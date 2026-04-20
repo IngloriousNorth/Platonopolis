@@ -52,47 +52,6 @@ function assertNodeNameFromData() {
     }
 }
 
-
-
-function assertTitleLoading(){
-  $("h2 span a").hide();
-
-  $("h2 span a").text("Loading...").addClass("loading").fadeIn()
-}
-
-function assertTitleLoaded(){
-
-  switch (TEMPLAR.pageREC()) {
-    case "torrents":
-      if(TEMPLAR.paramREC() && TEMPLAR.paramREC().search){
-        $("#torrentsTitle span a").text("Graph Search").attr("href", "#torrents?search=true&title=&author=&classes=&all=false&publisher=&type=all&media=all&format=all&res=all").removeClass("loading").fadeIn(3333)
-
-      }
-      else{
-        $("#torrentsTitle span a").text("Torrents").attr("href", "#torrents").removeClass("loading").fadeIn(3333)
-
-      }
-      break;
-    case "top10":
-      $("#top10Title span a").text("Top 10").removeClass("loading").show();
-      break;
-    case "node":
-      //TODO: maybe multiple calls here
-      //$.get("/source_info/" + TEMPLAR.paramREC().uuid, function (data) {
-        assertNodeNameFromData()
-        /*$("#addFormat").click(function () {
-          TEMPLAR.route("#upload?uuid=" + TEMPLAR.paramREC().uuid);
-        });*/
-     
-        //TEMPLAR.DOM();
-      //});
-      break;
-    default:
-      $("#torrentsTitle span a").text("Torrents").removeClass("loading").fadeIn(3333)
-
-  }
-}
-
 function updateTitleUI(name, label) {
     const colors = {
         source: "white",
@@ -117,13 +76,12 @@ function updateTitleUI(name, label) {
     $("#nodeTitle span a").text(name)
        .addClass(label)
        .attr("href", "#node?label=" + label + "&uuid=" + (TEMPLAR.paramREC() ? TEMPLAR.paramREC().uuid : "undefined"))
-       .removeClass("loading")
        .css("color", colors[label] || "white").removeClass("gold").removeClass("red")   
 
     TEMPLAR.DOM();
 
     $(document).off("TEMPLAR_SHIFT", "a.TEMPLAR").on("TEMPLAR_SHIFT", "a.TEMPLAR", function(e){
-        // 1. Prevent the mobile system menu from appearing
+        // 1. Prevent the mobile system menu from  assertTitleLoaded();aring //arising? airing this out
         e.preventDefault();
         const $self = $(this);
         const className = $self.attr('class').split(' ')[2];
@@ -200,10 +158,14 @@ function assertNodeTraverse(){
         $(document).off("TEMPLAR_SHIFT", "a.TEMPLAR").on("TEMPLAR_SHIFT", "a.TEMPLAR", function(e){
             // 1. Prevent the mobile system menu from appearing
             e.preventDefault();
+
+            //shift resets graph param uri, ctrl does not.
+            resetGraphParams();
+
             const $self = $(this);
             const className = $self.attr('class').split(' ')[2];
             const text = encodeURIComponent($self.text());
-            traverseGraph(className, text);
+            walkGraph(className, text);
         })
 
         $(document).off("TEMPLAR_CTRL", "a.TEMPLAR").on("TEMPLAR_CTRL", "a.TEMPLAR", function(e){

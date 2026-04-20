@@ -46,3 +46,10 @@ function walkGraph(label, name){
     TEMPLAR.routeParams("#torrents");
 }
 
+function resetGraphParams(){
+	graphParams.source = "";
+	graphParams.author = "";
+	graphParams.classes = "";
+	graphParams.publisher = "";
+}
+

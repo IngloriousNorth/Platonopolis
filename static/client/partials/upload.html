@@ -1,8 +1,8 @@
 <div class="titleBreak">
-  <h2><span id="uploadHeading">Upload</span></h2>
+  <h2><span id="uploadHeading"><a href="#upload">Upload</a></span></h2>
 </div>
 <p class="upload_inst">
-	Thank you very much for your interest in uploading educational media to propagate.info. To act as a "Good Librarian," Please take your Time when you fill out this form! Only *LEGALLY, FREELY AVAILABLE* Ebooks, Audiobooks, and Classical Music are allowed. If the Source already exists on the site, and you are doing, e.g., a new Translation for an existing Source, please Autofill the Source on this page (in the Title input), and then add your new torrent from that Source's Upload Page. If your Translation already exists, and you are uploading, e.g., an Audiobook for an existing PDF Edition, please select the correct Edition from the Drop-Down in the Edition Info section before adding your Audiobook. This way, Gazelle organizes the files neatly! After you upload your File(s), Do Not Forget to download the .torrent or MagnetURI, and finally seed the File(s) so that others can rev it.
+	Thank you very much for your interest in uploading educational media to propagate.info. To act as a "Good Librarian," Please take your Time when you fill out this form! <br><br>Only <span id="legal">*PUBLIC DOMAIN*</span> Ebooks, Audiobooks, Classical Music, Renaissance Art, and Documentaries are allowed.<br><br> If the Source already exists on the site, and you are doing, e.g., a new Translation for an existing Source, please Autofill the Source on this page (in the Title input), and then add your new torrent from that Source's Upload Page.<br><br>If your Translation already exists, and you are uploading, e.g., an Audiobook for an existing PDF Edition, please select the correct Edition from the Drop-Down in the Edition Info section before adding your Audiobook.<br><br>Please take some time to properly tag and categorize torrents so that Gazelle for Web3 organizes the files neatly!<br><br> After you upload your File(s), Do Not Forget to download the .torrent or MagnetURI, and finally seed the File(s) so that others can "rev" it.
 </p>
 <h3 id="newUploadHeader"><span>Uploading</span><a href="#"></a></h3>
 <form>
@@ -181,20 +181,22 @@
 		<label for="format">Format:</label>
 	</div>
 	<div class="grid_1">
-		<select id="format">
-		</select>
+    <select id="format">
+        <option value="">Select Format</option>
+        <option value="mp3">MP3</option>
+        <option value="mp4">MP4</option>
+        <option value="png">PNG</option>
+        <option value="PDF">PDF</option>
+    </select>
 	</div>
 	<div class="grid_0">
-		<label for="resolutions">Resolution:</label>
+	    <label for="resolutions">Resolution:</label>
 	</div>
 	<div class="grid_1">
-		<select name="resolutions" class="resolutions" id="pdf_resolutions">
-		</select>
-		<select name="resolutions" class="resolutions" id="music_resolutions">
-		</select>
-		<select  name="resolutions" class="resolutions" id="video_resolutions">
-		</select>
-		<input  name="resolutions" class="resolutions" id="image_resolutions" placeholder="Format: 1080x720">
+	    <select class="resolutions" id="pdf_resolutions" style="display:none;"></select>
+	    <select class="resolutions" id="music_resolutions" style="display:none;"></select>
+	    <select class="resolutions" id="video_resolutions" style="display:none;"></select>
+	    <input class="resolutions" id="image_resolutions" placeholder="Format: 1080x720" style="display:none;">
 	</div>
   <br><br><br><br><br><br><br><br>
   <div class="APA">

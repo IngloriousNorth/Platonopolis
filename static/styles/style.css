@@ -134,7 +134,7 @@ object{
   right:5px;
   bottom:4px;
   color:black;
-  font-family:"Oswald", serif;
+  font-family:"Figtree", serif;
 }
 
 .dataTables_length{
@@ -412,7 +412,11 @@ h2 span a{
   color:mediumvioletred;
   letter-spacing:7px;
   padding:0;
-  text-shadow:1px 2px black;
+  text-shadow: 
+  -1px -1px 0 #000,  
+   1px -1px 0 #000,
+  -1px  1px 0 #000,
+   1px  1px 0 #000;
   
 }
   
@@ -528,9 +532,14 @@ background: #01D3CC;
   
   /*font-family:"Atkinson Hyperlegible Mono", serif;*/
   color:white !important;
+    text-shadow: 
+  -1px -1px 0 #000,  
+   1px -1px 0 #000,
+  -1px  1px 0 #000,
+   1px  1px 0 #000;
   text-decoration:underline;
   font-size:25px;  
-  font-family:"Oswald", sans-serif;
+  font-family:"Figtree", sans-serif;
   font-variant:small-caps;
   
 }
@@ -739,7 +748,11 @@ h2{
 }
 
 .dataTable{
-  border-bottom:5px solid black;
+  border-bottom:5px solid green;
+}
+
+#uploadHeading a{
+    color:white !important;
 }
 
 
@@ -1324,7 +1337,7 @@ a.adv_toggle{
  
 .active .page-link{
   background-color:green !important;
-  color:yellow !important;
+  color:blue !important;
 }
 
 
@@ -1368,10 +1381,6 @@ a.adv_toggle{
   font-family:"Crimson Text", sans-serif;
   font-size:16px;
   height:18px;
-}
-
-.upload a:not(.removeAuthor, .torrentArea a){
-  color:mediumvioletred;
 }
 
 .torrentArea a{
@@ -1579,9 +1588,14 @@ div.publishers h2 span a{
 }
 
   .upload p{
-    font-family:"Bitcount Prop Single", system-ui;
     font-size:16px;
     padding-left:5px;
+    color:blue;
+  }
+
+  #legal{
+    color:red;
+    font-weight:bold;
   }
 
 
@@ -1593,10 +1607,12 @@ div.publishers h2 span a{
   }
 
 
-h1, h1 a, h1 a:visited{
+h1, h1 a, h1 a:visited:not(.loading, .loading:visited){
   font-size:29px;
-  color:black;
-  text-shadow:2px 3px white;
+      background: linear-gradient(to right, #ef5350, #f48fb1, #7e57c2, #2196f3, #26c6da, #43a047, #eeff41, #f9a825, #ff5722);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+    text-shadow:2px 2px white;
   position:fixed;
   letter-spacing:1px;
   top:7px;
@@ -1615,7 +1631,7 @@ a.author, span.author{
 }
 
 .set h2 span a.author{
-  text-shadow:1px 1px black;
+  text-shadow:1px -1px black;
 
 }
 
@@ -1742,15 +1758,9 @@ a.source, a.author{
 }
 
 .torrentsTable td{
-  font-family:"Share Tech Mono", "Times New Roman";
+  font-family:"Figtree", "Times New Roman";
 
 }
-
-.loading{
-  font-family:"Crimson Text", sans-serif;
-}
-
-
 
 button{
   font-family:"Crimson Text", system-ui !important;
@@ -1770,6 +1780,7 @@ h2 span a{
 
 #torrentsTitle span a:not(.loading), #top10Title span a:not(.loading){
   color: black !important;
+  text-shadow:none !important;
 }
 
 .dtr-control{
@@ -1780,7 +1791,7 @@ h2 span a{
   color:black !important;
   text-shadow:1px 1px gold !important;
   font-size:17px !important;
-  font-family:"Oswald", sans-serif !important;
+  font-family:"Figtree", sans-serif !important;
   text-align:center !important;
   font-variant:small-caps;
   width:98px;
@@ -1830,8 +1841,8 @@ h3{
 }
 
 .titleBreak{
-  padding-top:20px;
-  padding-bottom:20px;
+  padding-top:25px;
+  padding-bottom:25px;
 }
 
 .gold{
@@ -2024,8 +2035,8 @@ footer{
 }
 
 .dataTable{
-  border-left:2px solid darkslategray;
-  border-right:2px solid darkslategray;
+  border-left:2px solid green;
+  border-right:2px solid green;
   border-radius:14px;
 }
 
@@ -2080,9 +2091,12 @@ h3{
 }
 
 .set a.author{
-  text-shadow:1px 1px black !important;
+  text-shadow: 
+  -1px -1px 0 #000,  
+   1px -1px 0 #000,
+  -1px  1px 0 #000,
+   1px  1px 0 #000;
 }
-
 .set table thead th:nth-last-child(2){
   border-radius:0;
 }
@@ -2134,13 +2148,13 @@ table.dataTable tr.dtrg-group th{
 }
 
 .tableHeading, .tableHeading a{
-  font-family: "Oswald" , serif !important;
+  font-family: "Figtree" , serif !important;
   font-size:16px !important;
 }
 
 
 .dataTable td, .dataTable td a{
-  font-family:"Share Tech Mono", serif !important;
+  font-family:"Figtree", serif !important;
   font-size:14px !important;
   text-align:justify;
 }
@@ -2175,12 +2189,25 @@ div.TEMPLAR{
 
 .adv_search label{
   color:green !important;
+  font-family:"Share Tech Mono", serif !important;
+}
+
+.adv_search select, .adv_search select option{
+  font-family:"Share Tech Mono", serif !important;
+}
+
+.adv_search input::placeholder{
+  font-family: "Share Tech Mono", serif !important;
+}
+
+.adv_search input{
+  font-family:"Share Tech Mono", serif !important;
 }
 
 #adv_heading{
   color:red !important;
   font-size:24px !important;
-  font-family:"Oswald", serif !important;
+  font-family:"Figtree", serif !important;
   text-decoration:none;
   letter-spacing:0px;
 }
@@ -2191,7 +2218,24 @@ div.TEMPLAR{
 }
 
 .torrentsTable a{
-  color:goldenrod !important;
+  color:green !important;
+}
+
+.authors_area div a{
+  font-family:"Share Tech Mono", sans-serif;
+}
+
+#MG a{
+  font-family:"Share Tech Mono", sans-serif;
+}
+
+.upload input, .upload select, .upload option, .upload input::placeholder{
+  font-family:"Share Tech Mono", sans-serif;
+
+}
+
+.upload label{
+  font-family:"Figtree", sans-serif;
 }
 
 .inst{
@@ -2213,7 +2257,7 @@ div.TEMPLAR{
 #graph_search, #adv_submit, .upload button{
   border:2px solid green !important;
   background:yellow !important;
-  color:blue !important;
+  color:red !important;
   font-family:"Share Tech Mono", system-ui !important;
   font-size:16px;
   font-variant:none;
@@ -2252,13 +2296,8 @@ h2 span a{
 }
 
 .panel li a, .panel li a:visited, .mobile_panel li a, .mobile_panel li a:visited{
-  color:green !important;
-  text-shadow:1px 1px yellow !important;
+  color:yellow !important;
   font-family:"Share Tech Mono", sans-serif !important;
-}
-
-input[type="text"], input::placeholder{
-  font-family:"Crimson Text", serif !important;
 }
 
 .dataTable td{
@@ -2302,6 +2341,11 @@ div.upload{
 
 .mobile_inst{
   display:none;
+}
+
+
+.upload_inst{
+  font-family:"Figtree", sans-serif;
 }
 
 @media (pointer:coarse) {

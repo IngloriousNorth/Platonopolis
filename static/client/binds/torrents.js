@@ -1,3 +1,43 @@
+function assertGraphParamsPendingReset(){
+  $("a TEMPLAR.torrents").on("click", function(){
+    resetGraphParams();
+  })
+}
+
+function assertTitleLoaded(){
+  switch (TEMPLAR.pageREC()) {
+    case "torrents":
+      if(TEMPLAR.paramREC() && TEMPLAR.paramREC().search){
+        $("#torrentsTitle span a").text("Graph Search").attr("href", "#torrents?search=true&title=&author=&classes=&all=false&publisher=&type=all&media=all&format=all&res=all").fadeIn(3333)
+
+      }
+      else{
+        $("#torrentsTitle span a").text("Torrents").attr("href", "#torrents").fadeIn(3333)
+
+      }
+      break;
+    case "top10":
+      $("#top10Title span a").text("Top 10").show();
+      break;
+    case "node":
+      //TODO: maybe multiple calls here
+      //$.get("/source_info/" + TEMPLAR.paramREC().uuid, function (data) {
+        
+        /*$("#addFormat").click(function () {
+          TEMPLAR.route("#upload?uuid=" + TEMPLAR.paramREC().uuid);
+        });
+     
+        //TEMPLAR.DOM();
+      //});*/
+      break;
+    default:
+      $("#torrentsTitle span a").text("Torrents").fadeIn(3333)
+
+  }
+  
+  $("h1 a").text("propagate.info").removeClass("loading");
+}
+
 function assertSourceIMG(record) {
     let sourceIMG;
     const type = record._fields[0].properties.type;
@@ -317,49 +357,3 @@ function assertTr(record, edition_torrent, apaHtml){
       return tr;
   }
 }
-
-/*
-function assertWTEnabled(){
-  setTimeout(function(){
-    $(".webtorrent").removeClass("webtorrent-disabled")
-  },0)
-  $(document).off("click", ".webtorrent");
-  $(document).on("click", ".webtorrent", function(event){
-    event.preventDefault();
-    const id = this.dataset.id;
-    const release = this.dataset.release;
-    const media = this.dataset.media 
-    const format = this.dataset.format;
-    const apa = this.dataset.apa;
-
-
-    TEMPLAR.route("#file?id=" + id + "&media=" + media + "&format=" + format + " &release=" + release + "&apa=" + encodeURIComponent(apa))
-  })
-}
-
-function assertButtonState(scope) {
-    const buttons = $(scope).find(".webtorrent");
-    if (torrent && torrent.files && torrent.files[0]) {
-        buttons.removeClass("webtorrent-disabled");
-    } else {
-        buttons.addClass("webtorrent-disabled");
-    }
-}
-
-function assertWT(){
-  setTimeout(function() {
-        $(".webtorrent").addClass("webtorrent-disabled");
-        
-        // 3. For extra safety, you can physically remove the 'onclick' attribute 
-        // if you were using inline handlers, though .prop is usually enough.
-    }, 0);
-
-  $(document).off("click", ".webtorrent")
-  $(document).on('click', ".webtorrent", function(){
-    $(".please").show();
-    setTimeout(function(){
-      $(".please").fadeOut(888)
-    },888)
-  })
-
-}*/

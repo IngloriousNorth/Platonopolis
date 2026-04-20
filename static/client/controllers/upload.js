@@ -485,40 +485,37 @@ function htmlUpload(){
 		uploadModel.torrent.media = $(this).val();
 	})
 	
-	$("#format").change(function(){
-		uploadModel.torrent.format = $(this).val();
+	$("#format").change(function() {
+	    var selectedFormat = $(this).val();
+	    uploadModel.torrent.format = selectedFormat;
 
-		//codec UI
-		$(".resolutions").hide();
-		switch($(this).val()){
-			case "mp3":
-				$("#music_resolutions").fadeIn(333);
-				break;
-			case "FLAC":
-				$("#music_resolutions").fadeIn(333);
-				break;
-			case "mp4":
-				$("#video_resolutions").fadeIn(333);
-				break;
-			case "mkv (x264)":
-				$("#video_resolutions").fadeIn(333);
-				break;
-			case "mkv":
-				$("#video_resolutions").fadeIn(333);
-				break;
-			case "png":
-				$("#image_resolutions").fadeIn(333);
-				break;
-			case "JPEG":
-				$("#image_resolutions").fadeIn(333);
-				break;
-			case "PDF":
-				$("#pdf_resolutions").fadeIn(333);
-				break;
+	    // Hide all first
+	    $(".resolutions").hide();
 
-		}
-		uploadModel.torrent.res = $('.resolution[showing="true"]').val();
-	})
+	    // Show the specific one based on format
+	    switch (selectedFormat) {
+	        case "mp3":
+	        case "FLAC":
+	            $("#music_resolutions").show();
+	            break;
+	        case "mp4":
+	        case "mkv (x264)":
+	        case "mkv":
+	            $("#video_resolutions").show();
+	            break;
+	        case "png":
+	        case "JPEG":
+	            $("#image_resolutions").show();
+	            break;
+	        case "PDF":
+	            $("#pdf_resolutions").show();
+	            break;
+	    }
+
+	    // Use the :visible selector instead of a custom attribute
+	        uploadModel.torrent.res = $('.resolutions:visible').val();
+	        console.log("Current Resolution:", uploadModel.torrent.res);
+	});
 
 	$(".resolutions").change(function(){
 		console.log($(this).val())

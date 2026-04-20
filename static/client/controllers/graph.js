@@ -149,11 +149,13 @@ function graphRender(selector) {
     
     const simulation = d3.forceSimulation(Obelisk.nodes)
     // 1. Increase link distance to push connected nodes further apart
-    .force("link", d3.forceLink(Obelisk.links).id(d => d.id).distance(8888)) 
+    .force("link", d3.forceLink(Obelisk.links).id(d => d.id).distance(7500)) 
     
     // 2. Stronger negative charge (repulsion). -1000 to -1500 is better for high-density text
-    .force("charge", d3.forceManyBody().strength(-7777))
-    
+    .force("charge", d3.forceManyBody()
+        .strength(-26000) 
+        .distanceMax(33333)
+    )
     // 3. Collision force prevents text labels from sitting directly on top of each other
     // Add padding so labels don't touch edges
 
@@ -163,11 +165,13 @@ function graphRender(selector) {
         return (width / 2) + 1250;
     }))
         
-    .force("center", d3.forceCenter(width / 2, height / 2));
+    .force("center", d3.forceCenter(width / 2, height / 2))
+    
+    .velocityDecay(0.137)
 
     setTimeout(() => {
         simulation.stop();
-    }, 4500);
+    }, 3333);
 
     // --- ZOOM only for DOUBLE-FINGER ---
     const zoom = d3.zoom()
@@ -394,7 +398,8 @@ function processInput(clientX, clientY, isSwipe, reset) {
 
         if (clickedNode && event.shiftKey) {
             const searchable = encodeURIComponent(clickedNode.name)
-            traverseGraph(clickedNode.group.toLowerCase(), searchable);
+            resetGraphParams();
+            walkGraph(clickedNode.group.toLowerCase(), searchable);
         }
         else if(clickedNode && event.ctrlKey){
             walkGraph(clickedNode.group.toLowerCase(), clickedNode.name)

@@ -1,7 +1,7 @@
 function assertMermaid(){
   $("#warp").unbind("click");
   $("#warp").click(function(e){
-    assertTitleLoading();
+    $('body').css('cursor', 'progress');
     $("#warp").prop("disabled", true)
     e.preventDefault();
     
@@ -21,7 +21,8 @@ function assertF8(){
 }
 
 function assertMermaidComplete(){
-  $("#warp").prop("disabled", false)
+  $("#warp").prop("disabled", false);
+  $('body').css('cursor', 'default');
 
 }
 

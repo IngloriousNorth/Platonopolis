@@ -14,7 +14,7 @@ function initializeTorrents(table) {
         $("#" + table).append('<thead><tr><th>Group</th><th>APA Citation</th><th>Revs</th><th>Date</th><th>Time</th><th class="none"></th></tr></thead><tbody></tbody>');
     }
     
-    assertTitleLoading();
+    assertTitleLoaded()
     assertGraphSearch();
     assertAdvSearchUI();
     assertAdvButton();
@@ -206,7 +206,7 @@ function initializeTorrents(table) {
                 $.post("/rev/" + infoHash)
             })
 
-            assertTitleLoaded();
+            assertNodeNameFromData()
             if (TEMPLAR.pageREC() === "node") {
                 assertButtonTab();
             }
