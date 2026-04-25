@@ -781,18 +781,18 @@ query += `
     MATCH (s)-[:PUB_AS]->(:Edition)-[:DIST_AS]->(torrent:Torrent) WHERE torrent.deleted = false
     WITH DISTINCT s AS s_seed
     WHERE s_seed IS NOT NULL
-    WITH s_seed ORDER BY rand() LIMIT 33
+    WITH s_seed ORDER BY rand() LIMIT 88
 
     // Find related sources through different paths (OR logic)
     CALL {
       WITH s_seed
       // Path A: Same Author
       MATCH (s_seed)<-[:AUTHOR]-(a:Author)-[:AUTHOR]->(s2:Source)
-      RETURN s2 LIMIT 15
+      RETURN s2 LIMIT 25
       UNION
       // Path B: Same Class/Tag
       MATCH (s_seed)<-[:TAGS]-(c:Class)-[:TAGS]->(s2:Source)
-      RETURN s2 LIMIT 25
+      RETURN s2 LIMIT 40
       UNION
       // Path C: Same Publisher
       MATCH (s_seed)-[:PUB_AS]->(:Edition)-[:PUBLISHED_BY]->(p:Publisher)<-[:PUBLISHED_BY]-(:Edition)<-[:PUB_AS]-(s2:Source) WHERE p.name <> ''
@@ -802,31 +802,6 @@ query += `
     // Ensure s2 is not the original seed and has a valid torrent
     MATCH (s2)-[:PUB_AS]->(e2:Edition)-[:DIST_AS]->(t2:Torrent) 
     WHERE t2.deleted = false AND s2 <> s_seed
-
-    // Find related sources through different paths (OR logic)
-    CALL {
-      WITH s_seed
-      // Path A: Same Author
-      MATCH (s2)<-[:AUTHOR]-(a:Author)-[:AUTHOR]->(s3:Source)
-      RETURN s3 LIMIT 5
-      UNION
-      // Path B: Same Class/Tag
-      MATCH (s2)<-[:TAGS]-(c:Class)-[:TAGS]->(s3:Source)
-      RETURN s3 LIMIT 7
-      UNION
-      // Path C: Same Publisher
-      MATCH (s2)-[:PUB_AS]->(:Edition)-[:PUBLISHED_BY]->(p:Publisher)<-[:PUBLISHED_BY]-(:Edition)<-[:PUB_AS]-(s3:Source) WHERE p.name <> ''
-      RETURN s3 LIMIT 5
-    }
-
-    // Ensure s3 is not the original seed and has a valid torrent
-    MATCH (s3)-[:PUB_AS]->(e3:Edition)-[:DIST_AS]->(t3:Torrent) 
-    WHERE t3.deleted = false AND s3 <> s_seed AND s3 <> s2
-
-    // Collect metadata for the second-degree source
-    OPTIONAL MATCH (s3)<-[:AUTHOR]-(a3:Author)
-    OPTIONAL MATCH (s3)<-[:TAGS]-(c3:Class)
-    OPTIONAL MATCH (e3)-[:PUBLISHED_BY]->(p3:Publisher) WHERE p3.name <> ''
 
     // Collect metadata for the second-degree source
     OPTIONAL MATCH (s2)<-[:AUTHOR]-(a2:Author)
@@ -839,9 +814,9 @@ query += `
     OPTIONAL MATCH (s_seed)-[:PUB_AS]->(e:Edition)-[:PUBLISHED_BY]->(p:Publisher) WHERE p.name <> ''
 
 
-    RETURN s_seed AS s, a, c, p, s2, a2, c2, p2, s3, a3, c3, p3
+    RETURN s_seed AS s, a, c, p, s2, a2, c2, p2
     ORDER BY rand()
-    LIMIT 150
+    LIMIT 333
 `;
 
 

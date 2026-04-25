@@ -98,51 +98,78 @@ function graph(data) {
         }
     });
 */
-// --- PASS 2: LINKS ---
 data.gData.forEach(function(record) {
-    // Tier 1 (Seed)
+
+    // Record structure based on your current backend RETURN:
+
+    // s, a, c, p, s2, a2, c2, p2
+
     var s1 = record._fields[0], a1 = record._fields[1], c1 = record._fields[2], p1 = record._fields[3];
-    // Tier 2 (Neighbors)
+
     var s2 = record._fields[4], a2 = record._fields[5], c2 = record._fields[6], p2 = record._fields[7];
-    // Tier 3 (Extended)
-    var s3 = record._fields[8], a3 = record._fields[9], c3 = record._fields[10], p3 = record._fields[11];
+
+
 
     const isGoldLink = (n1, n2) => {
+
         const findLabels = ["Find Source", "Find Author", "Find Class", "Find Publisher"];
+
         const node1 = Obelisk.nodes.find(n => n.id === n1.properties.uuid);
+
         const node2 = Obelisk.nodes.find(n => n.id === n2.properties.uuid);
+
         return (node1 && findLabels.includes(node1.group)) || (node2 && findLabels.includes(node2.group));
+
     };
+
     
+
     const addSafeLink = (nodeA, nodeB) => {
+
         if (!nodeA || !nodeB || !nodeA.properties || !nodeB.properties) return;
+
         let idA = nodeA.properties.uuid, idB = nodeB.properties.uuid;
-        // Prevent self-linking and duplicates
-        if (idA === idB) return;
+
         if (!Obelisk.links.some(l => (l.source === idA && l.target === idB) || (l.source === idB && l.target === idA))) {
+
             Obelisk.links.push({ source: idA, target: idB, isGold: isGoldLink(nodeA, nodeB) });
+
         }
+
     };
 
-    // --- Tier 1 Links ---
-    addSafeLink(a1, s1); addSafeLink(s1, c1); addSafeLink(s1, p1);
 
-    // --- Tier 2 Links ---
-    addSafeLink(a2, s2); addSafeLink(s2, c2); addSafeLink(s2, p2);
 
-    // --- Tier 3 Links ---
-    addSafeLink(a3, s3); addSafeLink(s3, c3); addSafeLink(s3, p3);
+    // Link Seed Node (s1) to its metadata
 
-    // --- Bridge: Tier 1 to Tier 2 ---
+    addSafeLink(a1, s1);
+
+    addSafeLink(s1, c1);
+
+    addSafeLink(s1, p1);
+
+
+
+    // Link Neighbor Node (s2) to its metadata
+
+    addSafeLink(a2, s2);
+
+    addSafeLink(s2, c2);
+
+    addSafeLink(s2, p2);
+
+
+
+    // CRITICAL: Link the Seed (s1) to the Neighbor (s2) through the bridge metadata
+
+    // This is what prevents the "disconnected islands" effect
+
     if (a1 && a2 && a1.properties.uuid === a2.properties.uuid) addSafeLink(a1, s2);
+
     if (c1 && c2 && c1.properties.uuid === c2.properties.uuid) addSafeLink(c1, s2);
+
     if (p1 && p2 && p1.properties.uuid === p2.properties.uuid) addSafeLink(p1, s2);
 
-    // --- Bridge: Tier 2 to Tier 3 ---
-    // Connects the secondary neighbors to the tertiary neighbors via shared metadata
-    if (a2 && a3 && a2.properties.uuid === a3.properties.uuid) addSafeLink(a2, s3);
-    if (c2 && c3 && c2.properties.uuid === c3.properties.uuid) addSafeLink(c2, s3);
-    if (p2 && p3 && p2.properties.uuid === p3.properties.uuid) addSafeLink(p2, s3);
 });
     graphRenderVR(".graph_search");
 }
