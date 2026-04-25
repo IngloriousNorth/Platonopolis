@@ -300,7 +300,7 @@ function assertAdvButton(){
   $("#adv_submit").unbind("click");
   $("#adv_submit").click(function () {
     //pass false for no route
-    if($("#adv_title").val() !== ""){
+    /*if($("#adv_title").val() !== ""){
       walkGraph("source", $("#adv_title").val(), false);
     }
     if($("#adv_author").val() !== ""){
@@ -311,7 +311,8 @@ function assertAdvButton(){
     }
     if($("#adv_publisher").val() !== ""){
       walkGraph("publisher", $("#adv_publisher").val(), false);
-    }
+    }*/
+    
     TEMPLAR.route(
       "#torrents?search=true&title=" +
         encodeURIComponent($("#adv_title").val()) +

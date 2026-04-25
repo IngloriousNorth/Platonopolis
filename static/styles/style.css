@@ -2332,7 +2332,7 @@ canvas:-webkit-full-screen {
 }
 
 h2 span a{
-  font-size:41px;
+  font-size:30px;
   font-family:"Rye", serif !important;
   text-shadow:1px 2px black !important;
   padding-left:5px;
@@ -2510,14 +2510,14 @@ div.upload{
     font-size:40px;
     width:49px;
     height:49px;
-    color:cyan !important;
+    color:goldenrod !important;
     top:9px;
     left:5px;
     z-index:9999;
   }
 
   #mobile_menu:hover{
-    color: palegoldenrod !important;
+    color: lightgoldenrodyellow !important;
   }
 
   .mobile_menu{

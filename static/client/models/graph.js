@@ -45,7 +45,7 @@ function walkGraph(label, name, route=true){
 	})
 
 	if(route)
-    		TEMPLAR.routeParams("#torrents");
+    	TEMPLAR.routeParams("#torrents");
 }
 
 function resetGraphParams(){

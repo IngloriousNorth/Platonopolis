@@ -80,14 +80,22 @@ function updateTitleUI(name, label) {
 
     TEMPLAR.DOM();
 
-    $(document).off("TEMPLAR_SHIFT", "a.TEMPLAR").on("TEMPLAR_SHIFT", "a.TEMPLAR", function(e){
+/*    $(document).off("TEMPLAR_SHIFT", "a.TEMPLAR").on("TEMPLAR_SHIFT", "a.TEMPLAR", function(e){
         // 1. Prevent the mobile system menu from  assertTitleLoaded();aring //arising? airing this out
-        e.preventDefault();
         const $self = $(this);
         const className = $self.attr('class').split(' ')[2];
         const text = encodeURIComponent($self.text());
-        traverseGraph(className, text);
-    })                  
+        resetGraphParams();
+        walkGraph(className, text);
+    })     
+
+    $(document).off("TEMPLAR_CTRL", "a.TEMPLAR").on("TEMPLAR_CTRL", "a.TEMPLAR", function(e){
+        // 1. Prevent the mobile system menu from  assertTitleLoaded();aring //arising? airing this out
+        const $self = $(this);
+        const className = $self.attr('class').split(' ')[2];
+        const text = encodeURIComponent($self.text());
+        walkGraph(className, text);
+    })      */        
 }
 
 function assertButtonTab(){

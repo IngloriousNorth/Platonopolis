@@ -1,8 +1,11 @@
+let firstLoad = true;
+
 function initializeTorrents(table) {
     // 1. Check the Global DataTable registry
     // This is more robust than checking the local variable 'dataTable'
     // 1. HARD RESET: Kill the old instance and its DOM leftovers
     $("#warp").hide();
+
 
     if ($.fn.DataTable.isDataTable("#" + table)) {
         var oldTable = $("#" + table).DataTable();
@@ -191,6 +194,24 @@ function initializeTorrents(table) {
             });
             */
 
+            //this sets graphParams in the graphModel so the graph can accumulate where the user left off.
+            if(firstLoad){
+              if($("#adv_title").val() !== ""){
+                  walkGraph("source", $("#adv_title").val(), false);
+                }
+                if($("#adv_author").val() !== ""){
+                  walkGraph("author", $("#adv_author").val(), false);
+                }
+                if($("#adv_classes").val() !== ""){
+                  walkGraph("class", $("#adv_classes").val(), false);
+                }
+                if($("#adv_publisher").val() !== ""){
+                  walkGraph("publisher", $("#adv_publisher").val(), false);
+                }
+                firstLoad = false;
+  
+            }
+            
             if(TEMPLAR.pageREC() === "node" && TEMPLAR.paramREC() && TEMPLAR.paramREC().label === "source"){
                 $("#warp").show();
             }
