@@ -244,7 +244,7 @@ app.post("/node/:label", [
         ${countClause}
         WITH s
         MATCH (s)-[:PUB_AS]->(:Edition)-[:DIST_AS]->(t:Torrent) WHERE t.deleted = false
-        WITH TOFLOAT(count(s)) AS full_count
+        WITH TOFLOAT(count(DISTINCT s)) AS full_count
 
         ${matchClause}
         OPTIONAL MATCH (authors:Author)-[]->(s1)
