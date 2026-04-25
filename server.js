@@ -243,16 +243,14 @@ app.post("/node/:label", [
     const cypherQuery = `
         ${countClause}
         WITH s
+        MATCH (s)-[:PUB_AS]->(:Edition)-[:DIST_AS]->(t:Torrent) WHERE t.deleted = false
         WITH TOFLOAT(count(s)) AS full_count
 
         ${matchClause}
         OPTIONAL MATCH (authors:Author)-[]->(s1)
-        MATCH (p:Publisher)<-[:PUBLISHED_BY]-(e:Edition)<-[:PUB_AS]-(s1)
-        MATCH (t:Torrent)<-[:DIST_AS]-(e) WHERE t.deleted = false
-        
-        WITH s1, authors, p, e, t, full_count
+        OPTIONAL MATCH (p:Publisher)<-[:PUBLISHED_BY]-(e:Edition)<-[:PUB_AS]-(s1)
         OPTIONAL MATCH (classes:Class)-[:TAGS]->(s1)
-        
+        MATCH (s1)-[:PUB_AS]->(:Edition)-[:DIST_AS]->(t:Torrent) WHERE t.deleted = false
         WITH s1, full_count,
              collect(DISTINCT authors) AS authorList, 
              collect(DISTINCT {publisher: p, edition: e, torrent: t}) AS edition_torrents, 
@@ -268,6 +266,8 @@ app.post("/node/:label", [
         });
 
         const total = result.records[0]._fields[4]
+         
+        
         res.json({
             draw: parseInt(req.body.draw) || 0,
             recordsTotal: total,

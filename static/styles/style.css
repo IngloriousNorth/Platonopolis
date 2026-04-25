@@ -534,7 +534,7 @@ background: #01D3CC;
 }
 
 .tabs a.torrents, .tabs a.torrents:visited, .mobile_tabs a.torrents:visited{
-  color:#007BFF !important;
+  color:black !important;
 
 }
 
@@ -1784,7 +1784,7 @@ h2 span a{
 
 
 #torrentsTitle span a:not(.loading){
-  color: #007BFF !important;
+  color: black !important;
 }
 
  #top10Title span a:not(.loading){
@@ -1849,8 +1849,8 @@ h3{
 }
 
 .titleBreak{
-  padding-top:25px;
-  padding-bottom:25px;
+  padding-top:35px;
+  padding-bottom:35px;
 }
 
 .gold{
@@ -2064,7 +2064,7 @@ footer{
 }
 
 .dt-container{  
-  background-color:silver !important;
+  background-color:lightgoldenrodyellow !important;
   border-top-left-radius:8px;
   border-top-right-radius:8px;
   border:3px solid gold;
@@ -2090,7 +2090,7 @@ h3{
 }
 
 .search input{
-  font-family:"Lato", "Special Elite";
+  font-family:"Share Tech Mono", "Special Elite";
 }
 
 .set a.publisher, .set a.class, .set a.author{
@@ -2132,20 +2132,20 @@ header, #hero{
 #status{color: white !important;}
 
 header{
-  box-shadow:3px 3px 6px goldenrod !important;
-  background:#333777 !important;
-  border-bottom:3px solid silver !important;
+  box-shadow:3px 3px 6px #333777 !important;
+  background:#007BFF !important;
+  border-bottom:3px solid white !important;
 }
 
 .dataTable thead th{
   box-shadow:none !important;
   border-bottom:2px solid darkviolet;
   /* 1. Define your gradient */
-  background:#333777 !important;
-  color:silver !important;
+  background:goldenrod !important;
+  color:#007BFF !important;
   border-top:3px solid #50C777 !important;
-  font-size:23px !important;
-  font-family:"Special Elite", system-ui !important;
+  font-size:20px !important;
+  font-family:"Rye", system-ui !important;
 }
 
 table.dataTable tr.dtrg-group th{
@@ -2171,11 +2171,11 @@ table.dataTable tr.dtrg-group th{
 }
 
 div.TEMPLAR{
-  background-color:#000 !important;
+  background-color:#CDCDCD !important;
 }
 
 .torrentsTable thead th{
-  background:slateblue !important;
+  background:slategray !important;
   border-bottom:none !important;
   box-shadow:none !important;
   font-family:"Special Elite", "sans-serif" !important;
@@ -2188,15 +2188,15 @@ div.TEMPLAR{
 }
 
 .adv_search{
-  background:linear-gradient(135deg, #007BFF, silver) !important;
-  border: 3px solid goldenrod !important;
+  background:silver !important;
+  border: 2px solid white !important;
   color:palegoldenrod !important;
   margin-bottom:30px;
   margin-top:30px;
 }
 
 .adv_search label{
-  color:goldenrod !important;
+  color:darkgoldenrod !important;
   letter-spacing:1px;
   font-size:16px;
   font-family:"Share Tech Mono", "serif" !important;
@@ -2215,7 +2215,7 @@ div.TEMPLAR{
 }
 
 #adv_heading{
-  color:darkgoldenrod;
+  color:goldenrod;
   font-size:28px !important;
   font-family:"Pirata One", sans-serif !important;
   text-decoration:none;
@@ -2223,7 +2223,7 @@ div.TEMPLAR{
 }
 
 .dt-container{
-  border:3px solid goldenrod !important;
+  border:3px solid white !important;
   margin-top:30px !important;
   border-bottom:none;
 }
@@ -2333,8 +2333,8 @@ canvas:-webkit-full-screen {
 
 h2 span a{
   font-size:41px;
-  font-family:"Pirata One", serif !important;
-  text-shadow:2px 2px cyan !important;
+  font-family:"Rye", serif !important;
+  text-shadow:1px 2px black !important;
   padding-left:5px;
 }
 
@@ -2529,7 +2529,7 @@ div.upload{
     top:63px;
     z-index:9998;
     bottom:88px;
-    background-color:#73688c !important;
+    background-color:goldenrod !important;
   }
   
 

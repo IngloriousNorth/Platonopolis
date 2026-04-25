@@ -2,7 +2,6 @@
 var table;
 
 function crossWard() {
-    assertSetLoading()
     //no class 1:02
     const currentWard = TEMPLAR.pageREC() === "set" ? TEMPLAR.paramREC().ward : null;
 
@@ -34,8 +33,8 @@ function crossWard() {
                     // [0] = Node, [1] = Connected Count, [2] = Snatches
                     var props = record._fields[0].properties;
                     var name = props.name || "Unknown";
-                    var nodeUuid = props.uuid || "0"; 
-
+                    var nodeUuid = props.uuid || 0; 
+                    console.log(props.name, props.uuid)
                     var count = (record._fields[1] && typeof record._fields[1].low !== 'undefined') ? 
                                 record._fields[1].low : (record._fields[1] || 0);
                     
