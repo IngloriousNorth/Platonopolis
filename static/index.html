@@ -3,15 +3,18 @@
 	<head>
     <link rel="icon" type="image/png" href="img/favicon.png">
 		<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-  		<meta name="description" content="5000 freely available PDFs & audiobooks!">
+  		<meta name="description" content="Legal torrent site with over 2000 Public Domain PDFs and Audiobooks">
 		<meta name="viewport" content="width=device-width, initial-scale=1">   
   		
-		<title>Library of 12,000 Verses</title>
-    
+		<title>A Public Domain WebTorrent Indexer</title>    
 		<script
 			  src="https://code.jquery.com/jquery-3.6.0.min.js"
 			  integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4="
 			  crossorigin="anonymous"></script>
+		<script src="//cdn.jsdelivr.net/npm/d3@7"></script>
+		<script src="//cdn.jsdelivr.net/npm/aframe"></script>
+		<script src="//cdn.jsdelivr.net/npm/three-spritetext"></script>
+		<script src="//cdn.jsdelivr.net/npm/3d-force-graph-vr"></script>
 		<script src="//momentjs.com/downloads/moment.min.js"></script>
 		<script src="https://cdn.jsdelivr.net/npm/webtorrent@latest/webtorrent.min.js"></script>
  		<!--<script type="text/javascript" src="https://cdn.datatables.net/v/dt/dt-1.12.1/r-2.3.0/rg-1.2.0/sc-2.0.7/datatables.min.js"></script>!-->
@@ -33,7 +36,7 @@
 		<script src="lib/util.js"></script>
 	    	<!--<script src="client/models/worldSpiritmodels.js"></script>
 		<script src="client/controllers/worldSpirit.js"></script>!-->
-		<script src="https://d3js.org/d3.v7.min.js"></script>
+		<!--<script src="https://d3js.org/d3.v7.min.js"></script>!-->
 
 		<script src="client/models/upload.js"></script>
 		<script src="client/models/set.js"></script>
@@ -63,16 +66,8 @@
 		<link rel="stylesheet" type="text/css" href="styles/style.css"/>
 		<link rel="preconnect" href="https://fonts.googleapis.com">
 		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-		<link href="https://fonts.googleapis.com/css2?family=Figtree&family=Pirata+One&family=Share+Tech+Mono&display=swap" rel="stylesheet">
-	</head>
-		<script async src="https://www.googletagmanager.com/gtag/js?id=G-Q8CSGDT9CY"></script>
-		<script>
-		  window.dataLayer = window.dataLayer || [];
-		  function gtag(){dataLayer.push(arguments);}
-		  gtag('js', new Date());
-
-		  gtag('config', 'G-Q8CSGDT9CY');
-		</script>
+		<link href="https://fonts.googleapis.com/css2?family=Pirata+One&family=Rye&family=Share+Tech+Mono&family=Special+Elite&display=swap" rel="stylesheet">
+	</head>		
 	<body>
 		
 		<header>
@@ -94,6 +89,8 @@
 			<div class="set">
 			</div>
 			<div class="torrents">
+			</div>
+			<div class="privacy">
 			</div>
 			
 		</div>		

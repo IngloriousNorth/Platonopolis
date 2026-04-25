@@ -19,7 +19,7 @@ var graphParams = {
 	"publisher" : ""
 }
 
-function walkGraph(label, name){
+function walkGraph(label, name, route=true){
 	switch(label.toLowerCase()){
 		case "source":
 			graphParams.source = graphParams.source ? graphParams.source + " " + name : name;
@@ -43,7 +43,9 @@ function walkGraph(label, name){
 		"classes" : graphParams.classes,
 		"publisher" : graphParams.publisher
 	})
-    TEMPLAR.routeParams("#torrents");
+
+	if(route)
+    		TEMPLAR.routeParams("#torrents");
 }
 
 function resetGraphParams(){

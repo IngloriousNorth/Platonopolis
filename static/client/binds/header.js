@@ -1,6 +1,6 @@
-$(".DMCA").click(function(e){
+$(".DMCA").on("click", function(e){
 	e.preventDefault();
-	alert("I wish to avoid any accusations of operating in a legal 'gray' area. Therefore, I have taken the drastic measure of hiding every torrent published after 1930, even if they show up on a standard Google search. Please send DMCA complaints, preferrably including the torrent infoHash of alleged to be infringing content, to: inevitableambrosia@gmail.com, and the torrent infoHash will be set to 'deleted' and hidden from all users upon prompt review.")
+	alert("I have taken the drastic measure of hiding every torrent published after 1930, even if they show up on a standard Google search. Exceptions are those found on U.S. government websites or InternetArchive. Please send DMCA complaints, preferrably including the torrent infoHash of allegedly infringing content, to: inevitableambrosia@gmail.com, and the torrent infoHash will be set to 'deleted' and hidden from all users upon prompt review.")
 })
 
 $(document).on("click", "#mobile_menu", function(e){

@@ -1,6 +1,6 @@
 <a href="#" id="mobile_menu">≡</a>
 	<!--<a href="#torrents" class="TEMPLAR torrents"></a>!-->
-	<img class="pi" src="img/pi2.png">
+	
 <h1><a class="TEMPLAR torrents" href="#">propagate.info</a></h1>
 
 <div class="mobile_menu">	
@@ -19,32 +19,34 @@
 	<br>
 	<ul class="mobile_tabs">
 			<li><a href="#torrents" class="TEMPLAR torrents">Torrents</a></li>
-			<li><a href="#set?ward=authors" class="TEMPLAR set">Authors</a></li>
-			<li><a href="#set?ward=classes" class="TEMPLAR set">Classes</a></li>
-			<li><a href="#set?ward=publishers" class="TEMPLAR set ">Publishers</a></li>			
+			<li><a href="#set?ward=authors" class="TEMPLAR set authors">Authors</a></li>
+			<li><a href="#set?ward=classes" class="TEMPLAR set classes">Classes</a></li>
+			<li><a href="#set?ward=publishers" class="TEMPLAR set publishers">Publishers</a></li>			
 			<li><a href="#top10" class="TEMPLAR top10">Top 10</a></li>
 	</ul><br>
 	<ul class="mobile_panel">
-		<li><a class="TEMPLAR upload" href="#upload">Upload</a></li>
+		<!--<li><a class="TEMPLAR upload" href="#upload">Upload</a></li>!-->
 		<li><a class="git" href="https://github.com/Selapian/Gazelle-WebTorrent" target="_blank">GitHub</a></li>
-		<li ><a class="DMCA" href="#">DMCA</a></li>
+		<li ><a class="DMCA" href="#">DMCA Request</a></li>
+		<li><a class="TEMPLAR privacy" href="#privacy">Privacy Policy</a></li>
 	</ul>
 </div>
 	
 <div class="panel">
 	<ul>
-		<li><a class="TEMPLAR upload" href="#upload">Upload</a></li>
+		<!--<li><a class="TEMPLAR upload" href="#upload">Upload</a></li>!-->
 		<li><a class="git" href="https://github.com/Selapian/Gazelle-WebTorrent" target="_blank">GitHub</a></li>	
-		<li ><a class="DMCA" href="#">DMCA</a></li>
+		<li ><a class="DMCA" href="#">DMCA Request</a></li>
+		<li><a class="TEMPLAR privacy" href="#privacy">Privacy Policy</a></li>
 	</ul>
 </div>
 <div id="header_stream">
 	<div class="tabs">	
 		<ul class="tabs">
-				<li><a href="#torrents" class="TEMPLAR titles">Torrents</a></li>
-				<li><a href="#set?ward=authors" class="TEMPLAR set">Authors</a></li>
-				<li><a href="#set?ward=classes" class="TEMPLAR set">Classes</a></li>
-				<li><a href="#set?ward=publishers" class="TEMPLAR set ">Publishers</a></li>			<!--!-->
+				<li><a href="#torrents" class="TEMPLAR torrents">Torrents</a></li>
+				<li><a href="#set?ward=authors" class="TEMPLAR set authors">Authors</a></li>
+				<li><a href="#set?ward=classes" class="TEMPLAR set classes">Classes</a></li>
+				<li><a href="#set?ward=publishers" class="TEMPLAR set publishers">Publishers</a></li>			<!--!-->
 				<li><a href="#top10" class="TEMPLAR top10">Top 10</a></li>	
 		</ul>
 	</div>
@@ -60,3 +62,10 @@
 
 	
 </div>
+
+<script>
+	$(".DMCA").on("click", function(e){
+	e.preventDefault();
+	alert("This website is intended for the free distribution and ownership of public domain media, and uses BitTorrent technology, allowing for user uploads. Only media uploaded with the publisher's express permission, or public domain torrents published before 1931, are allowed on propagate.info. Freely available Media found on U.S. University or U.S. government websites or the InternetArchive may also be uploaded here, regardless of publication date. Please send DMCA complaints, preferrably including the torrent infoHash of allegedly infringing content, to: inevitableambrosia@gmail.com, and the torrent infoHash will be set to 'deleted' and hidden from all users upon prompt review. Note that while propagate.info will no longer publicly index your file, this will not remove peers from the swarm, what is the nature of BitTorrent technology.")
+})
+</script>

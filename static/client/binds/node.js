@@ -94,96 +94,19 @@ function assertButtonTab(){
     switch(TEMPLAR.paramREC().label){
         case "source":
             $("#warp").fadeIn(1337);
-            $("#graph_search").hide();
+            $("#graph_search").show();
             break;
         default:
             $("#warp").hide()
-            $("#graph_search").fadeIn(1337);
+            $("#graph_search").show();
             break;
     }
-}
-
-
-
-function assertNodeTraverse(){
-   
-        // Configuration
-        let startX, startY;
-
-        $(document).off("touchstart", "a.TEMPLAR").on('touchstart', 'a.TEMPLAR', function(e) {
-            const touch = e.originalEvent.touches[0];
-            startX = touch.clientX;
-            startY = touch.clientY;
-        });
-
-        $(document).off('touchmove', 'a.TEMPLAR').on('touchmove', 'a.TEMPLAR', function(e) {
-            if (!startX) return;
-
-            const touch = e.originalEvent.touches[0];
-            const dx = touch.clientX - startX;
-            const dy = touch.clientY - startY;
-
-            // If movement is horizontal, prevent vertical scrolling
-            if (Math.abs(dx) > Math.abs(dy) && Math.abs(dx) > 10) {
-                if (e.cancelable) e.preventDefault();
-            }
-        });
-
-        $(document).off('touchmove', 'a.TEMPLAR').on('touchend', 'a.TEMPLAR', function(e) {
-            if (!startX) return;
-
-            const name = $(this).text().trim();
-            const group = $(this).attr("class").split(" ")[2];             
-               
-
-            const touch = e.originalEvent.changedTouches[0];
-            const dx = touch.clientX - startX;
-            const dy = touch.clientY - startY;
-
-            // Threshold: Swipe Right > 70px
-            if (dx > 70 && Math.abs(dy) < 40) {
-               walkGraph(group, name)
-              
-            }            
-            else if (dx < -70 && Math.abs(dy) < 40) {
-             
-                // Execute the deep traversal
-                traverseGraph(group, encodeURIComponent(name));
-            }
-
-            startX = null;
-        });
-
-        // Add this to your second script (the one that loads AFTER Templar)
-        $(document).off("TEMPLAR_SHIFT", "a.TEMPLAR").on("TEMPLAR_SHIFT", "a.TEMPLAR", function(e){
-            // 1. Prevent the mobile system menu from appearing
-            e.preventDefault();
-
-            //shift resets graph param uri, ctrl does not.
-            resetGraphParams();
-
-            const $self = $(this);
-            const className = $self.attr('class').split(' ')[2];
-            const text = encodeURIComponent($self.text());
-            walkGraph(className, text);
-        })
-
-        $(document).off("TEMPLAR_CTRL", "a.TEMPLAR").on("TEMPLAR_CTRL", "a.TEMPLAR", function(e){
-            e.preventDefault();
-            const $self = $(this);
-            const className = $self.attr('class').split(' ')[2];
-            const text = $self.text();
-            walkGraph(className, text);
-        })
-
-    
 }
 
 function assertGraphButton(searchable){
     $("#graph_search").off("click")
     $("#graph_search").on("click", function(e){
-        e.preventDefault();
-        traverseGraph(TEMPLAR.paramREC().label, searchable);
-        
+        e.preventDefault();        
+        walkGraph(TEMPLAR.paramREC().label, searchable);        
     })
 }

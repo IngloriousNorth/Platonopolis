@@ -2,6 +2,8 @@ function initializeTorrents(table) {
     // 1. Check the Global DataTable registry
     // This is more robust than checking the local variable 'dataTable'
     // 1. HARD RESET: Kill the old instance and its DOM leftovers
+    $("#warp").hide();
+
     if ($.fn.DataTable.isDataTable("#" + table)) {
         var oldTable = $("#" + table).DataTable();
         oldTable.clear().destroy(); 
@@ -14,6 +16,7 @@ function initializeTorrents(table) {
         $("#" + table).append('<thead><tr><th>Group</th><th>APA Citation</th><th>Revs</th><th>Date</th><th>Time</th><th class="none"></th></tr></thead><tbody></tbody>');
     }
     
+    assertGraphParamsPendingReset();
     assertTitleLoaded()
     assertGraphSearch();
     assertAdvSearchUI();
@@ -49,9 +52,9 @@ function initializeTorrents(table) {
         columns: [
             { visible: false, searchable: false }, // Index 0: Grouping (Date/Title)
             { width: "50%" },                      // Index 1: APA Citation
-            { width: "17%" },// Index 2: Revs (Right-align to keep icon tidy)
-            { width: "17%" },                      // Index 3: Date
-            { width: "17%" },                      // Index 4: Time
+            { width: "16.66%" },// Index 2: Revs (Right-align to keep icon tidy)
+            { width: "16.66%" },                      // Index 3: Date
+            { width: "16.66%" },                      // Index 4: Time
             { width: "100%", responsivePriority: 1 }// Index 5: Download
         ],
         columnDefs: [
@@ -188,7 +191,9 @@ function initializeTorrents(table) {
             });
             */
 
-            assertNodeTraverse();
+            if(TEMPLAR.pageREC() === "node" && TEMPLAR.paramREC() && TEMPLAR.paramREC().label === "source"){
+                $("#warp").show();
+            }
 
             // Handle Copy Event
             $("table tbody").off('contextmenu', ".magnetURI").on('contextmenu', ".magnetURI", function() {

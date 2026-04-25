@@ -8,8 +8,8 @@ function mount() {
     TEMPLAR.initialize({
         defaultPage: "torrents",
         dir: "client/partials",
-        fade: false,
-        pages: ["file", "top10", "torrents", "node", "set", "upload"],
+        fade: true,
+        pages: ["file", "top10", "torrents", "node", "set", "upload", "privacy"],
         helm: [
             {
                 page: "torrents",
@@ -22,6 +22,22 @@ function mount() {
                     if(TEMPLAR.paramREC() && TEMPLAR.paramREC().search === "true"){
                         initializeGraph(); // Likely the source of the 710ms reflow
                         $(".graph_search").show();
+                        function stopScroll(e){
+                            if(["Space","ArrowUp","ArrowDown","ArrowLeft","ArrowRight"].indexOf(e.code) > -1) {
+                                  e.preventDefault();
+                            }
+                          }
+
+                          $(".graph_search").on("mouseenter", function () {
+                            {
+                              window.removeEventListener("keydown", stopScroll);
+                              window.addEventListener("keydown", stopScroll);
+                            }
+                          });
+
+                          $(".graph_search").on('mouseleave', function () {
+                            window.removeEventListener("keydown", stopScroll);
+                          });
                         
                      // Small delay to allow Torrent list to render first
                     }

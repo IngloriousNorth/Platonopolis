@@ -82,7 +82,7 @@ object{
 
 .upload_inst{
   font-size:16px;
-  font-family:"Arial", sans-serif;
+  font-family:"Arial", sans-"Special Elite";
   color:black;
   display:block;
   text-align:justify !important;
@@ -97,13 +97,13 @@ object{
 .torrents_zip {
   margin-left:5px;
   margin-right:5px;
-  color:lightseagreen;
+  color:lightsea#50C777;
   font-size:16px;
 }
 
 .torrents_zip a{
   color:mediumvioletred;
-  font-family:"Pirata One", sans-serif;
+  font-family:"Pirata One", sans-"Special Elite";
 }
 
 
@@ -119,13 +119,14 @@ object{
   display:none;
 }
 
+
 .graph_search{
   height:500px;
   margin-left:5px;
   margin-right:5px;
   width:calc(100% - 10px);
   border-radius:14px;
-  background-color:#CDCDCD;
+  background-color:black;
   position:relative;
 }
 
@@ -134,7 +135,7 @@ object{
   right:5px;
   bottom:4px;
   color:black;
-  font-family:"Figtree", serif;
+  font-family:""Special Elite"", "Special Elite";
 }
 
 .dataTables_length{
@@ -152,7 +153,7 @@ object{
 }
 
 #hero{
-  color:lightgoldenrodyellow !important;
+  color:lightgoldenrodpalegoldenrod !important;
   font-family:"Lato", system-ui !important;
 }
 
@@ -190,11 +191,11 @@ body.is-seed .show-leech {
 }
 
 #anonymous{
-  font-family:"Lato", sans-serif;
+  font-family:"Lato", sans-"Special Elite";
 }
 
 .academic, .academic option{
-  font-family:"Pirata One", sans-serif;
+  font-family:"Share Tech Mono", system-ui;
 }
 
 
@@ -249,7 +250,7 @@ body.is-seed .show-leech {
   background-color:#fae1ec;
   background-color:silver;*/
   padding:0px;
-  /*box-shadow:4px 5px 4px lightgoldenrodyellow;*/
+  /*box-shadow:4px 5px 4px lightgoldenrodpalegoldenrod;*/
 
 }
 
@@ -257,7 +258,7 @@ body.is-seed .show-leech {
   font-weight:bold;
   font-size:26px;
   padding-top:23px;
-  font-family:"Pirata One", sans-serif;
+  font-family:"Pirata One", sans-"Special Elite";
   color:palevioletred;
   padding-bottom:32px;
 
@@ -324,28 +325,28 @@ h3{
   padding-bottom:20px;
   font-size:26px;
   font-weight:italics;
-  color:lightseagreen;
+  color:lightsea#50C777;
   font-variant:small-caps;
-  font-family:"Secular One", sans-serif;
+  font-family:"Secular One", sans-"Special Elite";
 }
 
 /* MISC PARTIALS */
 /*
 
 ::-webkit-input-placeholder {
-  font-family: 'Imperial Script', Arial, Helvetica, sans-serif;
+  font-family: 'Imperial Script', Arial, Helvetica, sans-"Special Elite";
 }
 
 :-ms-input-placeholder {
-  font-family: 'Imperial Script', Arial, Helvetica, sans-serif;
+  font-family: 'Imperial Script', Arial, Helvetica, sans-"Special Elite";
 }
 
 :-moz-placeholder {
-  font-family: 'Imperial Script', Arial, Helvetica, sans-serif;
+  font-family: 'Imperial Script', Arial, Helvetica, sans-"Special Elite";
 }
 
 ::-moz-placeholder {
-  font-family: 'Imperial Script', Arial, Helvetica, sans-serif;
+  font-family: 'Imperial Script', Arial, Helvetica, sans-"Special Elite";
 }*/
 
 .dataTables_length{
@@ -374,7 +375,7 @@ background: linear-gradient(342deg, rgba(205,205,205,1) 16%, rgba(120,113,126,1)
 }
 
 input{
-  font-family: "Cairo", sans-serif;
+  font-family: "Cairo", sans-"Special Elite";
 }
 
 #add_author, #create_author{
@@ -410,7 +411,6 @@ h2 span a{
   font-size: 60px;
   line-height:40px;
   color:mediumvioletred;
-  letter-spacing:7px;
   padding:0;
   text-shadow: 
   -1px -1px 0 #000,  
@@ -433,7 +433,7 @@ h3{
   font-size:32px;
   text-decoration:underline;
   font-variant:small-caps;
-  font-family:  "Secular One", sans-serif;
+  font-family:  "Secular One", sans-"Special Elite";
   
 }
 
@@ -445,7 +445,7 @@ h3 span, h3{
 }
 
 .panel {
-   font-family:  "Roboto", "Playfair Display", sans-serif
+   font-family:  "Roboto", "Playfair Display", sans-"Special Elite"
 }
 
 
@@ -456,9 +456,9 @@ header{
   /*background-color: #e6eef5;*/
   /*background-color: #413839;*/
   background-color:#3D8777;
-  background-color:lightseagreen;
+  background-color:lightsea#50C777;
   background-color:#137577;
-  background-color:lightseagreen;
+  background-color:lightsea#50C777;
   background-color:#EFEEDC;
   background-color:#D0CBAC;
   background-color:goldenrod;
@@ -473,7 +473,7 @@ background: linear-gradient(265deg, rgba(230,201,7,1) 0%, rgba(81,186,187,1) 11%
     z-index: 999;
  
 background: #01D3CC;
-  box-shadow:2px 3px 7px lightgoldenrodyellow !important; /* PYRAMID */ /* Can't get enough of that Golden Crisp! */
+  box-shadow:2px 3px 7px lightgoldenrodpalegoldenrod !important; /* PYRAMID */ /* Can't get enough of that Golden Crisp! */
   border-bottom:3px solid darkviolet;
 /* 180deg: Top-to-Bottom transition */
 
@@ -494,12 +494,11 @@ background: #01D3CC;
 
 
 #classes a, #classes a:visited, #authors a, #authors a:visited{
-  color:steelblue;
+  color:steel#007BFF;
 }
 
 #header_stream{
   position:relative;
-  top:8px;
   margin:0 auto;
 }
 
@@ -516,7 +515,7 @@ background: #01D3CC;
 
 #header_stream{
   position:relative;
-  top:43px;
+  top:39px;
 
 }
 
@@ -530,19 +529,24 @@ background: #01D3CC;
 
 .tabs a, .tabs a:visited, .mobile_tabs a, .mobile_tabs a:visited{
   
-  /*font-family:"Atkinson Hyperlegible Mono", serif;*/
-  color:white !important;
-    text-shadow: 
-  -1px -1px 0 #000,  
-   1px -1px 0 #000,
-  -1px  1px 0 #000,
-   1px  1px 0 #000;
+  /*font-family:"Atkinson Hyperlegible Mono", "Special Elite";*/
   text-decoration:underline;
-  font-size:25px;  
-  font-family:"Figtree", sans-serif;
+  font-size:27px;  
+  font-family:"Special Elite", "Times New Roman";
   font-variant:small-caps;
   
 }
+
+.tabs a.torrents, .tabs a.torrents:visited, .mobile_tabs a.torrents:visited{
+  color:#007BFF !important;
+
+}
+
+.tabs a.top10, .tabs a.top10:visited, .mobile_tabs a.top10, .mobile_tabs a.top10:visited{
+  color:white !important;
+}
+
+
 
 .tabs, .mobile_tabs{
   font-size:21px;
@@ -570,7 +574,7 @@ background: #01D3CC;
 
 .web3:not(a.web3){
   background-color:palevioletred;
-  box-shadow:2px 3px 2px lightseagreen;
+  box-shadow:2px 3px 2px lightsea#50C777;
   border-radius:7px;
   width:75px;
 }
@@ -598,16 +602,16 @@ h1{
 
 
 button:not(.page-link, .magnetURI, .webtorrent, .upload button){
-  background-color:lightseagreen;
+  background-color:lightsea#50C777;
   background-color:#385E5C;
-  background-color:lightgoldenrodyellow;
+  background-color:lightgoldenrodpalegoldenrod;
   width:136px;
   height:44px;
   border-radius:13px !important;
   color:#11523E;
   letter-spacing:1px;
 
-  color:lightgoldenrodyellow;
+  color:lightgoldenrodpalegoldenrod;
   display:block;
   margin:0 auto;
   font-size:16px;
@@ -665,7 +669,7 @@ h2{
   /*background: linear-gradient(to right, #ef5350, #f48fb1, #7e57c2, #2196f3, #26c6da, #43a047, #eeff41, #f9a825, #ff5722);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;*/
-  color:seagreen;
+  color:sea#50C777;
   color:white;
   color:#CDCDCD;
   z-index:9999;
@@ -716,8 +720,8 @@ h2{
   border-radius:5px;
   padding:17px;
   width:99px;
-  background-color:lightseagreen;
-  font-family:"Pirata One", sans-serif;
+  background-color:lightsea#50C777;
+  font-family:"Pirata One", sans-"Special Elite";
 }
 
 .donateInput{
@@ -748,7 +752,7 @@ h2{
 }
 
 .dataTable{
-  border-bottom:5px solid green;
+  border-bottom:6px #50C777;
 }
 
 #uploadHeading a{
@@ -937,7 +941,7 @@ table.dataTable tr.dtrg-group th:not(:first-child){
 }
 
 table.dataTable tr.dtrg-group th a:not(.torrentClasses a){
-  /*font-family:"Secular One", sans-serif;*/
+  /*font-family:"Secular One", sans-"Special Elite";*/
 }
 
 .torrentSource{
@@ -981,7 +985,7 @@ table.dataTable tr.dtrg-group th a:not(.torrentClasses a){
 .dataTables_wrapper, .dataTables_length{
   background:transparent;
   color:lightcyan;
-  font-family:"Lato", sans-serif;
+  font-family:"Lato", sans-"Special Elite";
   border-top:3px solid palegoldenrod;
 
   border-bottom:3px solid #CDCDCD;
@@ -990,7 +994,7 @@ table.dataTable tr.dtrg-group th a:not(.torrentClasses a){
 }
 
 .dataTables_length input{
-  font-family:"Lato", sans-serif;
+  font-family:"Lato", sans-"Special Elite";
 }
 
 
@@ -1015,7 +1019,7 @@ table.dataTable tr.dtrg-group th a:not(.torrentClasses a){
 
 
 .stat_text a{
-  color:lightseagreen;
+  color:lightsea#50C777;
 }
 
   .stat:hover{
@@ -1156,7 +1160,7 @@ input{
 
 .search input::placeholder, .adv_show input::placeholder{
   color:#50C777;
-  font-family:"Lato", sans-serif;
+  font-family:"Share Tech Mono", system-ui;
 }
 
 .tabs .searchField{
@@ -1169,7 +1173,7 @@ input{
 body .ui-menu-item {
   /* font-family to all */
  /* box-shadow:4px 4px 5px #83DAC0;*/
-  background-color:green;
+  background-color:#50C777;
   text-align:justify;
   font-size:16px;
   padding:7px 0px 7px 0px;
@@ -1194,6 +1198,9 @@ body .ui-autocomplete {
   /* font-family to all */
 }
 
+.search{
+  margin-top:-3px;
+}
 
 .panel ul, .tabs ul, #search_ul{
   margin-top: 0px;
@@ -1293,7 +1300,7 @@ a.link a.visited{
 .torrentsTable{
 
 
-  font-family:"Lato", sans-serif;
+  font-family:"Lato", sans-"Special Elite";
 }
 
 
@@ -1336,8 +1343,8 @@ a.adv_toggle{
 /* CAPTAIN'S LOG 8:28 */
  
 .active .page-link{
-  background-color:green !important;
-  color:blue !important;
+  background-color:black !important;
+  color:gold !important;
 }
 
 
@@ -1352,7 +1359,7 @@ a.adv_toggle{
   margin:0 auto;
   --angle: 0deg;
   /*border: 3px solid;
-  border-image: conic-gradient(from var(--angle), red, yellow, lime, aqua, blue, magenta, red) 1;
+  border-image: conic-gradient(from var(--angle), red, palegoldenrod, lime, aqua, #007BFF, magenta, red) 1;
   
   animation: 10s rotate linear infinite;
   box-shadow:4px 3px 5px black;*/
@@ -1367,7 +1374,7 @@ a.adv_toggle{
 .adv_search input:not(.adv_all){
   font-size:16px;
   height:27px;
-  font-family:"Lato", sans-serif;
+  font-family:"Lato", sans-"Special Elite";
   margin-top:22px !important;
 
 }
@@ -1378,7 +1385,7 @@ a.adv_toggle{
 
 
 .adv_show select, .adv_show option{
-  font-family:"Crimson Text", sans-serif;
+  font-family:"Crimson Text", sans-"Special Elite";
   font-size:16px;
   height:18px;
 }
@@ -1414,7 +1421,7 @@ a.adv_toggle{
 
 
 #adv_heading{
-  font-family: "Pirata One", serif !important;
+  font-family: "Pirata One", "Special Elite" !important;
   font-size:24px;
   text-align:center;
   float:left;
@@ -1435,15 +1442,15 @@ a.adv_toggle{
 
 
 .authors{
-  color:yellow !important;
+  color:gold !important;
 }
 
 .classes{
-  color:green !important;
+  color:#50C777 !important;
 }
 
 .publishers{
-  color:red !important;
+  color:mediumvioletred !important;
 }
 
 .red, .red:visited{
@@ -1454,8 +1461,8 @@ a.adv_toggle{
   color:orange;
 }
 
-.green, .green:visited{
-  color:green;
+.#50C777, .#50C777:visited{
+  color:#50C777;
 }
 
 .bold{
@@ -1512,7 +1519,7 @@ a.adv_toggle{
 }
 .removeAuthor{
   color:#83DAC0;
-  font-family:"Pirata One",sans-serif;
+  font-family:"Pirata One",sans-"Special Elite";
 }
 
 .sourceTab{
@@ -1533,7 +1540,7 @@ a.publisher{
 
 
   body, div.TEMPLAR{
-    background-color:lightgoldenrodyellow;
+    background-color:lightgoldenrodpalegoldenrod;
     background-color:darkcyan;
     background: radial-gradient(
 
@@ -1564,7 +1571,7 @@ a.source, .source span{
 
 
 #authorTitle span{
-  color:blue;
+  color:#007BFF;
 }
 
 #classTitle span{
@@ -1576,7 +1583,7 @@ a.source, .source span{
 }
 
 div.authors h2 span a{
-  color:blue !important;
+  color:#007BFF !important;
 }
 
 div.classes h2 span a{
@@ -1590,7 +1597,7 @@ div.publishers h2 span a{
   .upload p{
     font-size:16px;
     padding-left:5px;
-    color:blue;
+    color:#007BFF;
   }
 
   #legal{
@@ -1608,22 +1615,20 @@ div.publishers h2 span a{
 
 
 h1, h1 a, h1 a:visited:not(.loading, .loading:visited){
-  font-size:29px;
-      background: linear-gradient(to right, #ef5350, #f48fb1, #7e57c2, #2196f3, #26c6da, #43a047, #eeff41, #f9a825, #ff5722);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-    text-shadow:2px 2px white;
+  font-size:37px;
+   color:white;
+   text-shadow:3px 3px black;
   position:fixed;
-  letter-spacing:1px;
-  top:7px;
-  left:127px;
-  font-family:"Pirata One", serif !important;
+  text-decoration:none;
+  top:0px;
+  left:5px;
+  font-family:"Pirata One", system-ui !important;
 
 }
 
 /* CAPTAIN'S LOG 12/19/2025 "9:05" */
 a.author, span.author{
-  color:yellow !important;
+  color:gold !important;
 }
 
 .tableHeading{
@@ -1636,11 +1641,11 @@ a.author, span.author{
 }
 
 a.class, span.class{
-  color:green;
+  color:#50C777;
 }
 
 a.publisher, span.publisher{
-  color:red !important;
+  color:mediumvioletred !important;
 }
 
 /* 12;22 */
@@ -1648,8 +1653,13 @@ label.adv_all, input.adv_all{
   padding-top:10px;
 }
 
-#top10Title span{
+#top10Title span a{
   color: white;
+  text-shadow: 
+  -1px -1px 0 #000,  
+   1px -1px 0 #000,
+  -1px  1px 0 #000,
+   1px  1px 0 #000;
 }
 
 .red{
@@ -1735,7 +1745,7 @@ a.source, a.author{
 }
 
 .dataTable{
-  font-family:"Lato", sans-serif;
+  font-family:"Lato", sans-"Special Elite";
 }
 
 
@@ -1750,7 +1760,7 @@ a.source, a.author{
 
 .torrentsTable a{
   font-weight:bold;
-  color:blue !important;
+  color:#007BFF !important;
 }
 
 .panel li a, .mobile_panel li a{
@@ -1758,7 +1768,7 @@ a.source, a.author{
 }
 
 .torrentsTable td{
-  font-family:"Figtree", "Times New Roman";
+  font-family:""Special Elite"", "Special Elite";
 
 }
 
@@ -1768,8 +1778,7 @@ button{
 
 
 .mobile_panel{
-  position:relative;
-  top:15px;
+  
 }
 
 h2 span a{
@@ -1778,10 +1787,14 @@ h2 span a{
 }
 
 
-#torrentsTitle span a:not(.loading), #top10Title span a:not(.loading){
-  color: black !important;
+#torrentsTitle span a:not(.loading){
+  color: #007BFF !important;
   text-shadow:none !important;
 }
+
+ #top10Title span a:not(.loading){
+  color:white !important;
+ }
 
 .dtr-control{
   text-align:justify;
@@ -1789,9 +1802,9 @@ h2 span a{
 
 .sourceType{
   color:black !important;
-  text-shadow:1px 1px gold !important;
-  font-size:17px !important;
-  font-family:"Figtree", sans-serif !important;
+    text-shadow:1px 1px gold;
+  font-size:12px !important;
+  font-family:"Rye", "Times New Roman" !important;
   text-align:center !important;
   font-variant:small-caps;
   width:98px;
@@ -1805,22 +1818,22 @@ h2 span a{
 
 .torrentSource{
   position:relative;
-  top:-16px;
+  top:-17px;
 }
 
 .ui-menu .ui-menu-item-wrapper.ui-state-active {
-    background: yellow !important;
+    background: black !important;
     font-weight:bold !important;
-    color:red !important; /* Adjust text color for readability */
+    color:gold !important; /* Adjust text color for readability */
 }
 
 input{
-  font-family:"Lato", sans-serif;
+  font-family:"Lato", sans-"Special Elite";
 }
 
 h3{
   font-size:21px;
-  font-family:"Lato", sans-serif;
+  font-family:"Lato", sans-"Special Elite";
   text-align:center;
   width:100%;
 }
@@ -1865,7 +1878,7 @@ h3{
 .webtorrent{
   width:90px;
   height:33px;
-  font-family:"Lato", sans-serif;
+  font-family:"Lato", sans-"Special Elite";
   color:#007BFF;
   background:goldenrod;
   box-shadow:2px 3px 2px black;
@@ -1954,9 +1967,8 @@ footer{
 }
 
 .search input{
-  height: 22px !important;
+  height: 26px !important;
   position:relative;
-  top:-1px;
 }
 
 .search input::placeholder{
@@ -2035,17 +2047,17 @@ footer{
 }
 
 .dataTable{
-  border-left:2px solid green;
-  border-right:2px solid green;
+  border-left:3px solid #50C777;
+  border-right:3px solid #50C777;
   border-radius:14px;
 }
 
 .page-link{
-  font-family:"Crimson Text", serif !important;
+  font-family:"Crimson Text", "Special Elite" !important;
 }
 
 .adv_search input{
-  font-family:"Crimson Text" , serif !important;
+  font-family:"Crimson Text" , "Special Elite" !important;
 }
 
 .adv_search select{
@@ -2057,7 +2069,7 @@ footer{
 }
 
 .dt-container{  
-  background:lightgoldenrodyellow;
+  background-color:lightgoldenrodyellow !important;
   border-top-left-radius:8px;
   border-top-right-radius:8px;
   border:3px solid gold;
@@ -2083,7 +2095,7 @@ h3{
 }
 
 .search input{
-  font-family:"Lato", serif;
+  font-family:"Lato", "Special Elite";
 }
 
 .set a.publisher, .set a.class, .set a.author{
@@ -2125,43 +2137,42 @@ header, #hero{
 #status{color: white !important;}
 
 header{
-  box-shadow:3px 4px 5px yellow !important;
-  background:blue !important;
-  border-bottom:5px solid red !important;
+  box-shadow:3px 3px 6px goldenrod !important;
+  background:#11123c !important;
+  border-bottom:3px solid silver !important;
 }
 
 .dataTable thead th{
   box-shadow:none !important;
-  border-bottom:2px solid green;
+  border-bottom:2px solid darkviolet;
   /* 1. Define your gradient */
-  background:red !important;
-  border-top:2px solid black !important;
-  font-size:22px !important;
-  font-family:"Pirata One", serif !important;
-  color:#F8F8F8 !important;
-  text-shadow:none !important;
+  background:#11123C !important;
+  color:silver !important;
+  border-top:3px solid #50C777 !important;
+  font-size:23px !important;
+  font-family:"Special Elite", system-ui !important;
 }
 
 table.dataTable tr.dtrg-group th{
-  background:blue !important;
-  border-bottom:2px solid yellow !important;
+  background:#007BFF !important;
+  border-bottom:1px solid silver !important;
 }
 
 .tableHeading, .tableHeading a{
-  font-family: "Figtree" , serif !important;
-  font-size:16px !important;
+  font-family: "Times New Roman", "Times New Roman" !important;
+  font-size:17px !important;
 }
 
 
 .dataTable td, .dataTable td a{
-  font-family:"Figtree", serif !important;
-  font-size:14px !important;
+  font-family:"Times New Roman", "Special Elite" !important;
+  font-size:16px !important;
   text-align:justify;
 }
 
 .loading{
-  color:green !important;
-  font-family:"Pirata One", serif;
+  color:#50C777 !important;
+  font-family:"Rye", system-ui !important;
 }
 
 div.TEMPLAR{
@@ -2169,56 +2180,63 @@ div.TEMPLAR{
 }
 
 .torrentsTable thead th{
-  background:blue !important;
+  background:slateblue !important;
   border-bottom:none !important;
   box-shadow:none !important;
+  font-family:"Special Elite", "sans-serif" !important;
 }
 
 .torrentsTable td{
   background-color: white !important;
-  padding:18px 0 18px 0 !important;
+  padding:17px 0 17px 0 !important;
+  font-family: "Share Tech Mono", sans-serif !important;
 }
 
 .adv_search{
-  background:yellow !important;
-  border: 4px solid blue !important;
-  color:yellow !important;
-  margin-bottom:33px;
-  margin-top:33px;
+  background:linear-gradient(135deg, #007BFF, silver) !important;
+  border: 3px solid goldenrod !important;
+  color:palegoldenrod !important;
+  margin-bottom:30px;
+  margin-top:30px;
 }
 
 .adv_search label{
-  color:green !important;
-  font-family:"Share Tech Mono", serif !important;
+  color:goldenrod !important;
+  letter-spacing:1px;
+  font-size:16px;
+  font-family:"Share Tech Mono", "serif" !important;
 }
 
 .adv_search select, .adv_search select option{
-  font-family:"Share Tech Mono", serif !important;
+  font-family:"Share Tech Mono", "serif" !important;
 }
 
 .adv_search input::placeholder{
-  font-family: "Share Tech Mono", serif !important;
+  font-family: "Share Tech Mono", "serif" !important;
 }
 
 .adv_search input{
-  font-family:"Share Tech Mono", serif !important;
+  font-family:"Share Tech Mono", "serif" !important;
 }
 
 #adv_heading{
-  color:red !important;
-  font-size:24px !important;
-  font-family:"Figtree", serif !important;
+  color:darkgoldenrod;
+  font-size:28px !important;
+  font-family:"Pirata One", sans-serif !important;
   text-decoration:none;
   letter-spacing:0px;
 }
 
 .dt-container{
-  border:3px solid blue;
-  background:yellow !important;
+  border:3px solid goldenrod !important;
+  margin-top:30px !important;
+  border-bottom:none;
 }
 
 .torrentsTable a{
-  color:green !important;
+  color:goldenrod !important;
+  
+  font-family:"Share Tech Mono", system-ui !important;
 }
 
 .authors_area div a{
@@ -2235,11 +2253,11 @@ div.TEMPLAR{
 }
 
 .upload label{
-  font-family:"Figtree", sans-serif;
+  font-family:"Special Elite", sans-serif;
 }
 
 .inst{
-  color:blue;
+  color:#000;
   text-align:center;
   font-size:16px;
   font-family:"Share Tech Mono", sans-serif;
@@ -2250,53 +2268,91 @@ div.TEMPLAR{
 
     /* Prevents all native browser touch actions (scroll, zoom, swipe-to-back) */
     touch-action: pan-y;
+    user-select: none;  /* Prevents text selection while swiping */
     /* Standardizes the cursor for a 'grab' feel */
 
 }
 
+/* Target the canvas only when it is in fullscreen mode */
+canvas:fullscreen {
+    width: 100% !important;
+    height: 100% !important;
+    object-fit: contain; /* Keeps the aspect ratio clean */
+    background-color: black; /* Prevents white bars on the sides */
+}
+
+/* Safari support */
+canvas:-webkit-full-screen {
+    width: 100% !important;
+    height: 100% !important;
+}
+
+.graph{
+  height:500px;
+  width:100%;
+}
+
+#mobile_fullscreen{
+  display:none;
+  text-align:left;
+  float:left;
+  position:relative;
+  left:10px;
+  top:-49px;
+  border:1px solid #50C777 !important;
+  box-shadow:2px 3px 2px gold !important;
+  width:99px;
+  background-color:palegoldenrod !important;
+  color:cyan !important;
+  font-family:"Share Tech Mono", system-ui;
+}
+
 #graph_search, #adv_submit, .upload button{
-  border:2px solid green !important;
-  background:yellow !important;
-  color:red !important;
-  font-family:"Share Tech Mono", system-ui !important;
-  font-size:16px;
-  font-variant:none;
+  border:2px solid #007BFF !important;
+  background:goldenrod !important;
+  color:#007BFF !important;
+  font-variant:small-caps;
+  font-family:"Pirata One", system-ui !important;
+  font-size:24px;
+  width:77px;
+  margin-bottom:16px;
 }
 
 #graph_search:hover, #adv_submit:hover, .upload button:hover{
   box-shadow:3px 4px 3px white !important;
-  background-color:blue !important;
-  color:yellow !important;
+  color:palegoldenrod !important;
   font-weight:bold !important;
-  border:4px solid green !important;
+  border:4px solid gold !important;
 }
 
 #warp{
-  font-family:"Felipa", system-ui !important;
+  font-family:"Pirata One", system-ui !important;
+  font-variant:small-caps;
   font-size:24px;
+  width: 77px !important;
 }
 
 #warp:hover{
-  border:2px solid yellow;
+  border:2px solid palegoldenrod;
 }
 
 h2 span a{
-  font-size:40px;
-  font-family:"Pirata One", serif !important;
+  font-size:31px;
+  font-family:"Times New Roman", serif !important;
   padding-left:5px;
 }
 
 #hero{
-  border-top:3px solid yellow !important;
+  border-top:3px solid palegoldenrod !important;
   background:mediumvioletred !important;
 }
 
 #status{
-  font-family:"Share Tech Mono", serif !important;
+  font-family:"Share Tech Mono", sans-serif !important;
 }
 
 .panel li a, .panel li a:visited, .mobile_panel li a, .mobile_panel li a:visited{
-  color:yellow !important;
+  color:cyan !important;
   font-family:"Share Tech Mono", sans-serif !important;
 }
 
@@ -2305,8 +2361,8 @@ h2 span a{
 }
 
 .graph_search{
-  border:3px solid yellow;
-  background-color:silver;
+  border:3px solid cyan;
+  background-color:black;
 }
 
 div.upload{
@@ -2345,7 +2401,7 @@ div.upload{
 
 
 .upload_inst{
-  font-family:"Figtree", sans-serif;
+  font-family:"Share Tech Mono", sans-serif;
 }
 
 @media (pointer:coarse) {
@@ -2370,7 +2426,7 @@ div.upload{
     text-align:center;
     width:100%;
     left:0;
-    top:8px !important;
+    top:0px !important;
   }
 }
 
@@ -2484,14 +2540,14 @@ div.upload{
     font-size:40px;
     width:49px;
     height:49px;
-    color:green !important;
+    color:goldenrod; !important;
     top:9px;
     left:5px;
     z-index:9999;
   }
 
   #mobile_menu:hover{
-    color: yellow !important;
+    color: palegoldenrod !important;
   }
 
   .mobile_menu{
@@ -2503,7 +2559,7 @@ div.upload{
     top:63px;
     z-index:9998;
     bottom:88px;
-    background-color:red !important;
+    background-color:#73688c !important;
   }
   
 
@@ -2542,6 +2598,7 @@ div.upload{
     float:none;
     vertical-align:center;
     line-height:32px;
+
   
   }
 
@@ -2577,9 +2634,8 @@ div.upload{
   }
 
   .mobile_panel{
-    margin-top:24px;
     width:100%;
-
+    margin-top:10px;
     float:left;
   }
 
@@ -2609,8 +2665,8 @@ div.upload{
   .mobile_tabs li a{
       font-size:24px;
       padding:13px 0px 13px 0px;
-      border-top:1px solid #fae1ec;
-     /*color:lightseagreen;*/
+      border-top:1px solid silver;
+     /*color:lightsea#50C777;*/
     font-variant:small-caps;
     display:block;
     width:299px;
@@ -2647,7 +2703,7 @@ div.upload{
     display:block;
     width:290px;
     padding-left:0px;
-    border-top:1px solid #CDCDCD;
+    border-top:1px solid silver;
   }
 
 
@@ -2723,17 +2779,18 @@ div.upload{
  
   
   #mobile_quick{
-    color:blue;
+    color:black;
     font-variant:small-caps;
     font-size:18px;
-    font-family:"Crimson Text", serif;
+    font-family:Rye, system-ui;
     padding-bottom:13px;
     text-decoration:underline;
     letter-spacing:2px;
+    padding-bottom:5px;
   }
 
   #search_ul{
-    margin-top:13px;
+    margin-top:5px;
   }
 
  

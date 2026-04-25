@@ -1,22 +1,3 @@
-function initializeGraph(){
-    if ($("#graph-container").children().length > 0) return; // Already sailed!
-	if(TEMPLAR.pageREC() === "torrents" && TEMPLAR.paramREC() && TEMPLAR.paramREC().search){
-		$.post("/graph_search",  {title : TEMPLAR.paramREC() ? TEMPLAR.paramREC().title : "",
-		author : TEMPLAR.paramREC() ? TEMPLAR.paramREC().author : "",
-		classes : TEMPLAR.paramREC() ? TEMPLAR.paramREC().classes : "",
-		all : TEMPLAR.paramREC() ? TEMPLAR.paramREC().all : "",
-		publisher : TEMPLAR.paramREC() ? TEMPLAR.paramREC().publisher : "",
-		type : TEMPLAR.paramREC() ? TEMPLAR.paramREC().type : "",
-		media : TEMPLAR.paramREC() ? TEMPLAR.paramREC().media : "",
-		format : TEMPLAR.paramREC() ? TEMPLAR.paramREC().format : "",
-        res: TEMPLAR.paramREC() ? TEMPLAR.paramREC().res : "",
-		search : TEMPLAR.paramREC() ? TEMPLAR.paramREC().search : ""}, 
-        function(data){
-			graph(data)
-		})
-	}
-}
-
 function graph(data) {
     nodeUUIDs = [];
     renewObelisk();
@@ -69,29 +50,30 @@ function graph(data) {
                 if (field.labels[0] === "Source") {
                     nodeUUIDs.push(field.properties.uuid);
                     let isMatch = titles.some(t => field.properties.name.toLowerCase().includes(t));
-                    Obelisk.nodes.push({ id: field.properties.uuid, group: isMatch ? "Find Source" : "Source", name: decodeEntities(decodeEntities(field.properties.name)), count: 1, color: isMatch ? "darkgoldenrod" : "#17627C" });
+                    Obelisk.nodes.push({ id: field.properties.uuid, group: isMatch ? "Find Source" : "Source", name: decodeEntities(decodeEntities(field.properties.name)), count: 1, color: isMatch ? "cyan" : "white" });
                 } else if (field.labels[0] === "Author") {
 
                     let isMatch = TEMPLAR.paramREC()?.author && TEMPLAR.paramREC().author.toLowerCase().includes(field.properties.searchable.toLowerCase());
-                    Obelisk.nodes.push({ id: field.properties.uuid, group: isMatch ? "Find Author" : "Author", name: decodeEntities(decodeEntities(field.properties.name)), count: 1, color: isMatch ? "darkgoldenrod" : "blue" });
+                    Obelisk.nodes.push({ id: field.properties.uuid, group: isMatch ? "Find Author" : "Author", name: decodeEntities(decodeEntities(field.properties.name)), count: 1, color: isMatch ? "cyan" : "gold" });
                 } else if (field.labels[0] === "Class") {
                     let isMatch = classes2.includes(field.properties.name.toLowerCase().replace(/\s/g, ''));
-                    Obelisk.nodes.push({ id: field.properties.uuid, group: isMatch ? "Find Class" : "Class", name: decodeEntities(field.properties.name), count: 1, color: isMatch ? "darkgoldenrod" : "darkgoldenrod" });
+                    Obelisk.nodes.push({ id: field.properties.uuid, group: isMatch ? "Find Class" : "Class", name: decodeEntities(field.properties.name), count: 1, color: isMatch ? "cyan" : "#50C777" });
                 } else if (field.labels[0] === "Publisher") {
                     let isMatch = publishers.some(t => field.properties.name.includes(t));
-                    Obelisk.nodes.push({ id: field.properties.uuid, group: isMatch ? "Find Publisher" : "Publisher", name: toTitleCase(decodeEntities(decodeEntities(field.properties.name))), count: 1, color: isMatch ? "darkgoldenrod" : "mediumvioletred" });
+                    Obelisk.nodes.push({ id: field.properties.uuid, group: isMatch ? "Find Publisher" : "Publisher", name: toTitleCase(decodeEntities(decodeEntities(field.properties.name))), count: 1, color: isMatch ? "cyan" : "mediumvioletred" });
                 }
             }
         });
     });
 
-    // --- PASS 2: LINKS ---
+    /*// --- PASS 2: LINKS ---
     data.gData.forEach(function(record) {
         var source = record._fields[0];
         var author = record._fields[1];
         var classs = record._fields[2];
         var publisher = record._fields[3];
 
+        
         const isGoldLink = (n1, n2) => {
             const findLabels = ["Find Source", "Find Author", "Find Class", "Find Publisher"];
             const node1 = Obelisk.nodes.find(n => n.id === n1.properties.uuid);
@@ -115,319 +97,166 @@ function graph(data) {
             }
         }
     });
+*/
+// --- PASS 2: LINKS ---
+data.gData.forEach(function(record) {
+    // Record structure based on your current backend RETURN:
+    // s, a, c, p, s2, a2, c2, p2
+    var s1 = record._fields[0], a1 = record._fields[1], c1 = record._fields[2], p1 = record._fields[3];
+    var s2 = record._fields[4], a2 = record._fields[5], c2 = record._fields[6], p2 = record._fields[7];
 
-    graphRender(".graph_search");
+    const isGoldLink = (n1, n2) => {
+        const findLabels = ["Find Source", "Find Author", "Find Class", "Find Publisher"];
+        const node1 = Obelisk.nodes.find(n => n.id === n1.properties.uuid);
+        const node2 = Obelisk.nodes.find(n => n.id === n2.properties.uuid);
+        return (node1 && findLabels.includes(node1.group)) || (node2 && findLabels.includes(node2.group));
+    };
+    
+    const addSafeLink = (nodeA, nodeB) => {
+        if (!nodeA || !nodeB || !nodeA.properties || !nodeB.properties) return;
+        let idA = nodeA.properties.uuid, idB = nodeB.properties.uuid;
+        if (!Obelisk.links.some(l => (l.source === idA && l.target === idB) || (l.source === idB && l.target === idA))) {
+            Obelisk.links.push({ source: idA, target: idB, isGold: isGoldLink(nodeA, nodeB) });
+        }
+    };
+
+    // Link Seed Node (s1) to its metadata
+    addSafeLink(a1, s1);
+    addSafeLink(s1, c1);
+    addSafeLink(s1, p1);
+
+    // Link Neighbor Node (s2) to its metadata
+    addSafeLink(a2, s2);
+    addSafeLink(s2, c2);
+    addSafeLink(s2, p2);
+
+    // CRITICAL: Link the Seed (s1) to the Neighbor (s2) through the bridge metadata
+    // This is what prevents the "disconnected islands" effect
+    if (a1 && a2 && a1.properties.uuid === a2.properties.uuid) addSafeLink(a1, s2);
+    if (c1 && c2 && c1.properties.uuid === c2.properties.uuid) addSafeLink(c1, s2);
+    if (p1 && p2 && p1.properties.uuid === p2.properties.uuid) addSafeLink(p1, s2);
+});
+    graphRenderVR(".graph_search");
 }
 
-function graphRender(selector) {
+let isShiftPressed = false;
+let isCtrlPressed = false; // Covers Windows Ctrl and Mac Command
+
+window.addEventListener('keydown', (e) => {
+    if (e.key === "Shift") isShiftPressed = true;
+    // Track both Control (Win/Linux) and Meta (Mac Command)
+    if (e.key === "Control" || e.key === "Meta") isCtrlPressed = true;
+});
+
+window.addEventListener('keyup', (e) => {
+    if (e.key === "Shift") isShiftPressed = false;
+    if (e.key === "Control" || e.key === "Meta") isCtrlPressed = false;
+});
+
+// 2. Updated onNodeClick logic
+function graphRenderVR(selector) {
     const container = document.querySelector(selector);
     if (!container) return;
 
-    const width = container.clientWidth || $(container).width();
-    const height = 493;
-
-    container.innerHTML = ''; 
-    const canvas = d3.select(container).append("canvas")
-        .attr("width", width)
-        .attr("height", height)
-        .node();
-
-    const ctx = canvas.getContext("2d");
-
-    /** * Precise Modification: 
-     * Calculate scale for 7 clicks out (1/1.3^7 ≈ 0.159)
-     */
-    const initialScale = 0.0185; 
+    const Graph = ForceGraphVR()(container)
+    .width(container.clientWidth)
+    .height(500)
+    .graphData({ nodes: Obelisk.nodes, links: Obelisk.links })
     
-    // Create the identity and center it
-    const initialTransform = d3.zoomIdentity
-        .translate(width / 2, height / 2) 
-        .scale(initialScale)
-        .translate(-width / 2, -height / 2); 
-
-    let transform = initialTransform;
+    // --- Node Styling ---
+    .nodeRelSize(7) 
+    .nodeColor(d => d.color)
     
-    const simulation = d3.forceSimulation(Obelisk.nodes)
-    // 1. Increase link distance to push connected nodes further apart
-    .force("link", d3.forceLink(Obelisk.links).id(d => d.id).distance(7500)) 
+    // --- Link Styling ---
+    .linkColor(d => d.isGold ? 'gold' : '#555')
+    .linkWidth(d => d.isGold ? 4 : 1) // Thicker gold links
     
-    // 2. Stronger negative charge (repulsion). -1000 to -1500 is better for high-density text
-    .force("charge", d3.forceManyBody()
-        .strength(-26000) 
-        .distanceMax(33333)
-    )
-    // 3. Collision force prevents text labels from sitting directly on top of each other
-    // Add padding so labels don't touch edges
-
-    .force("collide", d3.forceCollide().radius(d => {
-        // If text width isn't measured yet, use a safe default
-        const width = d.__textWidth || 500; 
-        return (width / 2) + 1250;
-    }))
-        
-    .force("center", d3.forceCenter(width / 2, height / 2))
+    // Set transparency: 0.9 for Gold (solid), 0.2 for others (ghostly)
+    .linkOpacity(d => d.isGold ? 0.88 : 0.33)
     
-    .velocityDecay(0.137)
-
-    setTimeout(() => {
-        simulation.stop();
-    }, 3333);
-
-    // --- ZOOM only for DOUBLE-FINGER ---
-    const zoom = d3.zoom()
-    .scaleExtent([0.0001, 20])
-    // THE FILTER: Only allow zoom/pan if it's NOT a single-touch gesture
-    .filter(event => {
-        // Allow all mouse events (wheel, etc.)
-        if (event.type === 'wheel') return true;
-        if (event.type === 'mousedown') return true;
-        
-        // On mobile: ONLY allow if there are 2 or more touches (pinch/pan)
-        if (event.touches && event.touches.length > 1) return true;
-        
-        // Block everything else (single-finger touch)
-        return false;
+    // --- Particle Logic (The "Flow" Effect) ---
+    // Only gold links get particles
+    .linkDirectionalParticles(d => d.isGold ? 4 : 0)
+    .linkDirectionalParticleWidth(d => d.isGold ? 4 : 0)
+    .linkDirectionalParticleSpeed(0.005) // Slow, mystical flow
+    
+    .nodeLabel(node => node.name)
+    .onNodeClick((node) => {
+        const group = node.group.toLowerCase();
+        if (isShiftPressed) {
+            resetGraphParams();
+            walkGraph(group, encodeURIComponent(node.name));
+        } else if (isCtrlPressed) {
+            walkGraph(group, node.name);
+        } else {
+            handleNormalClick(node);
+        }
     })
-    .on("zoom", (event) => {
-        transform = event.transform;
-        render(); 
-    });
-    // Prevent default browser scrolling when the wheel is used over the canvas
-    canvas.addEventListener('wheel', function(e) {
-        e.preventDefault();
-    }, { passive: false });
-
-    const d3Canvas = d3.select(canvas);
     
-    // Sync the internal zoom behavior with our starting transform
-    d3Canvas.call(zoom);
-    d3Canvas.call(zoom.transform, initialTransform);
+    // ... (Arrows prevention and VR/Mobile logic
+    setupMobileFullscreen();
+}
+function handleNormalClick(clickedNode){
+    if (clickedNode) {
+        const d = clickedNode;
+        const routeMap = { "Source": "source", "Author": "author", "Class": "class", "Publisher": "publisher", "Find Source" : "source", "Find Author" : "author", "Find Class" : "class", "Find Publisher" : "publisher" };
+        const label = routeMap[d.group] || d.group.toLowerCase();
+        TEMPLAR.route(`#node?label=${label}&uuid=${d.id}`);
+    }
+}
 
-    function render() {
-        ctx.save();
-        ctx.clearRect(0, 0, width, height);
-        ctx.translate(transform.x, transform.y);
-        ctx.scale(transform.k, transform.k);
-
-        // --- PASS 1: DRAW NORMAL LINKS (BOTTOM LAYER) ---
-        Obelisk.links.forEach(d => {
-            if (d.source && d.target && !d.isGold) {
-                ctx.beginPath();
-                ctx.strokeStyle = "#555"; // Subtle gray
-                ctx.lineWidth = 1 / transform.k;
-                ctx.shadowBlur = 0;
-                ctx.moveTo(d.source.x, d.source.y);
-                ctx.lineTo(d.target.x, d.target.y);
-                ctx.stroke();
-            }
-        });
-
-        // --- PASS 2: DRAW GOLD LINKS (MIDDLE LAYER) ---
-        Obelisk.links.forEach(d => {
-            if (d.source && d.target && d.isGold) {
-                ctx.beginPath();
-                ctx.strokeStyle = "gold"; // Gold
-                ctx.lineWidth = 2 / transform.k;
-                ctx.shadowColor = "gold"; // Glow
-                ctx.shadowBlur = 4;
-                ctx.moveTo(d.source.x, d.source.y);
-                ctx.lineTo(d.target.x, d.target.y);
-                ctx.stroke();
-                ctx.shadowBlur = 0; // Reset for next iteration
-            }
-        });
-
-        // --- PASS 3: DRAW NODES/TEXT (TOP LAYER) ---
-        const baseFontSize = 15;
-        const currentFontSize = baseFontSize / transform.k;
-        ctx.textAlign = 'center';
-        ctx.textBaseline = 'middle';
-        ctx.font = `${currentFontSize}px Pirata One`;
-
-        Obelisk.nodes.forEach(d => {
-            if (d.group.includes("Find")) {
-                ctx.fillStyle = "blue";
+function setupMobileFullscreen() {
+    const isTouch = 'ontouchstart' in window || navigator.maxTouchPoints > 0;
+    
+    // Only proceed if it's a touch device and VR isn't currently active
+    if (isTouch) {
+        $("#mobile_fullscreen").show();
+        $("#mobile_fullscreen").on("click", () => {
+            // Get the actual canvas element from the force-graph
+            const canvas = document.querySelector('.graph_search'); 
+            
+            if (!document.fullscreenElement) {
+                if (canvas.requestFullscreen) {
+                    canvas.requestFullscreen();
+                } else if (canvas.webkitRequestFullscreen) { // iOS/Safari
+                    canvas.webkitRequestFullscreen();
+                }
             } else {
-                switch (d.group) {
-                    case "Source": ctx.fillStyle = "white"; break;
-                    case "Author": ctx.fillStyle = "yellow"; break;
-                    case "Class": ctx.fillStyle = "green"; break;
-                    case "Publisher": ctx.fillStyle = "red"; break;
-                    default: ctx.fillStyle = "palegoldenrod"; break;
+                if (document.exitFullscreen) {
+                    document.exitFullscreen();
                 }
             }
-            const metrics = ctx.measureText(d.name);
-            d.__textWidth = metrics.width;
-            d.__fontSize = currentFontSize;
-            ctx.fillText(d.name, d.x, d.y);
         });
 
-        ctx.restore();
+        // Hide button if VR mode starts
+        // Assuming your lib has an 'onNodeDrag' or similar event to hook into, 
+        // or just check for the VR session start
+        
+    }
+    else{
+        $("#mobile_fullscreen").hide();
     }
 
-    simulation.on("tick", render);
-
-    function handleNormalClick(clickedNode){
-        if (clickedNode) {
-            const d = clickedNode;
-            const routeMap = { "Source": "source", "Author": "author", "Class": "class", "Publisher": "publisher", "Find Source" : "source", "Find Author" : "author", "Find Class" : "class", "Find Publisher" : "publisher" };
-            const label = routeMap[d.group] || d.group.toLowerCase();
-            TEMPLAR.route(`#node?label=${label}&uuid=${d.id}`);
-        }
-    }
-let startX, startY, startTime;
-let startClientX, startClientY; // Add variables to store the actual starting coords
-const canvasNode = d3Canvas.node();
-canvasNode.addEventListener('touchstart', function(e) {
-    const t = e.touches[0];
-    startX = t.clientX;
-    startY = t.clientY;
-    // Store these specifically for the node lookup later
-    startClientX = t.clientX; 
-    startClientY = t.clientY;
-    startTime = Date.now();
-}, { passive: false });
-
-canvasNode.addEventListener('touchend', function(e) {
-    const t = e.changedTouches[0];
-    const dx = t.clientX - startX;
-    const dy = t.clientY - startY;
-    const duration = Date.now() - startTime;
-
-    // 1. GESTURE: PECHA UNROLL (Swipe Right)
-    if (dx > 70 && Math.abs(dy) < 40) {
-        // USE startClientX/Y so we find the node we started on!
-        processInput(startClientX, startClientY, true);
-    } 
-    else if (dx < -70 && Math.abs(dy) < 40) {
-        processInput(startClientX, startClientY, true, true);
-    }
-    // 2. GESTURE: SNAP TAP
-    else if (Math.abs(dx) < 5 && Math.abs(dy) < 5 && duration < 300) {
-        processInput(t.clientX, t.clientY, false, false);
-    }
-    
-    startX = null;
-}, { passive: false });
-
-/**
- * processInput handles both swipes and taps by converting 
- * screen coords to the current D3 Transform space.
- * * @param {number} clientX - The x-coordinate from the touch event
- * @param {number} clientY - The y-coordinate from the touch event
- * @param {boolean} isSwipe - Whether the detected gesture was a swipe
- * @param {boolean} reset - Whether the swipe was a 'Reset' (Left) or 'Walk' (Right)
- */
-function processInput(clientX, clientY, isSwipe, reset) {
-    if (!canvasNode || !transform) return;
-
-    const rect = canvasNode.getBoundingClientRect();
-    
-    // 1. Convert Screen space to Canvas space
-    const canvasX = clientX - rect.left;
-    const canvasY = clientY - rect.top;
-
-    // 2. Invert the transform to find the 'Graph Space' coordinate
-    // This accounts for your current zoom (transform.k) and pan (transform.x, transform.y)
-    const point = transform.invert([canvasX, canvasY]);
-    const graphX = point[0];
-    const graphY = point[1];
-
-    // 3. Define the proximity radius
-    // We scale the hitbox so that it remains a consistent "physical" size 
-    // on the screen regardless of zoom level. 
-    // Increasing 50 to 60-80 makes it easier to hit nodes when zoomed out.
-    const hitRadius = 60 / transform.k; 
-
-    // 4. Find the closest node within the hitRadius
-    let closestNode = null;
-    let minDistance = Infinity;
-
-    Obelisk.nodes.forEach(d => {
-        const dx = graphX - d.x;
-        const dy = graphY - d.y;
-        const distance = Math.sqrt(dx * dx + dy * dy);
-
-        if (distance < hitRadius && distance < minDistance) {
-            minDistance = distance;
-            closestNode = d;
-        }
+    window.addEventListener('fullscreenchange', () => {
+        // Tell the library to look at the new size of its container
+        // Most force-graph libs have a .width() and .height() or .onResize()
+        const newWidth = window.innerWidth;
+        const newHeight = window.innerHeight;
+        
+        Graph.width(newWidth);
+        Graph.height(newHeight);
     });
-
-    // 5. Execute Graph Logic
-    if (closestNode) {
-        if (isSwipe) {
-            if (reset) {
-                // GESTURE: PECHA UNROLL (Swipe Left)
-                console.log("Tibetan Library: Unrolling Pecha " + closestNode.name);
-                // Lowercase the group for URL consistency, encode name for safety
-                const groupKey = closestNode.group ? closestNode.group.toLowerCase() : "";
-                traverseGraph(groupKey, encodeURIComponent(closestNode.name));
-            } else {
-                // GESTURE: WALK GRAPH (Swipe Right)
-                console.log("Tibetan Library: Walking Path " + closestNode.name);
-                walkGraph(closestNode.group, closestNode.name);
-            }
-        } else {
-            // GESTURE: SNAP TAP (Single Click)
-            // Handle standard node selection or focusing here
-            console.log("Node Tapped: " + closestNode.name);
-            // Example: focusNode(closestNode);
-        }
-    } else {
-        console.warn("Touch detected, but no node found within radius at graph coords:", graphX, graphY);
-    }
 }
 
- d3Canvas.on("click", (event) => {
-        // Desktop Shift + Click
-        const point = transform.invert([event.offsetX, event.offsetY]);
-        const mouseX = point[0];
-        const mouseY = point[1];
-
-        const clickedNode = Obelisk.nodes.find(d => {
-            const textWidth = d.__textWidth || 0;
-            const textHeight = d.__fontSize || 0;
-            const padding = 5; 
-            const left = d.x - (textWidth / 2) - padding;
-            const right = d.x + (textWidth / 2) + padding;
-            const top = d.y - (textHeight / 2) - padding;
-            const bottom = d.y + (textHeight / 2) + padding;
-            return mouseX >= left && mouseX <= right && mouseY >= top && mouseY <= bottom;
+// Update your initializeGraph to call the VR version
+function initializeGraph() {
+    if ($("#graph-container").children().length > 0) return;
+    if(TEMPLAR.pageREC() === "torrents" && TEMPLAR.paramREC()?.search){
+        $.post("/graph_search", TEMPLAR.paramREC(), function(data){
+            // Prepare Obelisk.nodes/links exactly as you do now
+            graph(data); 
+            // Then render the VR version
+            graphRenderVR("#graph-container");
         });
-
-        if (clickedNode && event.shiftKey) {
-            const searchable = encodeURIComponent(clickedNode.name)
-            resetGraphParams();
-            walkGraph(clickedNode.group.toLowerCase(), searchable);
-        }
-        else if(clickedNode && event.ctrlKey){
-            walkGraph(clickedNode.group.toLowerCase(), clickedNode.name)
-        } else if (clickedNode){
-            // Your existing normal click logic here
-            handleNormalClick(clickedNode);
-        }
-    });
-
-// 4. THE EXECUTION CORE
-function handleExecution(clientX, clientY) {
-    const rect = el.getBoundingClientRect();
-    const x = clientX - rect.left;
-    const y = clientY - rect.top;
-
-    // Use Obelisk node detection
-    const node = Obelisk.nodes.find(d => Math.hypot(x - d.x, y - d.y) < 45);
-
-    if (node) {
-        const group = node.group.toLowerCase();
-        const searchable = encodeURIComponent(node.name);
-        
-        console.log(`Unrolling ${node.name} via ${group}`);
-        if (navigator.vibrate) navigator.vibrate(20);
-        
-        traverseGraph(group, searchable);
     }
 }
-    simulation.alphaTarget(1.337).restart();
-}
-

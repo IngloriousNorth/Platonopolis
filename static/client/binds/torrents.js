@@ -299,7 +299,19 @@ function assertAdvSearchUI(){
 function assertAdvButton(){
   $("#adv_submit").unbind("click");
   $("#adv_submit").click(function () {
-    
+    //pass false for no route
+    if($("#adv_title").val() !== ""){
+      walkGraph("source", $("#adv_title").val(), false);
+    }
+    if($("#adv_author").val() !== ""){
+      walkGraph("author", $("#adv_author").val(), false);
+    }
+    if($("#adv_classes").val() !== ""){
+      walkGraph("class", $("#adv_classes").val(), false);
+    }
+    if($("#adv_publisher").val() !== ""){
+      walkGraph("publisher", $("#adv_publisher").val(), false);
+    }
     TEMPLAR.route(
       "#torrents?search=true&title=" +
         encodeURIComponent($("#adv_title").val()) +

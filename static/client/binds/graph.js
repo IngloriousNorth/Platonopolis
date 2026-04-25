@@ -59,24 +59,3 @@ function traverseGraph(set, searchable){
 
         }
 }
-
-function scrollBind() {
-    const $container = $('div.TEMPLAR');
-    const $target = $("#graph_scroll");
-
-    // Ensure elements exist before running
-    if (!$container.length || !$target.length) return;
-
-    // Check if the container is currently at the top
-    const isAtTop = $container.scrollTop() <= 5; 
-
-    if (isAtTop) {
-        // CORRECT MATH: 
-        // (Target's distance from document top) - (Container's distance from document top)
-        const targetScrollPos = $target.offset().top - $container.offset().top + $container.scrollTop();
-
-        $container.stop(true, false).animate({
-            scrollTop: targetScrollPos
-        }, 400); // Added a default speed for smoothness
-    }
-}

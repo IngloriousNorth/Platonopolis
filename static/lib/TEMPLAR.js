@@ -131,16 +131,7 @@ var TEMPLAR = {
         if (this._isBound) return; 
 
         $(document).off("click", "a.TEMPLAR").on("click", "a.TEMPLAR", function(e) {
-            if(e.shiftKey){
-                e.preventDefault(); // Added here as a secondary fallback
-                $(this).trigger("TEMPLAR_SHIFT");
-                return;
-            }
-            else if(e.ctrlKey){
-                e.preventDefault();
-                $(this).trigger("TEMPLAR_CTRL");
-                return;
-            }
+            
             const $target = $(this);
             const href = $target.attr("href");
 
