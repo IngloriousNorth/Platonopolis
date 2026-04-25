@@ -50,17 +50,17 @@ function graph(data) {
                 if (field.labels[0] === "Source") {
                     nodeUUIDs.push(field.properties.uuid);
                     let isMatch = titles.some(t => field.properties.name.toLowerCase().includes(t));
-                    Obelisk.nodes.push({ id: field.properties.uuid, group: isMatch ? "Find Source" : "Source", name: decodeEntities(decodeEntities(field.properties.name)), count: 1, color: isMatch ? "cyan" : "white" });
+                    Obelisk.nodes.push({ id: field.properties.uuid, group: isMatch ? "Find Source" : "Source", name: decodeEntities(decodeEntities(field.properties.name)), count: 1, color : "white" });
                 } else if (field.labels[0] === "Author") {
 
                     let isMatch = TEMPLAR.paramREC()?.author && TEMPLAR.paramREC().author.toLowerCase().includes(field.properties.searchable.toLowerCase());
-                    Obelisk.nodes.push({ id: field.properties.uuid, group: isMatch ? "Find Author" : "Author", name: decodeEntities(decodeEntities(field.properties.name)), count: 1, color: isMatch ? "cyan" : "gold" });
+                    Obelisk.nodes.push({ id: field.properties.uuid, group: isMatch ? "Find Author" : "Author", name: decodeEntities(decodeEntities(field.properties.name)), count: 1, color: "gold" });
                 } else if (field.labels[0] === "Class") {
                     let isMatch = classes2.includes(field.properties.name.toLowerCase().replace(/\s/g, ''));
-                    Obelisk.nodes.push({ id: field.properties.uuid, group: isMatch ? "Find Class" : "Class", name: decodeEntities(field.properties.name), count: 1, color: isMatch ? "cyan" : "#50C777" });
+                    Obelisk.nodes.push({ id: field.properties.uuid, group: isMatch ? "Find Class" : "Class", name: decodeEntities(field.properties.name), count: 1, color: "#50C777" });
                 } else if (field.labels[0] === "Publisher") {
                     let isMatch = publishers.some(t => field.properties.name.includes(t));
-                    Obelisk.nodes.push({ id: field.properties.uuid, group: isMatch ? "Find Publisher" : "Publisher", name: toTitleCase(decodeEntities(decodeEntities(field.properties.name))), count: 1, color: isMatch ? "cyan" : "mediumvioletred" });
+                    Obelisk.nodes.push({ id: field.properties.uuid, group: isMatch ? "Find Publisher" : "Publisher", name: toTitleCase(decodeEntities(decodeEntities(field.properties.name))), count: 1, color: "mediumvioletred" });
                 }
             }
         });
@@ -139,20 +139,6 @@ data.gData.forEach(function(record) {
     graphRenderVR(".graph_search");
 }
 
-let isShiftPressed = false;
-let isCtrlPressed = false; // Covers Windows Ctrl and Mac Command
-
-window.addEventListener('keydown', (e) => {
-    if (e.key === "Shift") isShiftPressed = true;
-    // Track both Control (Win/Linux) and Meta (Mac Command)
-    if (e.key === "Control" || e.key === "Meta") isCtrlPressed = true;
-});
-
-window.addEventListener('keyup', (e) => {
-    if (e.key === "Shift") isShiftPressed = false;
-    if (e.key === "Control" || e.key === "Meta") isCtrlPressed = false;
-});
-
 // 2. Updated onNodeClick logic
 function graphRenderVR(selector) {
     const container = document.querySelector(selector);
@@ -164,37 +150,44 @@ function graphRenderVR(selector) {
     .graphData({ nodes: Obelisk.nodes, links: Obelisk.links })
     
     // --- Node Styling ---
-    .nodeRelSize(7) 
+    .nodeRelSize(7)               // Visual size
     .nodeColor(d => d.color)
-    
-    // --- Link Styling ---
-    .linkColor(d => d.isGold ? 'gold' : '#555')
-    .linkWidth(d => d.isGold ? 4 : 1) // Thicker gold links
-    
-    // Set transparency: 0.9 for Gold (solid), 0.2 for others (ghostly)
-    .linkOpacity(d => d.isGold ? 0.88 : 0.33)
-    
-    // --- Particle Logic (The "Flow" Effect) ---
-    // Only gold links get particles
-    .linkDirectionalParticles(d => d.isGold ? 4 : 0)
-    .linkDirectionalParticleWidth(d => d.isGold ? 4 : 0)
-    .linkDirectionalParticleSpeed(0.005) // Slow, mystical flow
-    
+
+    .nodeThreeObject(node => {
+      // Create a group to hold both the visible node and a "ghost" hitbox
+      const group = new THREE.Group();
+
+      // 1. The Visible Node
+      const visibleMesh = new THREE.Mesh(
+        new THREE.SphereGeometry(7), 
+        new THREE.MeshLambertMaterial({ color: node.color })
+      );
+      group.add(visibleMesh);
+
+      // 2. The Invisible Hitbox (Make this large enough to poke through the links)
+      const hitbox = new THREE.Mesh(
+        new THREE.SphereGeometry(19), // 12 is much larger than the link width
+        new THREE.MeshBasicMaterial({ transparent: true, opacity: 0, depthWrite: false })
+      );
+      group.add(hitbox);
+
+      return group;
+    })
+// --- Link Styling ---
+.linkColor(d => d.isGold ? "cyan" : '#555') // Static value is faster than a function check
+
     .nodeLabel(node => node.name)
     .onNodeClick((node) => {
         const group = node.group.toLowerCase();
-        if (isShiftPressed) {
-            resetGraphParams();
-            walkGraph(group, encodeURIComponent(node.name));
-        } else if (isCtrlPressed) {
-            walkGraph(group, node.name);
-        } else {
-            handleNormalClick(node);
-        }
+        
+        handleNormalClick(node);
+        
     })
-    
+  Graph.d3Force('charge').strength(-333)
+  Graph.d3Force('link').distance(d => d.isGold ? 110 : 35)
+  Graph.d3Force('center').strength(0.07);
     // ... (Arrows prevention and VR/Mobile logic
-    setupMobileFullscreen();
+  setupMobileFullscreen();
 }
 function handleNormalClick(clickedNode){
     if (clickedNode) {

@@ -412,11 +412,7 @@ h2 span a{
   line-height:40px;
   color:mediumvioletred;
   padding:0;
-  text-shadow: 
-  -1px -1px 0 #000,  
-   1px -1px 0 #000,
-  -1px  1px 0 #000,
-   1px  1px 0 #000;
+
   
 }
   
@@ -1421,7 +1417,7 @@ a.adv_toggle{
 
 
 #adv_heading{
-  font-family: "Pirata One", "Special Elite" !important;
+  font-family: "Rye", "Times New Roman" !important;
   font-size:24px;
   text-align:center;
   float:left;
@@ -1789,7 +1785,6 @@ h2 span a{
 
 #torrentsTitle span a:not(.loading){
   color: #007BFF !important;
-  text-shadow:none !important;
 }
 
  #top10Title span a:not(.loading){
@@ -2069,7 +2064,7 @@ footer{
 }
 
 .dt-container{  
-  background-color:lightgoldenrodyellow !important;
+  background-color:silver !important;
   border-top-left-radius:8px;
   border-top-right-radius:8px;
   border:3px solid gold;
@@ -2138,7 +2133,7 @@ header, #hero{
 
 header{
   box-shadow:3px 3px 6px goldenrod !important;
-  background:#11123c !important;
+  background:#333777 !important;
   border-bottom:3px solid silver !important;
 }
 
@@ -2146,7 +2141,7 @@ header{
   box-shadow:none !important;
   border-bottom:2px solid darkviolet;
   /* 1. Define your gradient */
-  background:#11123C !important;
+  background:#333777 !important;
   color:silver !important;
   border-top:3px solid #50C777 !important;
   font-size:23px !important;
@@ -2176,7 +2171,7 @@ table.dataTable tr.dtrg-group th{
 }
 
 div.TEMPLAR{
-  background-color:white !important;
+  background-color:#000 !important;
 }
 
 .torrentsTable thead th{
@@ -2337,8 +2332,9 @@ canvas:-webkit-full-screen {
 }
 
 h2 span a{
-  font-size:31px;
-  font-family:"Times New Roman", serif !important;
+  font-size:41px;
+  font-family:"Pirata One", serif !important;
+  text-shadow:2px 2px cyan !important;
   padding-left:5px;
 }
 
@@ -2361,7 +2357,7 @@ h2 span a{
 }
 
 .graph_search{
-  border:3px solid cyan;
+  border:3px solid silver;
   background-color:black;
 }
 
@@ -2404,32 +2400,6 @@ div.upload{
   font-family:"Share Tech Mono", sans-serif;
 }
 
-@media (pointer:coarse) {
-  .mobile_inst{
-    display:inline;
-
-  }
-
-  .desktop_inst{
-    display:none;
-  }
-}
-
-@media only screen and (max-width:1299px){
-  .pi{
-    display:none !important;
-  }
-
-  h1 a, h1 a:visited{
-    position:fixed !important;
-    margin:0 auto !important;
-    text-align:center;
-    width:100%;
-    left:0;
-    top:0px !important;
-  }
-}
-
 @media only screen and (max-width: 1079px) {
   .row>*{
     padding:0px;
@@ -2460,7 +2430,7 @@ div.upload{
 
   h1, h1 a, h1 a :visited{
     position:relative;
-    top:10px;
+    top:3px;
   }
 
   
@@ -2540,7 +2510,7 @@ div.upload{
     font-size:40px;
     width:49px;
     height:49px;
-    color:goldenrod; !important;
+    color:cyan !important;
     top:9px;
     left:5px;
     z-index:9999;
