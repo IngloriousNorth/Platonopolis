@@ -201,7 +201,7 @@ body.is-seed .show-leech {
 footer{
   height:60px;
   width:100%;
-  background: #333777 !important;
+  background: #007BFF !important;
 }
 
 
@@ -915,7 +915,7 @@ table.dataTable>tbody>tr.child {
 table.dataTable tr.dtrg-group th{
   background-color:#555555;
   background: linear-gradient(90deg, #50C777 0%, #CDCDCD 100%) !important;
-  box-shadow: 0 4px 8px #333777 !important;
+  box-shadow: 0 4px 8px skyblue !important;
   border-bottom: 2px solid palegoldenrod !important;
   height:147px;
   position:relative;
@@ -1967,7 +1967,7 @@ footer{
   }
 
   .torrentsTable{
-    padding:0px 5px 0px 5px;
+    padding:0px 0px 0px 0px;
     width:100%;
     box-sizing:border-box;
   }
@@ -2118,14 +2118,14 @@ header{
 #status{color: #FFF !important;}
 
 header{
-  box-shadow:2px 4px 8px darkgoldenrod !important;
+  box-shadow:2px 4px 8px white !important;
   background:#007BFF !important;
-  border-bottom:5px solid #333777 !important;
+  border-bottom:5px solid skyblue !important;
 }
 
 .dataTable thead th{
   box-shadow:none !important;
-  border-bottom:4px solid #333777;
+  border-bottom:4px solid skyblue;
   /* 1. Define your gradient */
   background:goldenrod !important;
   color:#007BFF !important;
@@ -2161,13 +2161,13 @@ div.TEMPLAR{
 }
 
 .torrentsTable thead th{
-  background:#007BFF !important;
+  background:skyblue !important;
   border-bottom:none !important;
   box-shadow:none !important;
   font-family:"Share Tech Mono", "sans-serif" !important;
   font-size:18px !important;
   text-shadow:none !important;
-  color:palevioletred !important;
+  color:mediumvioletred !important;
 }
 
 .torrentsTable td{
@@ -2178,14 +2178,14 @@ div.TEMPLAR{
 
 .adv_search{
   background:lightgoldenrodyellow !important;
-  border: 3px solid #50C777 !important;
+  border: 3px solid skyblue !important;
   color:palegoldenrod !important;
   margin-bottom:30px;
   margin-top:30px;
 }
 
 .adv_search label{
-  color:#333777 !important;
+  color:skyblue !important;
   letter-spacing:1px;
   font-size:16px;
   font-family:"Share Tech Mono", "serif" !important;
@@ -2212,7 +2212,7 @@ div.TEMPLAR{
 }
 
 .dt-container{
-  border:3px solid mediumvioletred !important;
+  border:2px solid skyblue !important;
   margin-top:30px !important;
   border-bottom:none;
 }
@@ -2325,7 +2325,7 @@ h2 span a{
 }
 
 footer{
-  border-top:3px solid black !important;
+  border-top:4px solid white !important;
 }
 
 #status{

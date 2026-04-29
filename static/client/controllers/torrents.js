@@ -48,7 +48,14 @@ function initializeTorrents(table) {
                 type: ''
             }
         },*/
-        responsive : true,
+        responsive: {
+            details: {
+                // This forces the child row to be shown immediately
+                display: $.fn.dataTable.Responsive.display.childRowImmediate,
+                // Optional: determines how the row is toggled (none means the user can't close it)
+                type: 'none' 
+            }
+        },
         serverSide: true,
         bSort: true,
         pageLength: 10,
@@ -170,7 +177,7 @@ function initializeTorrents(table) {
 
                         if (editionsAdded.indexOf(edition_torrent.edition.properties.uuid) === -1) {
                             // NEW EDITION: Create the full table wrapper
-                            var fullTable = "<table class='torrentsTable'><thead><tr><th>Meta</th><th>Download</th><th>Revs</th><th>Size</th></tr></thead><tbody>" + 
+                            var fullTable = "<table class='torrentsTable'><thead><tr><th>File</th><th>Download</th><th>Revs</th><th>Size</th></tr></thead><tbody>" + 
                                             torrentsTableRows + "</tbody></table>";
                             
                             assertFirstEditionRow(record, edition_torrent, editionsAdded, currentApa, sourceIMG, dateField, authorField, classesField, fullTable);
