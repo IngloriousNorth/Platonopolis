@@ -36,9 +36,13 @@ I have also added Graph Visualization based on Gazelle's "Similar Artists" web, 
 
 To seed to browsers, please use WebTorrent Desktop for few files, or BiglyBT for many files (I can seed 3000 to browsers instantly using BiglyBT). qBitTorrent is slated to add WebTorrent support soon; Ferross' technology is a cutting-edge game-changer!
 
+Gazelle-Webtorrent is also a Single-Page Application (SPA) with a functional use-case, as torrents stay seeding and downloading as you TEMPLAR.route partials. If you play an HTML audio element on the .webtorrent route, it will continue playing as you go back/forward.
+
+The TEMPLAR router is black-boxed as a lib module, but if you want to add pages or manipulate function calls, you'll have to learn to initialize the helm() function. Check the docs of TEMPLAR.js
+
 **AMAZON-APACHE-TEMPLAR**
 
-As an example of robust System Operations, I use **Apache** as a reverse proxy and **TEMPLAR** as a client-side router. The Apache reverse-proxy and express app are hosted on an **Amazon** EC2 micro-instance.
+As an example of robust System Operations, I use **Apache** as a reverse proxy and **TEMPLAR** as an MVC-compatible client-side router. The Apache reverse-proxy and express app are hosted on an **Amazon** EC2 micro-instance.
 
 This setup costs less than 10$ a month to seed 100GB of stored data (18000 nodes).
 
