@@ -55,9 +55,9 @@ function assertNodeNameFromData() {
 function updateTitleUI(name, label) {
     const colors = {
         source: "white",
-        author: "yellow",
-        class: "green",
-        publisher: "red"
+        author: "gold",
+        class: "#50C777",
+        publisher: "darkviolet"
     };
 
     switch(label){

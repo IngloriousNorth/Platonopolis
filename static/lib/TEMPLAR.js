@@ -36,29 +36,27 @@ var TEMPLAR = {
 
         var that = this;
 
-        $.get("../" + this._dir + "/header.html", function(data) {
-            $("header").html(data);
-            window.addEventListener('popstate', (event) => {
-                const target = that.pageREC();
-                
-                // If the path has actually changed, we must re-disclose the Truth (render)
-                if (that.currentPage !== target) {
-                    $(document).trigger("TEMPLAR"); 
-                } else {
-                    // If only parameters changed, just update the helm rituals
-                    that.helm(target); 
-                }
+        window.addEventListener('popstate', (event) => {
+            const target = that.pageREC();
+            
+            // If the path has actually changed, we must re-disclose the Truth (render)
+            if (that.currentPage !== target) {
+                $(document).trigger("TEMPLAR"); 
+            } else {
+                // If only parameters changed, just update the helm rituals
+                that.helm(target); 
+            }
 
-            });
-
-            // 2. INITIAL HORIZON
-            var currentHash = window.location.hash.split('?')[0].substring(1);
-            var startingPage = currentHash || that._default;
-
-            $(document).trigger("TEMPLAR")
-            that.DOM();
-            if (cb) cb();
         });
+
+        // 2. INITIAL HORIZON
+        var currentHash = window.location.hash.split('?')[0].substring(1);
+        var startingPage = currentHash || that._default;
+
+        $(document).trigger("TEMPLAR")
+        that.DOM();
+        if (cb) cb();
+
     },
 
     route: function(origin = window.location.hash) {

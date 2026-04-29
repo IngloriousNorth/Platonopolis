@@ -60,7 +60,7 @@ function graph(data) {
                     Obelisk.nodes.push({ id: field.properties.uuid, group: isMatch ? "Find Class" : "Class", name: decodeEntities(field.properties.name), count: 1, color: "#50C777" });
                 } else if (field.labels[0] === "Publisher") {
                     let isMatch = publishers.some(t => field.properties.name.includes(t));
-                    Obelisk.nodes.push({ id: field.properties.uuid, group: isMatch ? "Find Publisher" : "Publisher", name: toTitleCase(decodeEntities(decodeEntities(field.properties.name))), count: 1, color: "mediumvioletred" });
+                    Obelisk.nodes.push({ id: field.properties.uuid, group: isMatch ? "Find Publisher" : "Publisher", name: toTitleCase(decodeEntities(decodeEntities(field.properties.name))), count: 1, color: "darkviolet" });
                 }
             }
         });

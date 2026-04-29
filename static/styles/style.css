@@ -152,11 +152,6 @@ object{
    transition: width .4s ease-in-out;
 }
 
-#hero{
-  color:lightgoldenrodpalegoldenrod !important;
-  font-family:"Lato", system-ui !important;
-}
-
 body.is-seed .show-seed {
    display: inline;
 }
@@ -171,9 +166,13 @@ body.is-seed .show-leech {
 
 
 #output object{
-    width: 100%;
-  min-height: 100vh;
-  
+  position:fixed;
+  top:88px;
+  bottom:60px;
+  height: calc(100% - 148px);
+  z-index:900;
+  width:100%;
+  margin:0 auto;
   /*top: 0;
   bottom: 0;*/
 }
@@ -194,25 +193,20 @@ body.is-seed .show-leech {
   font-family:"Lato", sans-"Special Elite";
 }
 
-.academic, .academic option{
+#hero, #hero option{
   font-family:"Share Tech Mono", system-ui;
 }
 
 
-#hero{
-  height:88px;
+footer{
+  height:60px;
   width:100%;
-  background: linear-gradient(
-        180deg, 
-        #007BFF 0%,    /* Start: Neon Cyan (Glow at the very top) */
-        silver 33%, 
-        darkviolet 66%   /* End: DarkViolet (Thin horizon line at the bottom) */
-    );
+  background: #333777 !important;
 }
 
 
 #status {
-   color: #007BFF;
+   color: #50C777;
    font-size: 13px;
    margin-top: 5px;
    margin-left:5px;
@@ -230,10 +224,10 @@ body.is-seed .show-leech {
 }
 
 #numPeers, #uploadSpeed, #downloadSpeed{
-  color:#007BFF !important;
+  color:#50C777 !important;
 }
 
-#hero a:link, #hero a:visited {
+footer a:link, #hero a:visited {
    color: lightcyan !important;
    text-decoration: none;
 }
@@ -241,6 +235,8 @@ body.is-seed .show-leech {
 #output a{
   padding-left:5px !important;
   color:cyan !important;
+  position:absolute;
+  z-index:901;
 }
 
 /* UPLOAD */
@@ -359,7 +355,7 @@ div.TEMPLAR{
     color:black;
     overflow-x: hidden;
     width: 100%;
-    height: calc(100% - 122px);
+    height: calc(100% - 148px);
     position: absolute;
     box-sizing: border-box;
     top: 92px;
@@ -534,12 +530,12 @@ background: #01D3CC;
 }
 
 .tabs a.torrents, .tabs a.torrents:visited, .mobile_tabs a.torrents:visited{
-  color:black !important;
+  color:white !important;
 
 }
 
 .tabs a.top10, .tabs a.top10:visited, .mobile_tabs a.top10, .mobile_tabs a.top10:visited{
-  color:white !important;
+  color:black !important;
 }
 
 
@@ -748,7 +744,7 @@ h2{
 }
 
 .dataTable{
-  border-bottom:6px #50C777;
+  border-bottom:6px silver;
 }
 
 #uploadHeading a{
@@ -919,8 +915,8 @@ table.dataTable>tbody>tr.child {
 table.dataTable tr.dtrg-group th{
   background-color:#555555;
   background: linear-gradient(90deg, #50C777 0%, #CDCDCD 100%) !important;
-  box-shadow: 0 4px 8px black !important;
-  border-bottom: 2px solid goldenrod !important;
+  box-shadow: 0 4px 8px #333777 !important;
+  border-bottom: 2px solid palegoldenrod !important;
   height:147px;
   position:relative;
   z-index:10;
@@ -1169,7 +1165,7 @@ input{
 body .ui-menu-item {
   /* font-family to all */
  /* box-shadow:4px 4px 5px #83DAC0;*/
-  background-color:#50C777;
+  background-color:palegoldenrod;
   text-align:justify;
   font-size:16px;
   padding:7px 0px 7px 0px;
@@ -1177,12 +1173,12 @@ body .ui-menu-item {
 .ui-autocomplete{
   max-height:310px;
   width:270px;
-  color:white !important;
+  color:#007BFF !important;
   font-family: "Share Tech Mono", system-ui;
   position:relative;
   z-index:9999;
   overflow-y:auto;
-  border: 2px solid red!important;
+  border: 2px solid #50C777 !important;
   border-radius:15px;
     
   /* A soft, deep shadow to give the menu elevation */
@@ -1339,8 +1335,8 @@ a.adv_toggle{
 /* CAPTAIN'S LOG 8:28 */
  
 .active .page-link{
-  background-color:black !important;
-  color:gold !important;
+  background-color:goldenrod !important;
+  color:#007BFF !important;
 }
 
 
@@ -1362,7 +1358,7 @@ a.adv_toggle{
   border-radius:14px !important;
  
   background: linear-gradient(120deg, #007BFF, silver, darkviolet);
-  border:3px solid goldenrod;
+  border:3px solid mediumvioletred;
 
   
 }
@@ -1446,7 +1442,7 @@ a.adv_toggle{
 }
 
 .publishers{
-  color:mediumvioletred !important;
+  color:darkviolet !important;
 }
 
 .red, .red:visited{
@@ -1641,7 +1637,7 @@ a.class, span.class{
 }
 
 a.publisher, span.publisher{
-  color:mediumvioletred !important;
+  color:darkviolet !important;
 }
 
 /* 12;22 */
@@ -1650,7 +1646,7 @@ label.adv_all, input.adv_all{
 }
 
 #top10Title span a{
-  color: white;
+  color: black;
   text-shadow: 
   -1px -1px 0 #000,  
    1px -1px 0 #000,
@@ -1754,11 +1750,6 @@ a.source, a.author{
   font-size:16px;
 }
 
-.torrentsTable a{
-  font-weight:bold;
-  color:#007BFF !important;
-}
-
 .panel li a, .mobile_panel li a{
   font-family:"Lato", system-ui;
 }
@@ -1784,11 +1775,11 @@ h2 span a{
 
 
 #torrentsTitle span a:not(.loading){
-  color: black !important;
+  color: white !important;
 }
 
  #top10Title span a:not(.loading){
-  color:white !important;
+  color:black !important;
  }
 
 .dtr-control{
@@ -1817,9 +1808,9 @@ h2 span a{
 }
 
 .ui-menu .ui-menu-item-wrapper.ui-state-active {
-    background: black !important;
+    background: #50C777 !important;
     font-weight:bold !important;
-    color:gold !important; /* Adjust text color for readability */
+    color:palegoldenrod !important; /* Adjust text color for readability */
 }
 
 input{
@@ -1865,42 +1856,11 @@ h3{
   background-color: coral;
 }
 
-.academic{
-  background:white;
+#hero{
+  background:white !important;
   color:black !important;
 }
 
-.webtorrent{
-  width:90px;
-  height:33px;
-  font-family:"Lato", sans-"Special Elite";
-  color:#007BFF;
-  background:goldenrod;
-  box-shadow:2px 3px 2px black;
-  border-radius:10px;
-  font-size:12px !important;
-}
-
-.webtorrent:hover{
-  border:3px solid #007BFF;
-  box-shadow:2px 3px 2px gold;
-}
-
-.webtorrent-disabled{
-  background: linear-gradient(180deg, #4d4d4d 0%, #333333 100%) !important;
-  color: #888888 !important;
-  border: 1px solid #444444 !important;
-  text-shadow: none !important;
-  box-shadow: inset 0 1px 3px rgba(0,0,0,0.5) !important;
-  cursor: wait !important;
-  opacity: 0.8;
-  filter: grayscale(100%);
-}
-
-.webtorrent-disabled:hover{
-  background: linear-gradient(180deg, #555555 0%, #3d3d3d 100%) !important;
-  color: #aaaaaa !important;
-}
 
 footer{
   position:fixed;
@@ -1933,12 +1893,14 @@ footer{
   color:#F8F8F8;
 }
 
-.academic{
+#hero{
   height:30px;
   border-radius:10px;
+  position:fixed;
+  bottom:0px;
 }
 
-#research_panel{
+#hero_client{
   width:calc(100% - 4px);
   position:fixed;
   left:2px;
@@ -1946,14 +1908,32 @@ footer{
   right:0;
 }
 
+.hero_files{
+  position:fixed;
+  left:5px;
+  bottom:34px;
+}
 
-.academic {
+#hero {
   width: 100%;
   box-sizing: border-box; /* Crucial for preventing overflow */
   display: block;        /* Ensures it behaves as a block-level element */
 }
 
-.academic option{
+.DL{
+  padding:9px;
+  position:fixed;
+  left:5px;
+  top:88px;
+  background:#1a1a1a; color:#00ccff; border:1px solid #00ccff; text-decoration:none; font-family:"Share Tech Mono", sans-serif; font-size:14px; border-radius:3px; cursor:pointer;
+}
+
+#output img{
+  margin:0 auto;
+  display:block;
+}
+
+#hero option{
   background:lightcyan;
 }
 
@@ -2000,8 +1980,14 @@ footer{
   display:none;
 }
 
-.magnetURI{
-  color:goldenrod !important;
+.magnetURI, .webtorrent{
+  color:darkgoldenrod !important;
+  display:block;
+  font-family:"Share Tech Mono", sans-serif !important;
+}
+
+.webtorrent{
+  padding-bottom:9px;
 }
 
 .upload h3{
@@ -2042,8 +2028,8 @@ footer{
 }
 
 .dataTable{
-  border-left:3px solid #50C777;
-  border-right:3px solid #50C777;
+  border-left:2px solid silver;
+  border-right:2px solid silver;
   border-radius:14px;
 }
 
@@ -2125,32 +2111,32 @@ h3{
   padding:0px;
 }
 
-header, #hero{
+header{
   background: #50C777 !important;
 }
 
-#status{color: white !important;}
+#status{color: #FFF !important;}
 
 header{
-  box-shadow:3px 3px 6px #333777 !important;
+  box-shadow:2px 4px 8px darkgoldenrod !important;
   background:#007BFF !important;
-  border-bottom:3px solid white !important;
+  border-bottom:5px solid #333777 !important;
 }
 
 .dataTable thead th{
   box-shadow:none !important;
-  border-bottom:2px solid darkviolet;
+  border-bottom:4px solid #333777;
   /* 1. Define your gradient */
   background:goldenrod !important;
   color:#007BFF !important;
-  border-top:3px solid #50C777 !important;
   font-size:20px !important;
   font-family:"Rye", system-ui !important;
 }
 
 table.dataTable tr.dtrg-group th{
   background:#007BFF !important;
-  border-bottom:1px solid silver !important;
+  border-top:2px solid silver !important;
+
 }
 
 .tableHeading, .tableHeading a{
@@ -2159,8 +2145,8 @@ table.dataTable tr.dtrg-group th{
 }
 
 
-.dataTable td, .dataTable td a{
-  font-family:"Times New Roman", "Special Elite" !important;
+.dataTable td{
+  font-family:"Share Tech Mono", system-ui !important;
   font-size:16px !important;
   text-align:justify;
 }
@@ -2175,10 +2161,13 @@ div.TEMPLAR{
 }
 
 .torrentsTable thead th{
-  background:slategray !important;
+  background:#007BFF !important;
   border-bottom:none !important;
   box-shadow:none !important;
-  font-family:"Special Elite", "sans-serif" !important;
+  font-family:"Share Tech Mono", "sans-serif" !important;
+  font-size:18px !important;
+  text-shadow:none !important;
+  color:palevioletred !important;
 }
 
 .torrentsTable td{
@@ -2188,15 +2177,15 @@ div.TEMPLAR{
 }
 
 .adv_search{
-  background:silver !important;
-  border: 2px solid white !important;
+  background:lightgoldenrodyellow !important;
+  border: 3px solid #50C777 !important;
   color:palegoldenrod !important;
   margin-bottom:30px;
   margin-top:30px;
 }
 
 .adv_search label{
-  color:darkgoldenrod !important;
+  color:#333777 !important;
   letter-spacing:1px;
   font-size:16px;
   font-family:"Share Tech Mono", "serif" !important;
@@ -2215,22 +2204,21 @@ div.TEMPLAR{
 }
 
 #adv_heading{
-  color:#007BFF;
-  font-size:28px !important;
-  font-family:"Pirata One", sans-serif !important;
+  color:darkgoldenrod;
+  font-size:25px !important;
+  font-family:"Rye", sans-serif !important;
   text-decoration:none;
   letter-spacing:0px;
 }
 
 .dt-container{
-  border:3px solid white !important;
+  border:3px solid mediumvioletred !important;
   margin-top:30px !important;
   border-bottom:none;
 }
 
 .torrentsTable a{
-  color:goldenrod !important;
-  
+
   font-family:"Share Tech Mono", system-ui !important;
 }
 
@@ -2306,9 +2294,8 @@ canvas:-webkit-full-screen {
   border:2px solid #007BFF !important;
   background:goldenrod !important;
   color:#007BFF !important;
-  font-variant:small-caps;
-  font-family:"Pirata One", system-ui !important;
-  font-size:24px;
+  font-family:"Share Tech Mono", system-ui !important;
+  font-size:18px;
   width:77px;
   margin-bottom:16px;
 }
@@ -2321,9 +2308,8 @@ canvas:-webkit-full-screen {
 }
 
 #warp{
-  font-family:"Pirata One", system-ui !important;
-  font-variant:small-caps;
-  font-size:24px;
+  font-family:"Share Tech Mono", system-ui !important;
+  font-size:18px;
   width: 77px !important;
 }
 
@@ -2332,15 +2318,14 @@ canvas:-webkit-full-screen {
 }
 
 h2 span a{
-  font-size:30px;
-  font-family:"Rye", serif !important;
+  font-size:40px;
+  font-family:"Pirata One", serif !important;
   text-shadow:1px 2px black !important;
   padding-left:5px;
 }
 
-#hero{
-  border-top:3px solid palegoldenrod !important;
-  background:mediumvioletred !important;
+footer{
+  border-top:3px solid black !important;
 }
 
 #status{
@@ -2485,6 +2470,11 @@ div.upload{
     height:55px;
   }
 
+  #output object{
+    top:55px;
+    height:calc(100% - 115px);
+  }
+
   .ui-autocomplete{
     width:299px;
   }
@@ -2496,8 +2486,8 @@ div.upload{
  
  div.TEMPLAR{
     top:60px;
-    height:calc(100% - 90px);
-    bottom:30px;
+    height:calc(100% - 120px) !important;
+    bottom:60px;
  }
 
   .desktop_1{
@@ -2591,8 +2581,20 @@ div.upload{
 
     position:fixed;
     z-index:9999;
-}
+  }
 
+  #output img {
+    /* Critical for mobile scaling */
+    max-width: 100%; 
+    height: auto; 
+    
+    /* Centering and display */
+    display: block;
+    margin: 0 auto;
+
+    /* Prevents pixelated upscaling on small images */
+    object-fit: contain; 
+}
   
 
 
@@ -2789,7 +2791,7 @@ div.upload{
     font-size:16px;
   }
   
-  .academic{
+  #hero{
     font-size:16px;
   }
 

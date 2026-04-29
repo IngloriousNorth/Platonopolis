@@ -247,15 +247,20 @@ app.post("/node/:label", [
         WITH TOFLOAT(count(DISTINCT s)) AS full_count
 
         ${matchClause}
+        // Step A: Collect metadata first to avoid row multiplication
         OPTIONAL MATCH (authors:Author)-[]->(s1)
-        OPTIONAL MATCH (p:Publisher)<-[:PUBLISHED_BY]-(e:Edition)<-[:PUB_AS]-(s1)
         OPTIONAL MATCH (classes:Class)-[:TAGS]->(s1)
-        MATCH (s1)-[:PUB_AS]->(:Edition)-[:DIST_AS]->(t:Torrent) WHERE t.deleted = false
-        WITH s1, full_count,
-             collect(DISTINCT authors) AS authorList, 
-             collect(DISTINCT {publisher: p, edition: e, torrent: t}) AS edition_torrents, 
-             collect(DISTINCT classes) AS classList
-             
+        WITH s1, full_count, collect(DISTINCT authors) AS authorList, collect(DISTINCT classes) AS classList
+
+        // Step B: Match Editions and Torrents specifically for this s1
+        MATCH (s1)-[:PUB_AS]->(e:Edition)-[:DIST_AS]->(t:Torrent) 
+        WHERE t.deleted = false
+        OPTIONAL MATCH (e)-[:PUBLISHED_BY]->(p:Publisher)
+        
+        // Step C: Collect the edition info
+        // We use DISTINCT here to ensure Torrent A doesn't appear under Edition B
+        WITH s1, full_count, authorList, classList, 
+             collect(DISTINCT {publisher: p, edition: e, torrent: t}) AS edition_torrents
         RETURN s1, authorList, edition_torrents, classList, full_count ORDER BY ` + orderBy + ` SKIP TOINTEGER($skip) LIMIT TOINTEGER($limit)`;
 
     try {
@@ -267,7 +272,9 @@ app.post("/node/:label", [
 
         const total = result.records[0]._fields[4]
          
-        
+        result.records.forEach(function(record){
+            console.log(record._fields[2].edition)
+        })
         res.json({
             draw: parseInt(req.body.draw) || 0,
             recordsTotal: total,
@@ -392,13 +399,40 @@ app.post("/torrents/adv_search", check("res").trim().escape().isLength({max : 25
   check("publisher").trim().escape().isLength({max: 612}), check("type").trim().escape().isLength({max:200}), check("media").trim().escape().isLength({max:350}),
   check("format").trim().escape().isLength({max:360}), function(req,res){
     const errors = validationResult(req);
-    console.log(errors);
+    if (!errors.isEmpty()) { return res.json({ errors: errors.array() }); }
 
-    if (!errors.isEmpty()) {
-      return res.json({ errors: errors.array() });
+    // 1. Define the Escape Helper
+    function escapeLucene(val) {
+        if (!val) return "";
+        // Escapes reserved Lucene characters while keeping spaces
+        return val.replace(/([\+\-\!\(\)\{\}\[\]\^\~\\\"\*\?\:\/]|&&|\|\|)/g, "\\$1").trim();
     }
 
-    req.body.title = remove_stopwords(req.body.title);
+    // 2. Initial cleanup
+    let rawTitle = req.body.title || "";
+    let rawAuthor = req.body.author || "";
+    let rawPub = req.body.publisher || "";
+
+    // 3. Apply your stopword and character filters
+    let title = remove_stopwords(rawTitle.toLowerCase()).replace(/[:!#;]/g, "");
+    let author = remove_stopwords(rawAuthor.toLowerCase().replace(/[:!#;]/g, ""));
+    let publisher = remove_publisher_stopwords(rawPub.toLowerCase().replace(/[:!]/g, ""));
+
+    if (publisher === "propagate" || publisher === "propagateinfo") {
+        publisher = "propagate.info";
+    }
+
+    // 4. THE CRITICAL STEP: Lucene Escape for all searchable strings
+    // This prevents the "-" crash in fulltext CALLs
+    let sTitle = escapeLucene(title);
+    let sAuthor = escapeLucene(author);
+    let sPublisher = escapeLucene(publisher);
+
+    // 5. Handle empty cases to prevent <EOF> errors
+    // If a field was JUST a hyphen, we treat it as empty
+    if (sTitle === "\\-") sTitle = "";
+    if (sAuthor === "\\-") sAuthor = "";
+    if (sPublisher === "\\-") sPublisher = "";
 
     const session = driver.session();
     if(req.body.classes){
@@ -413,9 +447,9 @@ app.post("/torrents/adv_search", check("res").trim().escape().isLength({max : 25
       }
     }
     
-    req.body.title = remove_stopwords(req.body.title.toLowerCase()).replace(":", ' ').replace("!", "").replace("#", "").replace(";", "");
-    req.body.author = remove_stopwords(req.body.author.toLowerCase().replace(":", ' ').replace("!", "").replace("#", "").replace(";", ""));
-    req.body.publisher = remove_publisher_stopwords(req.body.publisher.toLowerCase().replace(':', ' ').replace("!", ""));
+    sTitle = remove_stopwords(sTitle.toLowerCase()).replace(":", ' ').replace("!", "").replace("#", "").replace(";", "");
+    sAuthor = remove_stopwords(sAuthor.toLowerCase().replace(":", ' ').replace("!", "").replace("#", "").replace(";", ""));
+    sPublisher = remove_publisher_stopwords(sPublisher.toLowerCase().replace(':', ' ').replace("!", ""));
     if(req.body.publisher.toLowerCase() === "propagate" || req.body.publisher.toLowerCase() === "propagateinfo"){
       req.body.publisher = "propagate.info"
     }
@@ -427,14 +461,14 @@ app.post("/torrents/adv_search", check("res").trim().escape().isLength({max : 25
     if (req.body.type && req.body.type !== "all") {
         query += "MATCH (s:Source)-[:PUB_AS]->(e:Edition)-[:DIST_AS]->(t:Torrent) WHERE t.deleted = false AND s.type = $type ";
     }
-    if (req.body.title) {
+    if (sTitle) {
         query += "CALL db.index.fulltext.queryNodes('source_name', $title) YIELD node AS nodeTitle " +
                  "MATCH (s:Source)-[:PUB_AS]->(e:Edition)-[:DIST_AS]->(t:Torrent) WHERE t.deleted = false AND s.uuid = nodeTitle.uuid ";
     } else {
         query += "MATCH (s:Source)-[:PUB_AS]->(e:Edition)-[:DIST_AS]->(t:Torrent) WHERE t.deleted = false ";
     }
 
-    if (req.body.author) {
+    if (sAuthor) {
         query += "WITH s CALL db.index.fulltext.queryNodes('authorSearch', $author) YIELD node AS nodeAuthor " +
                  "MATCH (a1:Author)-[:AUTHOR]->(s) WHERE a1.uuid = nodeAuthor.uuid ";
     }
@@ -446,7 +480,7 @@ app.post("/torrents/adv_search", check("res").trim().escape().isLength({max : 25
                  "AND ALL(c in cList WHERE (s)<-[:TAGS]-(c)) ";
     }
 
-    if (req.body.publisher) {
+    if (sPublisher) {
         query += "WITH s CALL db.index.fulltext.queryNodes('publisherName', $publisher) YIELD node AS nodePub " +
                  "MATCH (p:Publisher)<-[:PUBLISHED_BY]-(e:Edition)<-[:PUB_AS]-(s) " +
                  "WHERE p.uuid = nodePub.uuid ";
@@ -479,7 +513,7 @@ app.post("/torrents/adv_search", check("res").trim().escape().isLength({max : 25
         query += " WITH s CALL { WITH s "; 
 
         // --- TITLE MATCH ---
-        query += (req.body.title && req.body.title.trim().length > 0) ? `
+        query += (sTitle && sTitle.trim().length > 0) ? `
             CALL db.index.fulltext.queryNodes('source_name', $title) YIELD node AS titleNode
             WHERE titleNode = s
             RETURN s AS result
@@ -488,7 +522,7 @@ app.post("/torrents/adv_search", check("res").trim().escape().isLength({max : 25
         query += " UNION ";
 
         // --- AUTHOR MATCH ---
-        query += (req.body.author && req.body.author.trim().length > 0) ? `
+        query += (sAuthor && sAuthor.trim().length > 0) ? `
             WITH s
             CALL db.index.fulltext.queryNodes('authorSearch', $author) YIELD node AS a
             MATCH (a)-[:AUTHOR]->(authorSource:Source)
@@ -499,7 +533,7 @@ app.post("/torrents/adv_search", check("res").trim().escape().isLength({max : 25
         query += " UNION ";
 
         // --- PUBLISHER MATCH ---
-        query += (req.body.publisher && req.body.publisher.trim().length > 0) ? `
+        query += (sPublisher && sPublisher.trim().length > 0) ? `
             WITH s
             CALL db.index.fulltext.queryNodes('publisherName', $publisher) YIELD node AS p
             MATCH (p)<-[:PUBLISHED_BY]-(:Edition)<-[:PUB_AS]-(pubSource:Source)
@@ -601,9 +635,20 @@ query += "WITH s, e, t, count " +
       break;
 
   }
-  var params = {skip : req.body.start, limit : req.body.length, title : remove_stopwords(req.body.title), author : he.encode(he.decode(he.decode(req.body.author))), 
-  classes: classes, publisher : he.encode(he.decode(he.decode(req.body.publisher))), type : he.encode(he.decode(he.decode(req.body.type))), 
-  media: req.body.media, format : req.body.format, res: req.body.res}
+
+ var params = {
+        skip: req.body.start,
+        limit: req.body.length,
+        title: sTitle, // Use sanitized version
+        author: sAuthor, // Use sanitized version
+        classes: classes,
+        publisher: sPublisher, // Use sanitized version
+        type: he.encode(he.decode(he.decode(req.body.type))),
+        media: req.body.media,
+        format: req.body.format,
+        res: req.body.res
+    };
+
   session.run(query , params).then(data => {
       session.close()      
       var recordsTotal;
@@ -630,22 +675,41 @@ app.post("/graph_search",
   function(req,res){   
     const errors = validationResult(req);
     if (!errors.isEmpty()) return res.json({ errors: errors.array() });
+        let classes = null; 
+        if(req.body.classes){
+            try {
+                classes = JSON.parse(he.decode(req.body.classes)).split(",");
+                classes = classes[0] === '' ? [] : classes.map(c => he.decode(c.trim()).replace(/['"]+/g, ''));
+            } catch (e) { 
+                classes = []; 
+            }
+        }
 
-    let classes = null; 
-    if(req.body.classes){
-        try {
-            classes = JSON.parse(he.decode(req.body.classes)).split(",");
-            classes = classes[0] === '' ? [] : classes.map(c => he.decode(c.trim()).replace(/['"]+/g, ''));
-        } catch (e) { classes = []; }
+    // 1. Centralized Escape Function
+    function escapeLucene(val) {
+        if (!val) return "";
+        return val.replace(/([\+\-\!\(\)\{\}\[\]\^\~\\\"\*\?\:\/]|&&|\|\|)/g, "\\$1").trim();
     }
 
-    req.body.title = remove_stopwords(req.body.title).replace(":", ' ').replace("!", "").replace("#", "").replace(";", "");
-    req.body.author = remove_stopwords(req.body.author.replace(":", ' ').replace("!", "").replace("#", "").replace(";", ""));
-    req.body.publisher = remove_publisher_stopwords(req.body.publisher.replace(':', ' ').replace("!", ""));
-    
-    if(req.body.publisher.toLowerCase().startsWith("propagate")){
-        req.body.publisher = "propagate.info";
-    }
+    // 2. Pre-process and Sanitize
+    let title = remove_stopwords(req.body.title || "").replace(/[:!#;]/g, " ");
+    let author = remove_stopwords(req.body.author || "").replace(/[:!#;]/g, " ");
+    let publisher = remove_publisher_stopwords(req.body.publisher || "").replace(/[:!]/g, " ");
+
+    let sTitle = escapeLucene(title);
+    let sAuthor = escapeLucene(author);
+    let sPublisher = escapeLucene(publisher);
+
+    // 3. Early Exit if search is broken (e.g., searching just "-")
+    const hasActiveSearch = (sTitle && sTitle !== "\\-") || 
+                            (sAuthor && sAuthor !== "\\-") || 
+                            (sPublisher && sPublisher !== "\\-") || 
+                            (req.body.classes && req.body.classes.length > 2); // Assuming JSON array string length
+
+    // If "all" is false (OR logic) and there's no valid search term, 
+    // we should still allow the "rand()" discovery logic to run, 
+    // but we must ensure the individual CALLs don't receive empty strings.
+
 
     const session = driver.session();
     let query = "";
@@ -653,7 +717,7 @@ app.post("/graph_search",
     // --- 1. SEARCH LOGIC ---
     if(req.body.all === "true"){
         // AND Logic: Narrow down results sequentially
-        if(req.body.title){
+        if(sTitle){
             query += "CALL db.index.fulltext.queryNodes('source_name', $title) YIELD node " +
                      "MATCH (s:Source)-[:PUB_AS]->(:Edition)-[:DIST_AS]->(t_check:Torrent) " +
                      "WHERE s.uuid = node.uuid AND t_check.deleted = false ";
@@ -669,14 +733,14 @@ app.post("/graph_search",
 
         query += "WITH s ";
 
-        if(req.body.author){
+        if(sAuthor){
         query += "CALL db.index.fulltext.queryNodes('authorSearch', $author) YIELD node AS authorNode " +
                  "MATCH (authorNode)-[:AUTHOR]->(s) " + 
                  "WITH s "; 
         }
 
         // 3. Publisher Search (Lucene)
-        if(req.body.publisher){
+        if(sPublisher){
             query += "CALL db.index.fulltext.queryNodes('publisherName', $publisher) YIELD node AS pubNode " +
                      "MATCH (s)-[:PUB_AS]->(:Edition)-[:PUBLISHED_BY]->(pubNode) " +
                      "WITH s ";
@@ -711,7 +775,7 @@ app.post("/graph_search",
         query += " WITH s CALL { WITH s "; 
 
         // --- TITLE MATCH ---
-        query += (req.body.title && req.body.title.trim().length > 0) ? `
+        query += (sTitle && sTitle.trim().length > 0) ? `
             CALL db.index.fulltext.queryNodes('source_name', $title) YIELD node AS titleNode
             WHERE titleNode = s
             RETURN s AS result
@@ -720,7 +784,7 @@ app.post("/graph_search",
         query += " UNION ";
 
         // --- AUTHOR MATCH ---
-        query += (req.body.author && req.body.author.trim().length > 0) ? `
+        query += (sAuthor && sAuthor.trim().length > 0) ? `
             WITH s
             CALL db.index.fulltext.queryNodes('authorSearch', $author) YIELD node AS a
             MATCH (a)-[:AUTHOR]->(authorSource:Source)
@@ -731,7 +795,7 @@ app.post("/graph_search",
         query += " UNION ";
 
         // --- PUBLISHER MATCH ---
-        query += (req.body.publisher && req.body.publisher.trim().length > 0) ? `
+        query += (sPublisher && sPublisher.trim().length > 0) ? `
             WITH s
             CALL db.index.fulltext.queryNodes('publisherName', $publisher) YIELD node AS p
             MATCH (p)<-[:PUBLISHED_BY]-(:Edition)<-[:PUB_AS]-(pubSource:Source)
@@ -863,10 +927,10 @@ query += `
 
 
     var params = {
-      title : req.body.title, 
-      author : req.body.author, 
+      title : sTitle, 
+      author : sAuthor, 
       classes: classes, 
-      publisher : req.body.publisher, 
+      publisher : sPublisher, 
       type : req.body.type, 
       media: req.body.media, 
       format : req.body.format,
@@ -885,74 +949,101 @@ query += `
     });
 });
 
-app.get("/search", check("term").trim().escape(), check("field").not().isEmpty().trim().escape(), function(req,res){
-  const errors = validationResult(req);
-  if (!errors.isEmpty()) {
-    return res.json({ errors: errors.array() });
-  }
-  const session = driver.session()
-
-  if(req.query.field === "search_publishers"){
-    req.query.term = remove_publisher_stopwords(req.query.term)
-  }
-  else{
-    req.query.term = remove_stopwords(req.query.term);
-  }
-  if(req.query.term.toLowerCase() === "propagate" || req.query.term.toLowerCase() === "propagateinfo"){
-    req.query.term = "propagate.info"
-  }
-  var query = "";  
-  req.query.term = req.query.term.replace(":", '').replace("!", '').replace(";", "");
-  if(!req.query.term){
-    return res.end();
-  }
-  if(req.query.term){
-    switch(req.query.field){
-      case "search_sources":
-        query += "CALL db.index.fulltext.queryNodes('source_name', $sourceName) YIELD node " +
-        "MATCH (s:Source)-[]->(e:Edition)-[]->(t:Torrent {deleted : false}) WHERE s.uuid = node.uuid " +
-        "RETURN DISTINCT s " 
-        break;
-      case "search_authors":
-        query += "CALL db.index.fulltext.queryNodes('authorSearch', $authorName) YIELD node " +
-        "MATCH (a:Author)-[:AUTHOR]->(:Source)-[]->(e:Edition)-[]->(t:Torrent {deleted : false})  WHERE a.uuid = node.uuid " +
-        "RETURN DISTINCT a "
-        break;
-      case "search_classes":
-        query += "CALL db.index.fulltext.queryNodes('classes', $className) YIELD node " +
-        "MATCH (c:Class)-[]->(s:Source)-[]->(e:Edition)-[]->(t:Torrent {deleted : false})  WHERE c.uuid = node.uuid " +
-        "RETURN DISTINCT c " 
-        break;
-      case "search_publishers":
-        query += "CALL db.index.fulltext.queryNodes('publisherName', $publisherName) YIELD node " +
-        "MATCH (p:Publisher)<-[]-(e:Edition)-[]->(t:Torrent {deleted : false}) WHERE p.uuid = node.uuid " +
-        "RETURN DISTINCT p "
-        break; 
+app.get("/search", check("term").trim().escape(), check("field").not().isEmpty().trim().escape(), check("upload").trim().escape(), function(req, res) {
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+        return res.json({ errors: errors.array() });
     }
-  }
 
-  var params = {sourceName : req.query.term, authorName : req.query.term, className : req.query.term, publisherName: req.query.term};
-  session.run(query , params).then(data => {
-      session.close()
-      var recordData = []
-      if(data.records){
-        data.records.forEach(function(data, i){
-            recordData.push({label : data._fields[0].properties.name, value : data._fields[0].properties.uuid});          
-        }) 
-        return res.send(recordData); 
-      }
-      else{
-        return res.end();
+    // 1. Process the term
+    let term = req.query.term || "";
+    
+    if (req.query.field === "search_publishers") {
+        term = remove_publisher_stopwords(term);
+    } else {
+        term = remove_stopwords(term);
     }
-  }).catch(function(err){
-    console.log(err);
-    return res.end();
-  })
-  
 
-  
-})
+    if (term.toLowerCase() === "propagate" || term.toLowerCase() === "propagateinfo") {
+        term = "propagate.info";
+    }
 
+    // 2. Clean and Sanitize
+    term = term.replace(/[:!;]/g, "");
+
+    function escapeLucene(val) {
+        return val.replace(/([\+\-\!\(\)\{\}\[\]\^\~\\\"\*\?\:\/]|&&|\|\|)/g, "\\$1");
+    }
+
+    let sanitizedTerm = escapeLucene(term).trim();
+
+    // 3. THE CRITICAL GUARD: Stop if empty or just an escaped hyphen
+    if (!sanitizedTerm || sanitizedTerm === "\\-") {
+        return res.json([]); // Return empty list instead of hitting the DB
+    }
+
+    // 4. Build Query
+    const session = driver.session();
+    var query = "";
+
+    switch (req.query.field) {
+        case "search_sources":
+            query = "CALL db.index.fulltext.queryNodes('source_name', $sourceName) YIELD node " +
+                    "MATCH (s:Source)-[]->(e:Edition)-[]->(t:Torrent {deleted : false}) WHERE s.uuid = node.uuid " +
+                    "RETURN DISTINCT s";
+            break;
+        case "search_authors":
+            query = "CALL db.index.fulltext.queryNodes('authorSearch', $authorName) YIELD node " +
+                    "MATCH (a:Author)-[:AUTHOR]->(:Source) ";
+            if (req.query.upload !== "true") {
+                query += "-[]->(e:Edition)-[]->(t:Torrent {deleted : false}) ";
+            }
+            query += "WHERE a.uuid = node.uuid RETURN DISTINCT a";
+            break;
+        case "search_classes":
+            query = "CALL db.index.fulltext.queryNodes('classes', $className) YIELD node " +
+                    "MATCH (c:Class)-[]->(s:Source)-[]->(e:Edition)-[]->(t:Torrent {deleted : false}) WHERE c.uuid = node.uuid " +
+                    "RETURN DISTINCT c";
+            break;
+        case "search_publishers":
+            query = "CALL db.index.fulltext.queryNodes('publisherName', $publisherName) YIELD node " +
+                    "MATCH (p:Publisher)<-[]-(e:Edition)-[]->(t:Torrent {deleted : false}) WHERE p.uuid = node.uuid " +
+                    "RETURN DISTINCT p";
+            break;
+        default:
+            session.close();
+            return res.status(400).send("Invalid field");
+    }
+
+    var params = {
+        sourceName: sanitizedTerm, 
+        authorName: sanitizedTerm, 
+        publisherName: sanitizedTerm,
+        className: sanitizedTerm, // Already handled in your code
+    };
+
+    session.run(query, params).then(data => {
+        session.close();
+    
+        // Map the Neo4j records back to the format the autocomplete expects
+        var recordData = [];
+        if (data.records) {
+            data.records.forEach(function(record) {
+                // Reaching into the first field returned (s, a, c, or p)
+                const node = record._fields[0];
+                recordData.push({
+                    label: node.properties.name,
+                    value: node.properties.uuid
+                });
+            });
+        }
+        return res.json(recordData); // Return the array directly
+    }).catch(err => {
+        session.close();
+        console.error("Search Error:", err);
+        res.status(500).json([]); // Return empty array on error so frontend doesn't crash
+    });
+});
 
 var torrentQuery = "OPTIONAL MATCH (a:Author)-[]->(s) " + 
   "OPTIONAL MATCH (e:Edition)<-[:PUB_AS]-(s) " +
@@ -1456,8 +1547,8 @@ app.post("/upload/:uuid", check("APA").trim().escape(), check("type").trim().esc
            //empty in dropdown, since coalesce null is not an edition.uuid
             query += 'ON CREATE SET ' +
                      'e.uuid = randomUUID(), e.snatches = 0.0, e.no = $editionNo, ' +
-                     'e.date = $editionDate, e.created_at = timestamp(), ' +
-                     'e.pages = $editionPages, e.title = $editionTitle, e.publisher = $editionPublisher ';
+                     'e.date = $editionDate, e.created_at = TOFLOAT(TIMESTAMP()), ' +
+                     'e.pages = $editionPages, e.title = $editionTitle, e.publisher = $editionPublisher '              
 
             query += 'WITH s, e ';
             query += 'MERGE (s)-[pu:PUB_AS]->(e) ';

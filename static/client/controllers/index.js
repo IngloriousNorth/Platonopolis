@@ -9,7 +9,7 @@ function mount() {
         defaultPage: "torrents",
         dir: "client/partials",
         fade: true,
-        pages: ["file", "top10", "torrents", "node", "set", "upload", "privacy"],
+        pages: ["webtorrent", "torrents", "top10", "node", "set", "upload", "privacy", "mission"],
         helm: [
             {
                 page: "torrents",
@@ -61,6 +61,10 @@ function mount() {
             {
                 page: "node",
                 fn: function() {
+                    if (!TEMPLAR.paramREC() || !TEMPLAR.paramREC().uuid) {
+                        TEMPLAR.route("#torrents");
+                        return;
+                    }  
                     initializeTorrents("node");
                     assertButtonTab();
                     $("button").hide();
@@ -72,23 +76,30 @@ function mount() {
             {
                 page: "set",
                 fn: function() {
+                    if (!TEMPLAR.paramREC() || !TEMPLAR.paramREC().ward) {
+                        TEMPLAR.route("#torrents");
+                        return;
+                    }  
                     crossWard();
                 }
             },
             {
-                page: "file",
-                fn : function(){
-                    /*const QFILE = Q_FILE();
-                    if(QFILE){
-                        assertReference(QFILE);             
-                    }
-                    if(torrent && torrent.files && torrent.files.length > 0){
-                        selectFile(QFILE);                                               
-                    }*/
-                    assertHero(TEMPLAR.paramREC().infoHash, TEMPLAR.paramREC().APA, TEMPLAR.paramREC().format);    
-                    DL(TEMPLAR.paramREC().infoHash);
+                page: "webtorrent",
+                fn: function() {
+                    const params = TEMPLAR.paramREC();
+                    if (!params || !params.infoHash) {
+                        TEMPLAR.route("#torrents");
+                        return;
+                    }                    
 
-                    
+                    // Check if the footer has actually loaded yet
+                    if ($("#hero").length > 0) {
+                        initializeHero();
+                        initializeWebtorrent();
+                    } else {
+                        // The logic inside the $.get callback in mount() will handle it 
+                        // once the file arrives.
+                    }
                 }
             },
             {
@@ -100,23 +111,34 @@ function mount() {
             }
         ]
     }, function(){
-        $.get("../client/partials/hero.html", function(data){
-            $("footer").html(data);
-            if(TEMPLAR.pageREC() === "file"){
-                assertReference(Q_FILE());     
-            }
-            headerAutocomplete();
-            
-            // Use a timeout to stagger the initialization of magnets
-            //setTimeout(initializeMagnets, 0);
+        $.get("../client/partials/header.html", function(data){
+            $("header").html(data);            
+            $.get("../client/partials/hero.html", function(data){
+                $("footer").html(data);
+                headerAutocomplete();
 
+                // NEW: If we are currently on the webtorrent page, 
+                // we must manually fire initializeHero now that the HTML exists.
+                if (TEMPLAR.pageREC() === "webtorrent") {
+                    initializeHero();
+                    // Also re-run initializeWebtorrent if it needs the hero to be ready
+                    initializeWebtorrent(); 
+                }
+                
+                // Use a timeout to stagger the initialization of magnets
+                //setTimeout(initializeMagnets, 0);
+
+            })
         })
 
         $(document).on("TEMPLAR", function(){
-            if(TEMPLAR.pageREC() !== "file"){           
-                $(".academic").prop("selectedIndex", 0)
-                $(".academic").trigger("change");
-            }            
+            if(TEMPLAR.pageREC() !== "webtorrent"){           
+                $("#hero").prop("selectedIndex", 0)
+                $("#hero").trigger("change");
+            }
+            $("#warp").hide();
+            $("#graph_search").hide();
+            $("h2 span a").hide();           
            
         })
 

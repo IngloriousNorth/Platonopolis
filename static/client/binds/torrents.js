@@ -12,12 +12,12 @@ function assertTitleLoaded(){
 
       }
       else{
-        $("#torrentsTitle span a").text("Torrents").attr("href", "#torrents").fadeIn(3333)
+        $("#torrentsTitle span a").text("Torrents").attr("href", "#torrents").fadeIn(1337)
 
       }
       break;
     case "top10":
-      $("#top10Title span a").text("Top 10").show();
+      $("#top10Title span a").text("Top 10").fadeIn(1337);
       break;
     case "node":
       //TODO: maybe multiple calls here
@@ -31,11 +31,11 @@ function assertTitleLoaded(){
       //});*/
       break;
     default:
-      $("#torrentsTitle span a").text("Torrents").fadeIn(3333)
+      $("#torrentsTitle span a").text("Torrents").fadeIn(1337)
+      break;
 
   }
   
-  $("h1 a").text("propagate.info").removeClass("loading");
 }
 
 function assertSourceIMG(record) {
@@ -343,25 +343,23 @@ function assertTr(record, edition_torrent, apaHtml){
   if(edition_torrent.torrent){
     const cleanApa = apaHtml.replace(/<[^>]*>?/gm, '');
      var tr = "<tr>";
-      tr += "<td>" + edition_torrent.torrent.properties.format + "</td>";          
-      tr += "<td>" + edition_torrent.torrent.properties.res + "</td>"
+      tr += "<td>" + edition_torrent.torrent.properties.format + "<br>" + edition_torrent.torrent.properties.media + "<br>" + ( edition_torrent.torrent.properties.res !== "N/A" ? edition_torrent.torrent.properties.res : "" )+ "</td>";          
       
      /*   tr +=
         "<td class='here'>" +
         timeSince(edition_torrent.torrent.properties.created_at) +
         " ago</td>";*/
       tr +=
-        "<td>"
-        /*<a" +
-         " data-id='" + edition_torrent.torrent.properties.size + "'" +
-         " data-release='" + edition_torrent.torrent.properties.release + "'" + 
-         " data-media='" + edition_torrent.torrent.properties.media + "'" +
-         " data-apa='" + cleanApa + "'" + // Store the citation here
-         " data-format='" + edition_torrent.torrent.properties.format + "'" +
-         " data-infohash = '" + edition_torrent.torrent.properties.infoHash + "'" +
-         " class='webtorrent'>[WebTorrent]</a>
-         */
-         + "<a href='" + getMagnetURI(edition_torrent.torrent.properties.infoHash) + "' class='magnetURI' data-infohash='" + edition_torrent.torrent.properties.infoHash + "'>[magnetURI]</a></td>"
+        "<td>" +
+          "<a" +
+           " data-id='" + edition_torrent.torrent.properties.size + "'" +
+           " data-release='" + edition_torrent.torrent.properties.release + "'" + 
+           " data-media='" + edition_torrent.torrent.properties.media + "'" +
+           " data-apa='" + cleanApa + "'" + // Store the citation here
+           " data-format='" + edition_torrent.torrent.properties.format + "'" +
+           " data-infohash = '" + edition_torrent.torrent.properties.infoHash + "'" +
+           " class='webtorrent' href='webtorrent'>[WebTorrent]</a>" +
+           "<a href='" + getMagnetURI(edition_torrent.torrent.properties.infoHash) + "' class='magnetURI' data-infohash='" + edition_torrent.torrent.properties.infoHash + "'>[magnetURI]</a><br>"
       tr += "<td>" +
         edition_torrent.torrent.properties.snatches
         "</td>"

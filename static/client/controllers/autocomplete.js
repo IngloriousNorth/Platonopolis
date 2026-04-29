@@ -331,7 +331,7 @@ function uploadAutocomplete(){
                 data : { 
                     term : request.term.split(",")[0]
                 },
-                url: '/search?field=search_authors',
+                url: '/search?field=search_authors&upload=true',
                 type: "get", //send it through get method
                 success: function(data) {
                     response($.map(data, function(item) {

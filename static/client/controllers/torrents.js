@@ -170,7 +170,7 @@ function initializeTorrents(table) {
 
                         if (editionsAdded.indexOf(edition_torrent.edition.properties.uuid) === -1) {
                             // NEW EDITION: Create the full table wrapper
-                            var fullTable = "<table class='torrentsTable'><thead><tr><th>Format</th><th>Resolution</th><th>Download</th><th>Revs</th><th>Size</th></tr></thead><tbody>" + 
+                            var fullTable = "<table class='torrentsTable'><thead><tr><th>Meta</th><th>Download</th><th>Revs</th><th>Size</th></tr></thead><tbody>" + 
                                             torrentsTableRows + "</tbody></table>";
                             
                             assertFirstEditionRow(record, edition_torrent, editionsAdded, currentApa, sourceIMG, dateField, authorField, classesField, fullTable);
@@ -197,16 +197,16 @@ function initializeTorrents(table) {
             //this sets graphParams in the graphModel so the graph can accumulate where the user left off.
             if(firstLoad){
               if($("#adv_title").val() !== ""){
-                  walkGraph("source", $("#adv_title").val(), false);
+                  walkGraph("source", $("#adv_title").val() ? $("#adv_title").val() : "", false);
                 }
                 if($("#adv_author").val() !== ""){
-                  walkGraph("author", $("#adv_author").val(), false);
+                  walkGraph("author", $("#adv_author").val() ? $("#adv_author").val() : "", false);
                 }
                 if($("#adv_classes").val() !== ""){
-                  walkGraph("class", $("#adv_classes").val(), false);
+                  walkGraph("class", $("#adv_classes").val() ? $("#adv_classes").val() : "", false);
                 }
                 if($("#adv_publisher").val() !== ""){
-                  walkGraph("publisher", $("#adv_publisher").val(), false);
+                  walkGraph("publisher", $("#adv_publisher").val() ? $("#adv_publisher").val() : "", false);
                 }
                 firstLoad = false;
   
@@ -254,43 +254,14 @@ function initializeTorrents(table) {
         },
     })
     if (TEMPLAR.pageREC() === "top10") $('th').unbind('click.DT')
-
-    dataTable.on('responsive-display', function (e, datatable, row, showHide, update) {
-        if (showHide) { // If the row was just expanded
-            syncTorrentButtonState($(row.node()).next()); // Target the child row specifically
-        }
-    });
-    
-    $(document).off("click", ".webtorrent").on("click", ".webtorrent", function(e) {
+   
+    $(document).off("click", "a.webtorrent").on("click", "a.webtorrent", function(e) {
         e.preventDefault();
         
-        // If the button has the disabled class, show the "please wait" message
-        if ($(this).hasClass("webtorrent-disabled")) {
-            $(".b").show().fadeOut(2000);
-            return;
-        }
-
-        $(".webtorrent").prop("disabled", true);
-
-        setTimeout(function(){
-            $(".webtorrent").prop("disabled", false);
-        }, 333)
-
         // Otherwise, proceed with the route
         const d = this.dataset;
-        TEMPLAR.route("#file?id=" + d.id + "&media=" + d.media + "&format=" + d.format + "&release=" + d.release + "&apa=" + encodeURIComponent(d.apa));
+        TEMPLAR.route("#webtorrent?format=" + d.format + "&infoHash=" + d.infohash + "&apa=" + encodeURIComponent(d.apa));
     });
 }
 
-function syncTorrentButtonState(container) {
-    // If no container is provided, default to the whole table
-    var target = container || "#torrents";
-    var buttons = $(target).find(".webtorrent");
 
-    // Check the actual state of the WebTorrent client
-    if (window.torrent && window.torrent.files && window.torrent.files[0]) {
-        buttons.removeClass("webtorrent-disabled");
-    } else {
-        buttons.addClass("webtorrent-disabled");
-    }
-}

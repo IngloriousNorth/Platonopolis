@@ -20,6 +20,7 @@ var graphParams = {
 }
 
 function walkGraph(label, name, route=true){
+
 	switch(label.toLowerCase()){
 		case "source":
 			graphParams.source = graphParams.source ? graphParams.source + " " + name : name;
@@ -35,17 +36,18 @@ function walkGraph(label, name, route=true){
 			break;
 	}
 
-    TEMPLAR.paramSET({
-    	"search" : "true", 
-    	"all" : TEMPLAR.paramREC() && TEMPLAR.paramREC().all ? TEMPLAR.paramREC().all : "false",
-    	"title" : graphParams.source,
-		"author" : graphParams.author,
-		"classes" : graphParams.classes,
-		"publisher" : graphParams.publisher
-	})
-
-	if(route)
+	if(route){
+	    TEMPLAR.paramSET({
+	    	"search" : "true", 
+	    	"all" : TEMPLAR.paramREC() && TEMPLAR.paramREC().all ? TEMPLAR.paramREC().all : "false",
+	    	"title" : graphParams.source,
+			"author" : graphParams.author,
+			"classes" : graphParams.classes,
+			"publisher" : graphParams.publisher
+		})
+	
     	TEMPLAR.routeParams("#torrents");
+    }
 }
 
 function resetGraphParams(){

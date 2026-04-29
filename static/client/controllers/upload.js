@@ -213,6 +213,35 @@ function initializeUpload(){
 							$("#format").append(option);
 							uploadModel.torrent.format = $("#format").val();
 					})
+
+					pdf_resolutions.forEach(function(val){
+						var option = document.createElement("option");
+						$(option).val(val);
+						$(option).text(decodeEntities(decodeEntities(val)));
+						$("#pdf_resolutions").append(option);
+						uploadModel.torrent.res = $("#pdf_resolutions").val();
+
+					})
+
+					music_resolutions.forEach(function(val){
+						var option = document.createElement("option");
+						$(option).val(val);
+						$(option).text(decodeEntities(decodeEntities(val)));
+						$("#music_resolutions").append(option);
+						uploadModel.torrent.res = $("#music_resolutions").val();
+
+					})
+
+					video_resolutions.forEach(function(val){
+						var option = document.createElement("option");
+						$(option).val(val);
+						$(option).text(decodeEntities(decodeEntities(val)));
+						$("#video_resolutions").append(option);
+						uploadModel.torrent.res = $("#video_resolutions").val();
+
+					})
+
+
 			
 				})
 			},100)			
