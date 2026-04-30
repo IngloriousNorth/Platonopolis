@@ -232,13 +232,6 @@ footer a:link, #hero a:visited {
    text-decoration: none;
 }
 
-#output a{
-  padding-left:5px !important;
-  color:cyan !important;
-  position:absolute;
-  z-index:901;
-}
-
 /* UPLOAD */
 
 .titleBreak{

@@ -8,6 +8,7 @@ function initializeWebtorrent(){
         $("#output").empty();
         torrentCache.files.forEach(function(file) {
             appendFile(file, torrentCache.infoHash);
+            appendButton(file, torrentCache.infoHash)
         });
         assertPeersProgress();
     } else {
@@ -18,7 +19,11 @@ function initializeWebtorrent(){
 }
 
 function DL(infoHash) {
-    
+    console.log("Downloading: " + infoHash)
+    if (WebTorrent.get(infoHash)) {
+        console.log("Torrent " + infoHash + " is already active. Skipping add.");
+        return; 
+    }
     assertProgress();
 
     const torrent = WebTorrent.add(getMagnetURI(infoHash));  
@@ -64,5 +69,10 @@ function onDone(torrent) {
     //assertDL(torrent)
     clearInterval(interval);
     // Save the downloaded file handles to the hero option for later cycling
-    console.log("Transmission Complete. Filelist cached.");
+    torrent.files.forEach(file => {
+        // Trigger the replacement logic for each file
+        appendButton(file, torrent.infoHash);
+    });
+
+    $.post("/rev/" + torrent.infoHash)
 }

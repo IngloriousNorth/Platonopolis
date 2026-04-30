@@ -228,11 +228,11 @@ function initializeTorrents(table) {
                 const infoHash = $(this).data("infohash");
                 $.post("/rev/" + infoHash);
             });
-            $(".webtorrent").off("click").click(function(){
+            /*$("a.webtorrent").off("click").on("click" function(){
                 const infoHash = $(this).data("infohash");
                 const APA = $(this).data("apa");                            
                 TEMPLAR.route("file?infoHash=" + infoHash + "&APA=" + encodeURIComponent(APA));                
-            })
+            })*/
 
             $("table tbody").off("click", ".magnetURI").on("click", ".magnetURI", function(){
                 const infoHash = $(this).data("infohash");

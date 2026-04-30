@@ -90,16 +90,14 @@ function mount() {
                     if (!params || !params.infoHash) {
                         TEMPLAR.route("#torrents");
                         return;
-                    }                    
-
-                    // Check if the footer has actually loaded yet
-                    if ($("#hero").length > 0) {
-                        initializeHero();
-                        initializeWebtorrent();
-                    } else {
-                        // The logic inside the $.get callback in mount() will handle it 
-                        // once the file arrives.
                     }
+
+                    //screwy AI crap way                    
+                    if($("#hero").length > 0){
+                        initializeHero();
+                        initializeWebtorrent();    
+                    }
+                    
                 }
             },
             {
@@ -113,21 +111,15 @@ function mount() {
     }, function(){
         $.get("../client/partials/header.html", function(data){
             $("header").html(data);            
+            headerAutocomplete();
+
             $.get("../client/partials/hero.html", function(data){
                 $("footer").html(data);
-                headerAutocomplete();
-
-                // NEW: If we are currently on the webtorrent page, 
-                // we must manually fire initializeHero now that the HTML exists.
-                if (TEMPLAR.pageREC() === "webtorrent") {
+                //helm race condition
+                if(TEMPLAR.pageREC() === "webtorrent"){
                     initializeHero();
-                    // Also re-run initializeWebtorrent if it needs the hero to be ready
-                    initializeWebtorrent(); 
-                }
-                
-                // Use a timeout to stagger the initialization of magnets
-                //setTimeout(initializeMagnets, 0);
-
+                    initializeWebtorrent();    
+                }                  
             })
         })
 
