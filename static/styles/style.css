@@ -895,8 +895,6 @@ table.dataTable>tbody>tr.child {
 table.dataTable tr.dtrg-group th{
   background-color:#555555;
   background: linear-gradient(90deg, #50C777 0%, #CDCDCD 100%) !important;
-  box-shadow: 0 4px 8px skyblue !important;
-  border-bottom: 2px solid palegoldenrod !important;
   height:147px;
   position:relative;
   z-index:10;
@@ -2113,7 +2111,7 @@ header{
 
 table.dataTable tr.dtrg-group th{
   background:#007BFF !important;
-  border-top:2px solid silver !important;
+  box-shadow:2px 2px 4px darkviolet;
 
 }
 
@@ -2168,7 +2166,7 @@ div.TEMPLAR{
 
 .adv_search{
   background:lightgoldenrodyellow !important;
-  border: 4px solid goldenrod !important;
+  border: 2px solid #007BFF !important;
   color:palegoldenrod !important;
   margin-bottom:30px;
   margin-top:30px;
@@ -2748,7 +2746,6 @@ div.upload{
     font-size:17px;
     font-family:"Share Tech Mono", system-ui;
     padding-bottom:13px;
-    text-decoration:underline;
     letter-spacing:2px;
     padding-bottom:5px;
   }
