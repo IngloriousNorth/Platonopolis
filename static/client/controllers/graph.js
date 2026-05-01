@@ -260,6 +260,15 @@ function setupMobileFullscreen() {
                 }
             }
         });
+        window.addEventListener('fullscreenchange', () => {
+            // Tell the library to look at the new size of its container
+            // Most force-graph libs have a .width() and .height() or .onResize()
+            const newWidth = window.innerWidth;
+            const newHeight = window.innerHeight;
+            
+            Graph.width(newWidth);
+            Graph.height(newHeight);
+        });
 
         // Hide button if VR mode starts
         // Assuming your lib has an 'onNodeDrag' or similar event to hook into, 
@@ -270,15 +279,7 @@ function setupMobileFullscreen() {
         $("#mobile_fullscreen").hide();
     }
 
-    window.addEventListener('fullscreenchange', () => {
-        // Tell the library to look at the new size of its container
-        // Most force-graph libs have a .width() and .height() or .onResize()
-        const newWidth = window.innerWidth;
-        const newHeight = window.innerHeight;
-        
-        Graph.width(newWidth);
-        Graph.height(newHeight);
-    });
+    
 }
 
 // Update your initializeGraph to call the VR version
