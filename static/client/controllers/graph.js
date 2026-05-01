@@ -184,7 +184,7 @@ function graphRenderVR(selector) {
     const container = document.querySelector(selector);
     if (!container) return;
     assertScrollPause();
-    
+
     const Graph = ForceGraphVR()(container)
     .width(container.clientWidth)
     .height(500)
@@ -228,7 +228,6 @@ function graphRenderVR(selector) {
   Graph.d3Force('link').distance(d => d.isGold ? 110 : 35)
   Graph.d3Force('center').strength(0.07);
     // ... (Arrows prevention and VR/Mobile logic
-  setupMobileFullscreen();
 }
 function handleNormalClick(clickedNode){
     if (clickedNode) {

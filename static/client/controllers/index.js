@@ -17,7 +17,8 @@ function mount() {
                     // Priority 1: Get the list visible                    
                     initializeTorrents("torrents");
                     
-          
+                    setupMobileFullscreen();
+                    
                     if(TEMPLAR.paramREC() && TEMPLAR.paramREC().search === "true"){
                         initializeGraph(); // Likely the source of the 710ms reflow
                         $(".graph_search").show();                        
