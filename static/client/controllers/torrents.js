@@ -4,11 +4,13 @@ function initializeTorrents(table) {
     // 1. Check the Global DataTable registry
     // This is more robust than checking the local variable 'dataTable'
     // 1. HARD RESET: Kill the old instance and its DOM leftovers
-    if(TEMPLAR.pageREC() === "node"){
-        assertTitleHidden();
+    assertTitleHidden();
+
+    //shiv for sources and top10
+    if(TEMPLAR.pageREC() === "sources" || TEMPLAR.pageREC() === "top10"){
+        $("h2 span a").show();
     }
-
-
+    
     if ($.fn.DataTable.isDataTable("#" + table)) {
         var oldTable = $("#" + table).DataTable();
         oldTable.clear().destroy(); 
