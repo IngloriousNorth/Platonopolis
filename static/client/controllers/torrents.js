@@ -5,7 +5,7 @@ function initializeTorrents(table) {
     // This is more robust than checking the local variable 'dataTable'
     // 1. HARD RESET: Kill the old instance and its DOM leftovers
     if(TEMPLAR.pageREC() === "node"){
-        assertHiddenButtonTab();
+        assertTitleHidden();
     }
 
 
@@ -21,8 +21,7 @@ function initializeTorrents(table) {
         $("#" + table).append('<thead><tr><th>Group</th><th>APA Citation</th><th>Revs</th><th>Date</th><th>Time</th><th class="none"></th></tr></thead><tbody></tbody>');
     }
     
-    assertGraphParamsPendingReset();
-    assertTitleLoaded()
+    assertGraphParamsPendingReset();    
     assertGraphSearch();
     assertAdvSearchUI();
     assertAdvButton();
@@ -202,7 +201,7 @@ function initializeTorrents(table) {
                 }
             });
             */
-
+            assertTitleLoaded()
             //this sets graphParams in the graphModel so the graph can accumulate where the user left off.
             if(firstLoad){
               if($("#adv_title").val() !== ""){

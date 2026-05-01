@@ -1,6 +1,7 @@
-function assertHiddenButtonTab(){
+function assertTitleHidden(){
     $("#graph_search").hide();
     $("#warp").hide();
+    $("h2 span a").hide()
 }
 
 function assertNodeNameFromData() {
@@ -80,9 +81,9 @@ function updateTitleUI(name, label) {
     }
 
     $("#nodeTitle span a").text(name)
-       .addClass(label)
+       .attr("class", "TEMPLAR node")
        .attr("href", "#node?label=" + label + "&uuid=" + (TEMPLAR.paramREC() ? TEMPLAR.paramREC().uuid : "undefined"))
-       .css("color", colors[label] || "white").removeClass("gold").removeClass("red").show(); 
+       .css("color", colors[label] || "white").show(); 
 
     TEMPLAR.DOM();
 
