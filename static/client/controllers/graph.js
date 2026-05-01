@@ -243,7 +243,7 @@ function setupMobileFullscreen() {
     const isTouch = 'ontouchstart' in window || navigator.maxTouchPoints > 0;
     
     // Only proceed if it's a touch device and VR isn't currently active
-    if (isTouch) {
+    if (isTouch && TEMPLAR.paramREC() && TEMPLAR.paramREC().search) {
         $("#mobile_fullscreen").show();
         $("#mobile_fullscreen").on("click", () => {
             // Get the actual canvas element from the force-graph
