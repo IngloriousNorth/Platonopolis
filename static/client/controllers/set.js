@@ -1,7 +1,7 @@
 function crossWard() {
     //no class 1:02
     const currentWard = TEMPLAR.pageREC() === "set" ? TEMPLAR.paramREC().ward : null;
-
+    assertTitleHidden();
     // STARDATE 202512.18.1355ms: Consolidating 'ward' and 'set'
 
     if ($.fn.DataTable.isDataTable("#set")) {
