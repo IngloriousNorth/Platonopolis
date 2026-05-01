@@ -84,7 +84,7 @@
         }
 
         h2 span a.TEMPLAR.privacy{
-            color:silver !important;
+            color:black !important;
         }
     </style>
 </head>
@@ -109,7 +109,7 @@
 
         <div class="policy-section">
             <h2>2. "Revs" Statistics</h2>
-            <p>To maintain our community <strong>Top 10</strong> rankings (calculated by Day, Week, Month, and Year), we record "revs."</p>
+            <p>To maintain our community <strong>Top 10</strong> rankings (calculated by Day, Week, Month, and Year), we record "Revs" (formerly "Snatches")!</p>
             <ul>
                 <li><strong>How it works:</strong> When a magnetURI is accessed, we increment a "rev" counter for that specific work.</li>
                 <li><strong>Historical Data:</strong> Revs are recorded regardless of the work's original upload date.</li>
@@ -118,17 +118,23 @@
         </div>
 
         <div class="policy-section">
-            <h2>3. MagnetURIs and Infrastructure</h2>
-            <p>This site does not link to or host public domain "files." Instead, we provide links to public domain <span class="highlight-link">magnetURIs</span>. Once you leave this site to join a peer-to-peer swarm, your IP address is visible to other peers. This is a fundamental technical requirement of the BitTorrent protocol.</p>
-            <p><strong>Server Logs:</strong> We do not maintain custom server logs. Our infrastructure runs on Amazon EC2, which maintains standard infrastructure logs required for basic network security. We do not analyze these logs for tracking or marketing purposes.</p>
+            <h2>3. BitTorrent Infrastructure</h2>
+            <p><strong>WebTorrent:</strong> Once you join a WebTorrent swarm in the Browser (you do not connect to WebTorrent automatically; you only connect once you download or upload a file), your IP address will be visible to other peers in the swarm. This is a fundamental technological requirement of the BitTorrent protocol.</p>
+            <p><strong>Desktop Client</strong> Similarly, once you leave this site to join a peer-to-peer swarm on a Desktop Client, your IP address is visible to other peers.</p>           
         </div>
 
-        <div class="policy-section">
-            <h2>4. Future Roadmap</h2>
-            <p>We are constantly evolving. Please note that once we integrate <span class="highlight-link">WebTorrent</span> and <span class="highlight-link">MetaMask</span>, this privacy policy will be updated to reflect how those technologies interact with your browser and the blockchain. Check back for updates as these features are rolled out.</p>
+         <div class="policy-section">
+            <h2>4. Server Logs</h2>
+             <p><strong>Infrastructure Logs:</strong> We do not maintain custom server logs. Our infrastructure runs on Amazon EC2, which maintains standard infrastructure logs required for basic network security. We do not analyze these logs for tracking or marketing purposes.</p>
+             <p><strong>Programming Logs:</strong> There may be console.log(err) lines in the server code, which we reserve the right to analyze for basic debugging requirements.   
+        </div>
+
+         <div class="policy-section">
+            <h2>5. Future Roadmap</h2>
+            <p>We are constantly evolving. Please note that if we integrate <span class="highlight-link">MetaMask</span>, this privacy policy will be updated to reflect how those technologies interact with your browser and the blockchain. Check back for updates in case New Features are rolled out.</p>
         </div>
     </div>
 
     <div class="footer-note">
-        WebTorrent Client (Coming Soon!) | MetaMask Integration (Pending)
+       WebTorrent Integration (Done) | MetaMask Integration (Pending)
     </div>

@@ -62,21 +62,17 @@ function crossWard() {
 
 function assertSetTitleLoaded(){
     $("#setTitle span a").text(toTitleCase(TEMPLAR.paramREC().ward));
-    $("h1 a").removeClass("loading").text("propagate.info"); //Mr. Crowley
     switch(TEMPLAR.paramREC().ward){
         case "authors":
-            $("#setTitle span a").addClass("authors").attr("href", "#set?ward=authors");
+            $("#setTitle span a").attr("class", "TEMPLAR set authors").attr("href", "#set?ward=authors");
             break;
         case "classes":
-            $("#setTitle span a").addClass("classes").attr("href", "#set?ward=classes");
+            $("#setTitle span a").attr("class", "TEMPLAR set classes").attr("href", "#set?ward=classes");
             break;
         case "publishers":
-            $("#setTitle span a").addClass("publishers").attr("href", "#set?ward=publishers");
+            $("#setTitle span a").attr("class", "TEMPLAR set publishers").attr("href", "#set?ward=publishers");
             break;
     }
+    $("#setTitle span a").show();
 
-}
-
-function assertSetLoading(){
-  $("h1 a").text("Loading...").addClass("loading").fadeIn()
 }

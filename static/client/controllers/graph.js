@@ -183,7 +183,8 @@ function graphRenderVR(selector) {
 
     const container = document.querySelector(selector);
     if (!container) return;
-
+    assertScrollPause();
+    
     const Graph = ForceGraphVR()(container)
     .width(container.clientWidth)
     .height(500)

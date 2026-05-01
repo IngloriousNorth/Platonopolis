@@ -528,7 +528,7 @@ background: #01D3CC;
 }
 
 .tabs a.top10, .tabs a.top10:visited, .mobile_tabs a.top10, .mobile_tabs a.top10:visited{
-  color:#888 !important;
+  color:#007BFF !important;
 }
 
 
@@ -1409,15 +1409,15 @@ a.adv_toggle{
 
 
 
-.authors{
+a.authors{
   color:gold !important;
 }
 
-.classes{
+a.classes{
   color:#50C777 !important;
 }
 
-.publishers{
+a.publishers{
   color:darkviolet !important;
 }
 
@@ -1622,7 +1622,7 @@ label.adv_all, input.adv_all{
 }
 
 #top10Title span a{
-  color: #888;
+  color: #007BFF;
   text-shadow: 
   -1px -1px 0 #000,  
    1px -1px 0 #000,

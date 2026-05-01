@@ -70,5 +70,5 @@ function onDone(torrent) {
         assertButton(file, torrent.infoHash);
     });
 
-    $.post("/rev/" + torrent.infoHash)
+   // $.post("/rev/" + torrent.infoHash)
 }

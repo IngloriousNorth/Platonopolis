@@ -1,3 +1,8 @@
+function assertHiddenButtonTab(){
+    $("#graph_search").hide();
+    $("#warp").hide();
+}
+
 function assertNodeNameFromData() {
     const params = TEMPLAR.paramREC();
     const targetUuid = params?.uuid ? String(params.uuid).trim().toLowerCase() : null;
@@ -53,6 +58,7 @@ function assertNodeNameFromData() {
 }
 
 function updateTitleUI(name, label) {
+
     const colors = {
         source: "white",
         author: "gold",
@@ -76,7 +82,7 @@ function updateTitleUI(name, label) {
     $("#nodeTitle span a").text(name)
        .addClass(label)
        .attr("href", "#node?label=" + label + "&uuid=" + (TEMPLAR.paramREC() ? TEMPLAR.paramREC().uuid : "undefined"))
-       .css("color", colors[label] || "white").removeClass("gold").removeClass("red").fadeIn(2222); 
+       .css("color", colors[label] || "white").removeClass("gold").removeClass("red").show(); 
 
     TEMPLAR.DOM();
 
@@ -101,7 +107,7 @@ function updateTitleUI(name, label) {
 function assertButtonTab(){
     switch(TEMPLAR.paramREC().label){
         case "source":
-            $("#warp").fadeIn(1337);
+            $("#warp").show();
             $("#graph_search").show();
             break;
         default:

@@ -30,6 +30,7 @@ function assertHero(currentFile, params) {
         TEMPLAR.route(`#webtorrent?format=${$opt.data("format")}&infoHash=${$opt.data("infohash")}&apa=${$opt.data("apa")}`);
         $(".output").hide();
         $("#output_" + $opt.data("infohash")).show();
+        assertPeersProgress();
 
     });
  
@@ -70,6 +71,11 @@ function onProgress(torrent) {
 function assertPeersProgress(){
     const $hero = $("#hero").find("option:selected");
     const torrent = $hero.data("torrent");
+    if(!torrent){
+        if ($numPeers) $numPeers.innerHTML = 0 + ' peers';
+        if ($progressBar) $progressBar.style.width = 0 + "%";
+        return;
+    }
     if ($numPeers) $numPeers.innerHTML = (torrent.numPeers ? torrent.numPeers : 0) + (torrent.numPeers = 1 ? ' peer' : ' peers');
     const percent = Math.round(torrent.progress * 100 * 100) / 100;
     if ($progressBar) $progressBar.style.width = (percent ? percent : 0) + "%";

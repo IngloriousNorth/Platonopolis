@@ -4,7 +4,9 @@ function initializeTorrents(table) {
     // 1. Check the Global DataTable registry
     // This is more robust than checking the local variable 'dataTable'
     // 1. HARD RESET: Kill the old instance and its DOM leftovers
-    $("#warp").hide();
+    if(TEMPLAR.pageREC() === "node"){
+        assertHiddenButtonTab();
+    }
 
 
     if ($.fn.DataTable.isDataTable("#" + table)) {
@@ -219,10 +221,6 @@ function initializeTorrents(table) {
   
             }
             
-            if(TEMPLAR.pageREC() === "node" && TEMPLAR.paramREC() && TEMPLAR.paramREC().label === "source"){
-                $("#warp").show();
-            }
-
             // Handle Copy Event
             $("table tbody").off('contextmenu', ".magnetURI").on('contextmenu', ".magnetURI", function() {
                 const infoHash = $(this).data("infohash");

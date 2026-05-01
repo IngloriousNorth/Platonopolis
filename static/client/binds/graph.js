@@ -59,3 +59,31 @@ function traverseGraph(set, searchable){
 
         }
 }
+
+function assertScrollPause(){
+    function stopScroll(e){
+        if(["Space","ArrowUp","ArrowDown","ArrowLeft","ArrowRight"].indexOf(e.code) > -1) {
+              e.preventDefault();
+        }
+      }
+
+      $(".graph_search").on("mouseenter", function () {
+            // Your existing keydown logic
+            window.addEventListener("keydown", stopScroll);
+
+            // FIX: Explicitly handle the wheel event on the graph container
+            // Use the native DOM element to set passive: false
+            this.addEventListener('wheel', function(e) {
+                // If the graph is focused, we likely want to prevent page scroll
+                // so the user can zoom the graph instead.
+                if (e.ctrlKey || $(this).is(":hover")) {
+                     e.preventDefault(); // The library usually handles this, 
+                     // but declaring the listener as non-passive stops the warning.
+                }
+            }, { passive: false }); 
+        });
+
+      $(".graph_search").on('mouseleave', function () {
+        window.removeEventListener("keydown", stopScroll);
+      });
+}

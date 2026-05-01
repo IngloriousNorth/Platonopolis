@@ -8,16 +8,16 @@ function assertTitleLoaded(){
   switch (TEMPLAR.pageREC()) {
     case "torrents":
       if(TEMPLAR.paramREC() && TEMPLAR.paramREC().search){
-        $("#torrentsTitle span a").text("Graph Search").attr("href", "#torrents?search=true&title=&author=&classes=&all=false&publisher=&type=all&media=all&format=all&res=all").fadeIn(3333)
+        $("#torrentsTitle span a").text("Graph Search").attr("href", "#torrents?search=true&title=&author=&classes=&all=false&publisher=&type=all&media=all&format=all&res=all").show();
 
       }
       else{
-        $("#torrentsTitle span a").text("Sources").attr("href", "#sources").fadeIn(1337)
+        $("#torrentsTitle span a").text("Sources").attr("href", "#sources").show();
 
       }
       break;
     case "top10":
-      $("#top10Title span a").text("Top 10").fadeIn(1337);
+      $("#top10Title span a").text("Top 10").show();
       break;
     case "node":
       //TODO: maybe multiple calls here
@@ -31,7 +31,7 @@ function assertTitleLoaded(){
       //});*/
       break;
     default:
-      $("#torrentsTitle span a").text("Sources").fadeIn(1337)
+      $("#torrentsTitle span a").text("Sources").show();
       break;
 
   }

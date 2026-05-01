@@ -8,7 +8,7 @@ function mount() {
     TEMPLAR.initialize({
         defaultPage: "sources",
         dir: "client/partials",
-        fade: true,
+        fade: false,
         pages: ["webtorrent", "sources", "top10", "node", "set", "upload", "privacy", "mission"],
         helm: [
             {
@@ -17,38 +17,10 @@ function mount() {
                     // Priority 1: Get the list visible                    
                     initializeTorrents("torrents");
                     
-                    // Priority 2: Defer the heavy graph and search logic
           
                     if(TEMPLAR.paramREC() && TEMPLAR.paramREC().search === "true"){
                         initializeGraph(); // Likely the source of the 710ms reflow
-                        $(".graph_search").show();
-                        function stopScroll(e){
-                            if(["Space","ArrowUp","ArrowDown","ArrowLeft","ArrowRight"].indexOf(e.code) > -1) {
-                                  e.preventDefault();
-                            }
-                          }
-
-                          $(".graph_search").on("mouseenter", function () {
-                                // Your existing keydown logic
-                                window.addEventListener("keydown", stopScroll);
-
-                                // FIX: Explicitly handle the wheel event on the graph container
-                                // Use the native DOM element to set passive: false
-                                this.addEventListener('wheel', function(e) {
-                                    // If the graph is focused, we likely want to prevent page scroll
-                                    // so the user can zoom the graph instead.
-                                    if (e.ctrlKey || $(this).is(":hover")) {
-                                         e.preventDefault(); // The library usually handles this, 
-                                         // but declaring the listener as non-passive stops the warning.
-                                    }
-                                }, { passive: false }); 
-                            });
-
-                          $(".graph_search").on('mouseleave', function () {
-                            window.removeEventListener("keydown", stopScroll);
-                          });
-                        
-                     // Small delay to allow Torrent list to render first
+                        $(".graph_search").show();                        
                     }
                     else{
                         $(".graph_search").hide();
@@ -75,8 +47,6 @@ function mount() {
                         return;
                     }  
                     initializeTorrents("node");
-                    assertButtonTab();
-                    $("#graph_search").hide();
                     if(TEMPLAR.paramREC() && TEMPLAR.paramREC().label === "source"){
                         assertMermaid();
                     }                    
@@ -114,6 +84,18 @@ function mount() {
                 fn : function(){
                     initializeUpload();
                     uploadAutocomplete();
+                }
+            },
+            {
+                page: "mission",
+                fn : function(){
+                    $(".TEMPLAR.mission").show();
+                }
+            },
+            {
+                page:  "privacy",
+                fn : function(){
+                    $(".TEMPLAR.privacy").show();
                 }
             }
         ]
