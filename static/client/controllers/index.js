@@ -6,13 +6,13 @@ function mount() {
     $(".autosuggestBox").hide();
 
     TEMPLAR.initialize({
-        defaultPage: "torrents",
+        defaultPage: "sources",
         dir: "client/partials",
         fade: true,
-        pages: ["webtorrent", "torrents", "top10", "node", "set", "upload", "privacy", "mission"],
+        pages: ["webtorrent", "sources", "top10", "node", "set", "upload", "privacy", "mission"],
         helm: [
             {
-                page: "torrents",
+                page: "sources",
                 fn: function() {
                     // Priority 1: Get the list visible                    
                     initializeTorrents("torrents");
@@ -29,11 +29,20 @@ function mount() {
                           }
 
                           $(".graph_search").on("mouseenter", function () {
-                            {
-                              window.removeEventListener("keydown", stopScroll);
-                              window.addEventListener("keydown", stopScroll);
-                            }
-                          });
+                                // Your existing keydown logic
+                                window.addEventListener("keydown", stopScroll);
+
+                                // FIX: Explicitly handle the wheel event on the graph container
+                                // Use the native DOM element to set passive: false
+                                this.addEventListener('wheel', function(e) {
+                                    // If the graph is focused, we likely want to prevent page scroll
+                                    // so the user can zoom the graph instead.
+                                    if (e.ctrlKey || $(this).is(":hover")) {
+                                         e.preventDefault(); // The library usually handles this, 
+                                         // but declaring the listener as non-passive stops the warning.
+                                    }
+                                }, { passive: false }); 
+                            });
 
                           $(".graph_search").on('mouseleave', function () {
                             window.removeEventListener("keydown", stopScroll);
@@ -67,7 +76,7 @@ function mount() {
                     }  
                     initializeTorrents("node");
                     assertButtonTab();
-                    $("button").hide();
+                    $("#graph_search").hide();
                     if(TEMPLAR.paramREC() && TEMPLAR.paramREC().label === "source"){
                         assertMermaid();
                     }                    

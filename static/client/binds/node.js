@@ -76,7 +76,7 @@ function updateTitleUI(name, label) {
     $("#nodeTitle span a").text(name)
        .addClass(label)
        .attr("href", "#node?label=" + label + "&uuid=" + (TEMPLAR.paramREC() ? TEMPLAR.paramREC().uuid : "undefined"))
-       .css("color", colors[label] || "white").removeClass("gold").removeClass("red")   
+       .css("color", colors[label] || "white").removeClass("gold").removeClass("red").fadeIn(2222); 
 
     TEMPLAR.DOM();
 

@@ -74,7 +74,7 @@ object{
   margin-top:0px !important;
 }
 
-#output a{
+.output a{
   margin-bottom:0px !important;
 }
 
@@ -165,7 +165,7 @@ body.is-seed .show-leech {
 }
 
 
-#output object{
+.output object{
   position:fixed;
   top:88px;
   bottom:60px;
@@ -201,7 +201,7 @@ body.is-seed .show-leech {
 footer{
   height:60px;
   width:100%;
-  background: #007BFF !important;
+  background: #333777 !important;
 }
 
 
@@ -459,7 +459,7 @@ background: linear-gradient(265deg, rgba(230,201,7,1) 0%, rgba(81,186,187,1) 11%
  
 background: #01D3CC;
   box-shadow:2px 3px 7px lightgoldenrodpalegoldenrod !important; /* PYRAMID */ /* Can't get enough of that Golden Crisp! */
-  border-bottom:3px solid darkviolet;
+  border-bottom:3px solid #333777;
 /* 180deg: Top-to-Bottom transition */
 
 
@@ -470,7 +470,7 @@ background: #01D3CC;
         180deg, 
         #007BFF 0%,    /* Start: Neon Cyan (Glow at the very top) */
         silver 33%, 
-        darkviolet 66%   /* End: DarkViolet (Thin horizon line at the bottom) */
+        #333777 66%   /* End: #333777 (Thin horizon line at the bottom) */
     );
 }
 
@@ -522,13 +522,13 @@ background: #01D3CC;
   
 }
 
-.tabs a.torrents, .tabs a.torrents:visited, .mobile_tabs a.torrents:visited{
+.tabs a.sources, .tabs a.sources:visited, .mobile_tabs a.sources:visited{
   color:white !important;
 
 }
 
 .tabs a.top10, .tabs a.top10:visited, .mobile_tabs a.top10, .mobile_tabs a.top10:visited{
-  color:black !important;
+  color:#888 !important;
 }
 
 
@@ -800,7 +800,7 @@ thead:not(.torrentsTable thead) th {
     /* Optional: Style it to match your Cyan/Gold theme */
     background: #1a1a1a !important;
     color: cyan !important;
-    border: 1px solid darkviolet !important;
+    border: 1px solid #333777 !important;
     box-shadow: 0 6px 15px silver !important;
     
     /* Center it visually if it's drifting */
@@ -812,21 +812,8 @@ thead:not(.torrentsTable thead) th {
   border-radius:7px 7px 0px 0px;
 }
 
-.torrentsTable thead{
-  background-color:#CDCDCD;
-  border-bottom:2px solid black;
-  box-shadow:3px 6px 9px #CDCDCD;
-  position:relative;
-  z-index:10;
-}
 
-.torrentsTable th{
-  color:black !important;
-  text-shadow:1px 1px white;
-  letter-spacing:1px;
-  font-family:"Bitcount Grid Double", system-ui !important;
-  font-size:20px;
-}
+
 
 .torrentsTable td{
   padding-bottom:5px !important;
@@ -838,7 +825,7 @@ thead:not(.torrentsTable thead) th {
 
 
 .dataTable td:not(.torrentsTable td, .dtr-control, .child){
-  padding:26px 0px 26px 0px;
+  padding:13px 0px 13px 0px;
 }
 
 .text-left{
@@ -901,7 +888,7 @@ table.dataTable>tbody>tr.child {
 }
 
 .child{
-  border-bottom:1px solid #CDCDCD;
+  border-bottom:3px solid darkgoldenrod;
 }
 
 
@@ -916,7 +903,6 @@ table.dataTable tr.dtrg-group th{
   background:#007BFF !important;
   background:palevioletred !important;
 }
-
 
 
 
@@ -1228,8 +1214,7 @@ h3{
   width:100%;
 }
 
-.torrentsTable td:first-child{
-  font-weight:bold;
+.dataTable td:first-child{
 }
 
 .snatches{
@@ -1350,7 +1335,7 @@ a.adv_toggle{
   box-shadow:4px 3px 5px black;*/
   border-radius:14px !important;
  
-  background: linear-gradient(120deg, #007BFF, silver, darkviolet);
+  background: linear-gradient(120deg, #007BFF, silver, #333777);
   border:3px solid mediumvioletred;
 
   
@@ -1516,7 +1501,7 @@ a.adv_toggle{
 }
 
 .classComma{
-  color:darkviolet;
+  color:#333777;
 }
 
 a.publisher{
@@ -1576,7 +1561,7 @@ div.classes h2 span a{
 }
 
 div.publishers h2 span a{
-  color:mediumvioletred !important;
+  color:darkviolet !important;
 }
 
   .upload p{
@@ -1586,7 +1571,7 @@ div.publishers h2 span a{
   }
 
   #legal{
-    color:red;
+    color:#50C777;
     font-weight:bold;
   }
 
@@ -1600,9 +1585,9 @@ div.publishers h2 span a{
 
 
 h1, h1 a, h1 a:visited:not(.loading, .loading:visited){
-  font-size:37px;
-   color:white;
-   text-shadow:3px 3px black;
+  font-size:40px;
+   color:black;
+   text-shadow:3px 3px white;
   position:fixed;
   text-decoration:none;
   top:0px;
@@ -1639,7 +1624,7 @@ label.adv_all, input.adv_all{
 }
 
 #top10Title span a{
-  color: black;
+  color: #888;
   text-shadow: 
   -1px -1px 0 #000,  
    1px -1px 0 #000,
@@ -1781,9 +1766,9 @@ h2 span a{
 
 .sourceType{
   color:black !important;
-    text-shadow:1px 1px gold;
-  font-size:12px !important;
-  font-family:"Rye", "Times New Roman" !important;
+    text-shadow:1px 1px white;
+  font-size:21px !important;
+  font-family:"Pirata One", "Times New Roman" !important;
   text-align:center !important;
   font-variant:small-caps;
   width:98px;
@@ -1921,7 +1906,7 @@ footer{
   background:#1a1a1a; color:#00ccff; border:1px solid #00ccff; text-decoration:none; font-family:"Share Tech Mono", sans-serif; font-size:14px; border-radius:3px; cursor:pointer;
 }
 
-#output img{
+.output img{
   margin:0 auto;
   display:block;
 }
@@ -2010,7 +1995,7 @@ footer{
 }
 
 .adv_search label{
-  color:darkgoldenrod;
+  color:#50C777;
 }
 
 
@@ -2111,17 +2096,17 @@ header{
 #status{color: #FFF !important;}
 
 header{
-  box-shadow:2px 4px 8px white !important;
-  background:#007BFF !important;
-  border-bottom:5px solid skyblue !important;
+  box-shadow:2px 3px 3px darkgoldenrod !important;
+  background:lightskyblue !important;
+  border-bottom:3px solid #333777 !important;
 }
 
 .dataTable thead th{
   box-shadow:none !important;
-  border-bottom:4px solid skyblue;
+  border-bottom:3px solid darkviolet;
   /* 1. Define your gradient */
   background:goldenrod !important;
-  color:#007BFF !important;
+  color:#333777 !important;
   font-size:20px !important;
   font-family:"Rye", system-ui !important;
 }
@@ -2133,8 +2118,8 @@ table.dataTable tr.dtrg-group th{
 }
 
 .tableHeading, .tableHeading a{
-  font-family: "Times New Roman", "Times New Roman" !important;
-  font-size:17px !important;
+  font-family: "Special Elite", "Times New Roman" !important;
+  font-size:16px !important;
 }
 
 
@@ -2150,35 +2135,47 @@ table.dataTable tr.dtrg-group th{
 }
 
 div.TEMPLAR{
-  background-color:#CDCDCD !important;
+  background-color:silver !important;
 }
 
 .torrentsTable thead th{
-  background:skyblue !important;
+  background:#333777 !important;
   border-bottom:none !important;
   box-shadow:none !important;
   font-family:"Share Tech Mono", "sans-serif" !important;
   font-size:18px !important;
   text-shadow:none !important;
-  color:mediumvioletred !important;
+  color:silver !important;
+  text-align:left !important;
 }
 
 .torrentsTable td{
+  text-align:left;
   background-color: white !important;
-  padding:17px 0 17px 0 !important;
+  padding:4px 0 4px 0 !important;
   font-family: "Share Tech Mono", sans-serif !important;
+}
+
+
+.apa-text{
+  padding-left:5px !important;
+  display:block;
+}
+
+.torrentsTable td:first-child, .torrentsTable th:first-child{
+  padding-left:12px !important;
 }
 
 .adv_search{
   background:lightgoldenrodyellow !important;
-  border: 3px solid skyblue !important;
+  border: 4px solid goldenrod !important;
   color:palegoldenrod !important;
   margin-bottom:30px;
   margin-top:30px;
 }
 
 .adv_search label{
-  color:skyblue !important;
+  color:#50C777 !important;
   letter-spacing:1px;
   font-size:16px;
   font-family:"Share Tech Mono", "serif" !important;
@@ -2205,8 +2202,8 @@ div.TEMPLAR{
 }
 
 .dt-container{
-  border:2px solid skyblue !important;
-  margin-top:30px !important;
+  border:2px solid #333777 !important;
+  margin-top:33px !important;
   border-bottom:none;
 }
 
@@ -2285,8 +2282,8 @@ canvas:-webkit-full-screen {
 
 #graph_search, #adv_submit, .upload button{
   border:2px solid #007BFF !important;
-  background:goldenrod !important;
-  color:#007BFF !important;
+  background:#333777 !important;
+  color:goldenrod !important;
   font-family:"Share Tech Mono", system-ui !important;
   font-size:18px;
   width:77px;
@@ -2294,10 +2291,10 @@ canvas:-webkit-full-screen {
 }
 
 #graph_search:hover, #adv_submit:hover, .upload button:hover{
-  box-shadow:3px 4px 3px white !important;
+  box-shadow:3px 4px 3px #007BFF !important;
   color:palegoldenrod !important;
   font-weight:bold !important;
-  border:4px solid gold !important;
+  border:2px solid goldenrod !important;
 }
 
 #warp{
@@ -2318,7 +2315,7 @@ h2 span a{
 }
 
 footer{
-  border-top:2px solid skyblue !important;
+  border-top:3px solid darkgoldenrod !important;
 }
 
 #status{
@@ -2326,7 +2323,7 @@ footer{
 }
 
 .panel li a, .panel li a:visited, .mobile_panel li a, .mobile_panel li a:visited{
-  color:cyan !important;
+  color:#888 !important;
   font-family:"Share Tech Mono", sans-serif !important;
 }
 
@@ -2408,7 +2405,7 @@ div.upload{
 
   h1, h1 a, h1 a :visited{
     position:relative;
-    top:3px;
+    top:2px;
   }
 
   
@@ -2422,6 +2419,11 @@ div.upload{
     display:block;
   }
   
+
+  .titleBreak{
+    padding-top:18px;
+    padding-bottom:18px;
+  }
   
   
   
@@ -2463,7 +2465,7 @@ div.upload{
     height:55px;
   }
 
-  #output object{
+  .output object{
     top:55px;
     height:calc(100% - 115px);
   }
@@ -2493,14 +2495,14 @@ div.upload{
     font-size:40px;
     width:49px;
     height:49px;
-    color:goldenrod !important;
+    color:#333777 !important;
     top:9px;
     left:5px;
     z-index:9999;
   }
 
   #mobile_menu:hover{
-    color: lightgoldenrodyellow !important;
+    color: palegoldenrod !important;
   }
 
   .mobile_menu{
@@ -2559,9 +2561,6 @@ div.upload{
     display:none;
   }
 
-  .dataTable td:not(.torrentsTable td){
-    border:#333333;
-  }
 
   header{
     display:block;
@@ -2576,7 +2575,7 @@ div.upload{
     z-index:9999;
   }
 
-  #output img {
+  .output img {
     /* Critical for mobile scaling */
     max-width: 100%; 
     height: auto; 
@@ -2744,10 +2743,10 @@ div.upload{
  
   
   #mobile_quick{
-    color:black;
+    color:white;
     font-variant:small-caps;
-    font-size:18px;
-    font-family:Rye, system-ui;
+    font-size:17px;
+    font-family:"Share Tech Mono", system-ui;
     padding-bottom:13px;
     text-decoration:underline;
     letter-spacing:2px;
@@ -2776,8 +2775,7 @@ div.upload{
   }
 
   h2 span a{
-    font-size:29px;
-    line-height:30px;
+    font-size:32px;
   }
 
   h3{
@@ -2794,3 +2792,41 @@ div.upload{
 
 }
 
+
+/* 4. Final Polish for the .torrentsTable to bridge the gap */
+.torrentsTable {
+    width: 100% !important;
+    margin: 0 !important; /* Removes the gap between the APA row and this table */
+    border-collapse: collapse;
+    background: rgba(0, 0, 0, 0.3); /* Subtle depth without a harsh gray block */
+}
+
+/* Ensure the text stays readable in the new dark context */
+.torrentsTable td {
+    color: skyblue;
+    padding: 10px;
+}
+
+/* The APA container */
+.apa-text {
+    line-height: 1.5;
+}
+
+/* Force the torrentsTable to align with the indented text, not the margin */
+.torrentsTable {
+    width: calc(100% - 15px) !important; /* Subtract the padding amount */
+    margin-left: 15px !important; 
+    margin-right: 0;
+    border-left: 1px dotted goldenrod; /* Subtle vertical 'connector' line */
+}
+
+/* Ensure the table header (thead) doesn't overflow or clip */
+.torrentsTable thead th {
+    padding: 5px 5px;
+    white-space: nowrap; /* Prevents text from wrapping and cutting off */
+}
+
+.torrentsTable td{
+  padding-top:13px !important;
+  padding-left:5px !important;
+}

@@ -4,26 +4,22 @@ function initializeWebtorrent(){
     const $option = $("#hero option[value='" + params.infoHash + "']");
     const torrentCache = $option.data("torrent");
 
+    assertOutput(params.infoHash);
+
     if (torrentCache) {
-        $("#output").empty();
-        torrentCache.files.forEach(function(file) {
-            appendFile(file, torrentCache.infoHash);
-            appendButton(file, torrentCache.infoHash)
-        });
+
         assertPeersProgress();
     } else {
-        $("#output").empty();
-        // New download required
+        if (WebTorrent.get(params.infoHash)) {
+            return; 
+        }
+
+        
         DL(params.infoHash);
     }
 }
 
-function DL(infoHash) {
-    console.log("Downloading: " + infoHash)
-    if (WebTorrent.get(infoHash)) {
-        console.log("Torrent " + infoHash + " is already active. Skipping add.");
-        return; 
-    }
+function DL(infoHash) {    
     assertProgress();
 
     const torrent = WebTorrent.add(getMagnetURI(infoHash));  
@@ -51,7 +47,7 @@ function DL(infoHash) {
 
         // Initial render of files
         torrent.files.forEach(function(file) {
-            appendFile(file, torrent.infoHash);
+            assertFile(file, torrent.infoHash);
         });
 
         
@@ -71,7 +67,7 @@ function onDone(torrent) {
     // Save the downloaded file handles to the hero option for later cycling
     torrent.files.forEach(file => {
         // Trigger the replacement logic for each file
-        appendButton(file, torrent.infoHash);
+        assertButton(file, torrent.infoHash);
     });
 
     $.post("/rev/" + torrent.infoHash)

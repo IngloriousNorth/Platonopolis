@@ -90,26 +90,36 @@ var TEMPLAR = {
     render: function(page) {
         var that = this;
         if (!page) page = this._default;
-        var fileTarget = page + ".html";
 
+        // 1. Hide all pages first to clear the horizon
         this._pages.forEach(p => $("div." + p).hide());
 
-        $.get(this._dir + "/" + fileTarget, function(data) {
-            // 1. Write to the DOM
-            $("div." + page).html(data);
-            
-            // 2. The Asynchronous Breath:
-            // requestAnimationFrame ensures the browser has rendered the HTML
-            // before we start the 'helm' rituals which may trigger heavy reflows.
+        // 2. CHECK: Has this page been "un-concealed" (rendered) before?
+        // We check if the div has any children (content).
+        var $targetDiv = $("div." + page);
+
+        if ($targetDiv.children().length > 0) {
+            // TRUTH RETAINED: The HTML already exists. Just show it.
             requestAnimationFrame(() => {
                 that._visible_page(page);
-                // Use a slight delay if DataTables is still complaining
                 setTimeout(() => {
                     that.helm(page);
                 }, 0);
             });
-           
-        });
+        } else {
+            // FIRST DISCLOSURE: The HTML is missing, so we fetch it once.
+            var fileTarget = page + ".html";
+            $.get(this._dir + "/" + fileTarget, function(data) {
+                $targetDiv.html(data);
+                
+                requestAnimationFrame(() => {
+                    that._visible_page(page);
+                    setTimeout(() => {
+                        that.helm(page);
+                    }, 0);
+                });
+            });
+        }
     }
     ,
     helm: function(targetPage) {

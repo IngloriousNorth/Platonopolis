@@ -486,7 +486,7 @@ function htmlUpload(){
 
   		uploadModel.torrent.size = totalSize;
 
-  		WT.seed(files, function(torrent){
+  		WebTorrent.seed(files, function(torrent){
   			console.log(torrent);
 			$("#MG").empty();
 			uploadModel.torrent.infoHash = torrent.infoHash;

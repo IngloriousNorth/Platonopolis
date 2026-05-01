@@ -1,4 +1,23 @@
-function appendFile(file, infoHash) {
+function assertOutput(infoHash){
+    //add #output_infoHash div, controlled by hero.js
+    $(".output").hide();  
+
+    const prim = $("#output_" + infoHash).length;
+
+    if(prim){
+        $("#output_" + infoHash).show();
+    }
+    else{
+        const output = document.createElement("div");
+        $(output).attr("id", "output_" + infoHash);
+        $(output).addClass("output");
+        $("div.webtorrent").append(output);
+        $(output).show();
+    }
+    
+}
+
+function assertFile(file, infoHash) {
     const fileContainerId = "wrapper-" + file.name.replace(/[^a-z0-9]/gi, '-');
     let $container = $("#" + fileContainerId);
     const heroInfoHash = $("#hero").find("option:selected").val();
@@ -6,7 +25,7 @@ function appendFile(file, infoHash) {
     // Create container if it doesn't exist
     if ($container.length === 0) {
         $container = $("<div class='file-entry' style='margin-bottom: 25px;'></div>").attr("id", fileContainerId);
-        $("#output").append($container);
+        $("#output_" + infoHash).append($container);
         
         // Render media content (Audio/Video/Img)
         if(heroInfoHash === infoHash){
@@ -37,7 +56,7 @@ function appendFile(file, infoHash) {
     }
 }
 
-function appendButton(file, infoHash) {
+function assertButton(file, infoHash) {
     const statusId = "status-" + file.name.replace(/[^a-z0-9]/gi, '-');
     const $statusElement = $("#" + statusId);
     const heroInfoHash = $("#hero").find("option:selected").val();

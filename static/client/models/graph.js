@@ -46,7 +46,7 @@ function walkGraph(label, name, route=true){
 			"publisher" : graphParams.publisher
 		})
 	
-    	TEMPLAR.routeParams("#torrents");
+    	TEMPLAR.routeParams("#sources");
     }
 }
 

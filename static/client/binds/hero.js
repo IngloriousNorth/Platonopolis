@@ -28,6 +28,9 @@ function assertHero(currentFile, params) {
 
         // Route to the selected file
         TEMPLAR.route(`#webtorrent?format=${$opt.data("format")}&infoHash=${$opt.data("infohash")}&apa=${$opt.data("apa")}`);
+        $(".output").hide();
+        $("#output_" + $opt.data("infohash")).show();
+
     });
  
 }

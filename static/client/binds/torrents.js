@@ -12,7 +12,7 @@ function assertTitleLoaded(){
 
       }
       else{
-        $("#torrentsTitle span a").text("Torrents").attr("href", "#torrents").fadeIn(1337)
+        $("#torrentsTitle span a").text("Sources").attr("href", "#sources").fadeIn(1337)
 
       }
       break;
@@ -31,7 +31,7 @@ function assertTitleLoaded(){
       //});*/
       break;
     default:
-      $("#torrentsTitle span a").text("Torrents").fadeIn(1337)
+      $("#torrentsTitle span a").text("Sources").fadeIn(1337)
       break;
 
   }
@@ -88,10 +88,9 @@ function assertFirstEditionRow(record, edition_torrent, editionsAdded, citationH
           "</a>" + dateField + authorField + "</div><br><div class='torrentClasses'>" + classesField + "</div></div>",
 
           "<span class='apa-trigger'>" + // Removed title='Click to copy citation'
-              "<span class='apa-text' id='edition_" + edition_torrent.edition.properties.uuid + "_field'>" +
+              "<span class='apa-text bold' id='edition_" + edition_torrent.edition.properties.uuid + "_field'>" +
                 citationHtml +
-              "</span>" +
-              "<span class='copy-status'></span>" +
+              "</span>" +              
           "</span>",
 
           edition_torrent.edition.properties.snatches,
@@ -314,7 +313,7 @@ function assertAdvButton(){
     }*/
     
     TEMPLAR.route(
-      "#torrents?search=true&title=" +
+      "#sources?search=true&title=" +
         encodeURIComponent($("#adv_title").val()) +
         "&author=" +
         encodeURIComponent($("#adv_author").val()) +
