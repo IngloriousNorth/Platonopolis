@@ -10,29 +10,29 @@ function initializeWebtorrent(){
 
         assertPeersProgress();
     } else {
-        if (WebTorrent.get(params.infoHash)) {
+        if (client.get(params.infoHash)) {
             return; 
         }
 
         
         DL(params.infoHash);
     }
+
 }
 
 function DL(infoHash) {    
     assertProgress();
 
-    const torrent = WebTorrent.add(getMagnetURI(infoHash));  
-    torrent.on('wire', function(){
+    console.log("Downloading: " + infoHash)
+    client.add(getMagnetURI(infoHash), function(torrent){
         insertTorrent(infoHash, torrent);
-        assertPeersProgress();
-    })
 
-    torrent.on("metadata", function(){
         const interval = setInterval(function(){
             onProgress(torrent);
 
         },500);
+
+        console.log("DOWNLOADED METADATA")
 
         
 
@@ -50,17 +50,18 @@ function DL(infoHash) {
             assertFile(file, torrent.infoHash);
         });
 
-        
+        torrent.on('done', function(){
+           onDone(torrent);
+
+        });
     })        
 
-    torrent.on('done', function(){
-       onDone(torrent);
-
-    });
+    
     
 }
 
-function onDone(torrent) {         
+function onDone(torrent) {  
+        console.log("TORRENT COMPLETE")       
     onProgress(torrent);
     //assertDL(torrent)
     clearInterval(interval);
@@ -70,5 +71,5 @@ function onDone(torrent) {
         assertButton(file, torrent.infoHash);
     });
 
-    $.post("/rev/" + torrent.infoHash)
+   $.post("/rev/" + torrent.infoHash)
 }

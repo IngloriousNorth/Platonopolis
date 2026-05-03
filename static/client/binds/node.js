@@ -83,7 +83,7 @@ function updateTitleUI(name, label) {
     $("#nodeTitle span a").text(name)
        .attr("class", "TEMPLAR node")
        .attr("href", "#node?label=" + label + "&uuid=" + (TEMPLAR.paramREC() ? TEMPLAR.paramREC().uuid : "undefined"))
-       .css("color", colors[label] || "white").show(); 
+       .css("color", colors[label] || "white").fadeIn(1812); 
 
     TEMPLAR.DOM();
 

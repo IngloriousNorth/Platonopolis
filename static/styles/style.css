@@ -346,14 +346,12 @@ h3{
 div.TEMPLAR{
     overflow-y: auto;
     color:black;
-    overflow-x: hidden;
     width: 100%;
     height: calc(100% - 148px);
     position: absolute;
     box-sizing: border-box;
     top: 92px;
     bottom: 30px;
-    overflow-x:hidden;
     background-color:#fcfce8;
     background-color:#ABABAB;
     background-color:#78717E;
@@ -2280,8 +2278,8 @@ canvas:-webkit-full-screen {
 
 #graph_search, #adv_submit, .upload button{
   border:2px solid #007BFF !important;
-  background:#333777 !important;
-  color:goldenrod !important;
+  background:goldenrod !important;
+  color:#333777 !important;
   font-family:"Share Tech Mono", system-ui !important;
   font-size:18px;
   width:77px;
@@ -2289,8 +2287,7 @@ canvas:-webkit-full-screen {
 }
 
 #graph_search:hover, #adv_submit:hover, .upload button:hover{
-  box-shadow:3px 4px 3px #007BFF !important;
-  color:palegoldenrod !important;
+  box-shadow:3px 4px 3px #333777 !important;  
   font-weight:bold !important;
   border:2px solid goldenrod !important;
 }
@@ -2512,7 +2509,7 @@ div.upload{
     top:63px;
     z-index:9998;
     bottom:88px;
-    background-color:goldenrod !important;
+    background-color:#CDCDCD !important;
   }
   
 
@@ -2584,6 +2581,10 @@ div.upload{
 
     /* Prevents pixelated upscaling on small images */
     object-fit: contain; 
+}
+
+div.TEMPLAR.webtorrent{
+  overflow-x:auto !important;
 }
   
 

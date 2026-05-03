@@ -6,9 +6,10 @@ function initializeTorrents(table) {
     // 1. HARD RESET: Kill the old instance and its DOM leftovers
     assertTitleHidden();
 
+
     //shiv for sources and top10
     if(TEMPLAR.pageREC() === "sources" || TEMPLAR.pageREC() === "top10"){
-        $("h2 span a").show();
+        $("h2 span a").fadeIn(1812);
     }
     
     if ($.fn.DataTable.isDataTable("#" + table)) {
@@ -22,7 +23,7 @@ function initializeTorrents(table) {
         // Re-inject the skeleton because .empty() removes the <thead> your partial provided
         $("#" + table).append('<thead><tr><th>Group</th><th>APA Citation</th><th>Revs</th><th>Date</th><th>Time</th><th class="none"></th></tr></thead><tbody></tbody>');
     }
-    
+
     assertGraphParamsPendingReset();    
     assertGraphSearch();
     assertAdvSearchUI();
@@ -223,10 +224,10 @@ function initializeTorrents(table) {
             }
             
             // Handle Copy Event
-            $("table tbody").off('contextmenu', ".magnetURI").on('contextmenu', ".magnetURI", function() {
+            /*$("table tbody").off('contextmenu', ".magnetURI").on('contextmenu', ".magnetURI", function() {
                 const infoHash = $(this).data("infohash");
                 $.post("/rev/" + infoHash);
-            });
+            });*/
             /*$("a.webtorrent").off("click").on("click" function(){
                 const infoHash = $(this).data("infohash");
                 const APA = $(this).data("apa");                            
@@ -259,6 +260,7 @@ function initializeTorrents(table) {
             }            
         },
     })
+
     if (TEMPLAR.pageREC() === "top10") $('th').unbind('click.DT')
    
     $(document).off("click", "a.webtorrent").on("click", "a.webtorrent", function(e) {
@@ -266,7 +268,7 @@ function initializeTorrents(table) {
         
         // Otherwise, proceed with the route
         const d = this.dataset;
-        TEMPLAR.route("#webtorrent?format=" + d.format + "&infoHash=" + d.infohash + "&apa=" + encodeURIComponent(d.apa));
+        TEMPLAR.route("#webtorrent" + "?infoHash=" + d.infohash + "&apa=" + encodeURIComponent(d.apa) + "&format=" + d.format);
     });
 }
 

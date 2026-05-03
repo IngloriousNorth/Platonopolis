@@ -73,6 +73,6 @@ function assertSetTitleLoaded(){
             $("#setTitle span a").attr("class", "TEMPLAR set publishers").attr("href", "#set?ward=publishers");
             break;
     }
-    $("#setTitle span a").show();
+    $("#setTitle span a").fadeIn(1812);
 
 }

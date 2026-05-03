@@ -564,7 +564,7 @@ app.post("/torrents/adv_search", check("res").trim().escape().isLength({max : 25
     query += "WITH DISTINCT s "; 
 
     // 2. Calculate the total count of these unique sources
-    query += "WITH collect(s) as allSources, count(s) as totalCount ";
+    query += "WITH collect(s) as allSources, count(DISTINCT s) as totalCount ";
 
     // 3. Unwind to turn them back into rows, but keep the totalCount attached to every row
     query += "UNWIND allSources as s " +
@@ -1239,7 +1239,7 @@ app.post("/top10/:time", check("time").trim().escape(), async function(req,res){
                 "MATCH (t:Torrent {deleted : false})<-[]-(e:Edition)<-[]-(s:Source) " + 
                 "WHERE s.lastSnatched > threshold " +
                 "WITH s LIMIT 250 " +
-                "WITH count(s) AS count " +
+                "WITH count(DISTINCT s) AS count " +
                 "WITH DATETIME() - duration($time) AS threshold, count " +
                 "MATCH (t:Torrent {deleted : false})<-[]-(e:Edition)<-[]-(s:Source) " + 
                 "WHERE s.lastSnatched >threshold "

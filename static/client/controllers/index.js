@@ -6,10 +6,10 @@ function mount() {
     $(".autosuggestBox").hide();
 
     TEMPLAR.initialize({
-        defaultPage: "sources",
+        defaultPage: "webtorrent_seeding",
         dir: "client/partials",
         fade: false,
-        pages: ["webtorrent", "sources", "top10", "node", "set", "upload", "privacy", "mission"],
+        pages: ["webtorrent", "sources", "top10", "node", "set", "upload", "privacy", "mission", "webtorrent_seeding"],
         helm: [
             {
                 page: "sources",
@@ -78,6 +78,7 @@ function mount() {
                         initializeWebtorrent();    
                     }
                     
+                    
                 }
             },
             {
@@ -98,6 +99,12 @@ function mount() {
                 fn : function(){
                     $(".TEMPLAR.privacy").show();
                 }
+            },
+            {
+                page: "webtorrent_seeding",
+                fn : function(){
+                    $(".TEMPLAR.webtorrent_seeding").show();
+                }
             }
         ]
     }, function(){
@@ -109,21 +116,16 @@ function mount() {
                 $("footer").html(data);
                 //helm race condition
                 if(TEMPLAR.pageREC() === "webtorrent"){
-                    initializeHero();
-                    initializeWebtorrent();    
+                   initializeHero();
+                   initializeWebtorrent();    
                 }                  
             })
         })
 
-        $(document).on("TEMPLAR", function(){
-            if(TEMPLAR.pageREC() !== "webtorrent"){           
-                $("#hero").prop("selectedIndex", 0)
-                $("#hero").trigger("change");
-            }
+        $(document).on("TEMPLAR", function(){           
             $("#warp").hide();
             $("#graph_search").hide();
             $("h2 span a").hide();           
-           
         })
 
     });
