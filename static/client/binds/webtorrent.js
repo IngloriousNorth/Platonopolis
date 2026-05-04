@@ -27,10 +27,49 @@ function assertFile(file, infoHash) {
         $container = $("<div class='file-entry' style='margin-bottom: 25px;'></div>").attr("id", fileContainerId);
         $("#output_" + infoHash).append($container);
         
+        console.log(heroInfoHash, infoHash)
         // Render media content (Audio/Video/Img)
-        if(heroInfoHash === infoHash){
-            file.appendTo($container[0]);
-        }
+
+        if (heroInfoHash === infoHash) {
+            const container = document.querySelector("#" + fileContainerId);
+
+            // Use the async pattern they used in the example
+            (async () => {
+                try {
+                    // 1. Get the blob using the modern promise method
+                    const blob = await file.blob();
+                    const url = URL.createObjectURL(blob);
+
+                    // 2. Decide which element to create
+                    let element;
+                    const fileName = file.name.toLowerCase();
+
+                    if (fileName.endsWith('.pdf')) {
+                        element = document.createElement('embed');
+                        element.type = 'application/pdf';
+                        element.style.height = '80vh';
+                    } else if (fileName.match(/\.(mp4|webm|ogg|mkv)$/)) {
+                        element = document.createElement('video');
+                        element.controls = true;
+                    } else if (fileName.match(/\.(mp3|flac|wav)$/)) {
+                        element = document.createElement('audio');
+                        element.controls = true;
+                    } else if (fileName.match(/\.(jpg|jpeg|png|gif)$/)) {
+                        element = document.createElement('img');
+                    }
+
+                    if (element) {
+                        element.src = url;
+                        element.style.width = '100%';
+                        
+                        container.appendChild(element);
+                        console.log(`Rendered: ${file.name}`);
+                    }
+                } catch (err) {
+                    console.error("Modern blob retrieval failed:", err.message);
+                }
+            })();
+        }    
     }
 
     // Target media files for download buttons
@@ -59,34 +98,40 @@ function assertFile(file, infoHash) {
 function assertButton(file, infoHash) {
     const statusId = "status-" + file.name.replace(/[^a-z0-9]/gi, '-');
     const $statusElement = $("#" + statusId);
-    const heroInfoHash = $("#hero").find("option:selected").val();
     
     // Only proceed if there is a placeholder to replace
     if ($statusElement.length > 0) {
-        file.getBlobURL((err, url) => {
-            if (err) {
+        // We MUST wrap this in an IIFE and EXECUTE it with () at the end
+        (async () => {
+            try {
+                // 1. Get the blob using the modern promise method
+                const blob = await file.blob();
+                const url = URL.createObjectURL(blob);
+
+                // 2. Create the high-contrast terminal button
+                const btn = document.createElement('a');
+                btn.href = url;
+                btn.download = file.name;
+                btn.innerText = "DL: " + file.name;
+                btn.className = "download-button-main";
+                
+                // Styling
+                btn.style.cssText = "display:inline-block; padding:10px; margin-top:5px; margin-bottom:10px; background:#50C777; color:skyblue; border:1px solid #00ccff; text-decoration:none; font-family:monospace; font-size:14px; border-radius:3px; cursor:pointer;";
+
+                // Stop the click from triggering TEMPLAR's global router
+                btn.onclick = (e) => e.stopPropagation();
+
+                // 3. Perform the swap
+                // Using a more robust check for the current page
+                const currentParams = TEMPLAR.paramREC();
+                if (currentParams && currentParams.infoHash === infoHash) {
+                    $statusElement.replaceWith(btn);
+                    $(btn).after("<br>");
+                }
+            } catch (err) {
+                console.error("Button generation failed:", err);
                 $statusElement.text("[ ERROR: ARCHIVE EXTRACTION FAILED ]").css("color", "#ff0000");
-                return;
             }
-
-            // Create the high-contrast terminal button
-            const btn = document.createElement('a');
-            btn.href = url;
-            btn.download = file.name;
-            btn.innerText = "DL: " + file.name;
-            btn.className = "download-button-main";
-            
-            // Academic styling (monospace, cyan, high-contrast)
-            btn.style.cssText = "display:inline-block; padding:10px; margin-top:5px; margin-bottom:10px; background:#50C777; color:skyblue; border:1px solid #00ccff; text-decoration:none; font-family:monospace; font-size:14px; border-radius:3px; cursor:pointer;";
-
-            // Stop the click from triggering TEMPLAR's global router
-            btn.onclick = (e) => e.stopPropagation();
-
-            // Perform the swap and add a line break for sequential files (like MP3s)
-            if (TEMPLAR.paramREC() && TEMPLAR.paramREC().infoHash === infoHash) {
-                $statusElement.replaceWith(btn);
-                $(btn).after("<br>");
-            }
-        });
+        })(); // <--- These parentheses are what trigger the function!
     }
 }

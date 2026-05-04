@@ -16,7 +16,7 @@ function processMermaid(cb){
       //faster without re-route
       TEMPLAR.paramSET({uuid : uuid, from_qrng : mermaid}, true);
       initializeTorrents("node");
-      assertF8();      
+      //assertF8();      
       cb();
     })
 }

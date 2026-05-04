@@ -6,7 +6,7 @@
   		<meta name="description" content="Legal torrent site with over 2000 Public Domain PDFs and Audiobooks">
 		<meta name="viewport" content="width=device-width, initial-scale=1">   
   		
-		<title>Public Domain WebTorrent Indexer</title>    
+		<title>The Public Domain WebTorrent Library</title>    
 		<script
 			  src="https://code.jquery.com/jquery-3.6.0.min.js"
 			  integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4="
@@ -16,7 +16,10 @@
 		<script src="//cdn.jsdelivr.net/npm/three-spritetext"></script>
 		<script src="//cdn.jsdelivr.net/npm/3d-force-graph-vr"></script>
 		<script src="//momentjs.com/downloads/moment.min.js"></script>
-		<script src="https://cdn.jsdelivr.net/npm/webtorrent@latest/webtorrent.min.js"></script>
+		<script type='module'>
+ 			import WebTorrent from 'https://esm.sh/webtorrent/dist/webtorrent.min.js'
+ 			window.WebTorrent = WebTorrent;
+		</script>
  		<!--<script type="text/javascript" src="https://cdn.datatables.net/v/dt/dt-1.12.1/r-2.3.0/rg-1.2.0/sc-2.0.7/datatables.min.js"></script>!-->
  		<link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.6.0/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous">
 		<link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">

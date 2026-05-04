@@ -1,10 +1,9 @@
-function initializeWebtorrent(){
-   const params = TEMPLAR.paramREC();
+/*   const params = TEMPLAR.paramREC();
 
     const $option = $("#hero option[value='" + params.infoHash + "']");
     const torrentCache = $option.data("torrent");
 
-    assertOutput(params.infoHash);
+    
 
     if (torrentCache) {
 
@@ -18,13 +17,21 @@ function initializeWebtorrent(){
         DL(params.infoHash);
     }
 
-}
+}*/
 
 function DL(infoHash) {    
     assertProgress();
-
+    assertOutput(infoHash);
     console.log("Downloading: " + infoHash)
-    client.add(getMagnetURI(infoHash), function(torrent){
+
+    const myTrackers = [
+        'wss://tracker.openwebtorrent.com',
+        'wss://tracker.webtorrent.dev',
+        'wss://tracker.btorrent.xyz',
+        'wss://tracker.fastcast.nz'
+    ];
+
+    client.add(infoHash, { announce: myTrackers }, (torrent) => {
         insertTorrent(infoHash, torrent);
 
         const interval = setInterval(function(){
@@ -61,7 +68,7 @@ function DL(infoHash) {
 }
 
 function onDone(torrent) {  
-        console.log("TORRENT COMPLETE")       
+    console.log("TORRENT COMPLETE")       
     onProgress(torrent);
     //assertDL(torrent)
     clearInterval(interval);

@@ -845,7 +845,7 @@ query += `
     MATCH (s)-[:PUB_AS]->(:Edition)-[:DIST_AS]->(torrent:Torrent) WHERE torrent.deleted = false
     WITH DISTINCT s AS s_seed
     WHERE s_seed IS NOT NULL
-    WITH s_seed ORDER BY rand() LIMIT 88
+    WITH s_seed ORDER BY rand() LIMIT 55
 
     // Find related sources through different paths (OR logic)
     CALL {
@@ -880,7 +880,7 @@ query += `
 
     RETURN s_seed AS s, a, c, p, s2, a2, c2, p2
     ORDER BY rand()
-    LIMIT 333
+    LIMIT 555
 `;
 
 

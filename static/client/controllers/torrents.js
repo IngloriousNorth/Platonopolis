@@ -265,10 +265,10 @@ function initializeTorrents(table) {
    
     $(document).off("click", "a.webtorrent").on("click", "a.webtorrent", function(e) {
         e.preventDefault();
-        
-        // Otherwise, proceed with the route
         const d = this.dataset;
-        TEMPLAR.route("#webtorrent" + "?infoHash=" + d.infohash + "&apa=" + encodeURIComponent(d.apa) + "&format=" + d.format);
+        // Fix: Using d.infoHash (case sensitive) and adding quotes to selector       
+        assertHero(d);
+        
     });
 }
 

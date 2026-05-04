@@ -1,11 +1,4 @@
-/**
- * THE TEMPLAR INDEX: A fusion of maritime discipline and existential clarity.
- * We resolve to make the code sail by ensuring its properties are 'Ready-to-hand'.
- */
-function mount() {
-    $(".autosuggestBox").hide();
-
-    TEMPLAR.initialize({
+const config = {
         defaultPage: "webtorrent_seeding",
         dir: "client/partials",
         fade: false,
@@ -66,19 +59,16 @@ function mount() {
             {
                 page: "webtorrent",
                 fn: function() {
-                    const params = TEMPLAR.paramREC();
-                    if (!params || !params.infoHash) {
-                        TEMPLAR.route("#torrents");
+                    if(!TEMPLAR.paramREC()){
+                        TEMPLAR.route("#");
                         return;
                     }
-
-                    //screwy AI crap way                    
-                    if($("#hero").length > 0){
-                        initializeHero();
-                        initializeWebtorrent();    
+                    const currentFile = {
+                        infohash : TEMPLAR.paramREC().infoHash,
+                        apa : TEMPLAR.paramREC().apa,
+                        format : TEMPLAR.paramREC().format
                     }
-                    
-                    
+                    assertHero(currentFile)                
                 }
             },
             {
@@ -107,28 +97,32 @@ function mount() {
                 }
             }
         ]
-    }, function(){
-        $.get("../client/partials/header.html", function(data){
-            $("header").html(data);            
-            headerAutocomplete();
+    }
 
-            $.get("../client/partials/hero.html", function(data){
-                $("footer").html(data);
-                //helm race condition
-                if(TEMPLAR.pageREC() === "webtorrent"){
-                   initializeHero();
-                   initializeWebtorrent();    
-                }                  
-            })
+function mount() {
+    $(".autosuggestBox").hide();
+
+    const params = TEMPLAR.paramREC() ? TEMPLAR.paramREC : {};
+    $.get("../client/partials/header.html", function(data){
+        $("header").html(data);            
+        headerAutocomplete();
+
+        $.get("../client/partials/hero.html", function(data){
+            $("footer").html(data);
+            //helm race condition
+               //initializeWebtorrent();   
+            insertClient();          
+            TEMPLAR.initialize(config)
         })
+    })
 
-        $(document).on("TEMPLAR", function(){           
-            $("#warp").hide();
-            $("#graph_search").hide();
-            $("h2 span a").hide();           
-        })
+    $(document).on("TEMPLAR", function(){           
+        $("#warp").hide();
+        $("#graph_search").hide();
+        $("h2 span a").hide();           
+    })
 
-    });
+    
 }
 
 $(document).ready(function(){

@@ -7,67 +7,67 @@ var $uploadSpeed
 var $downloadSpeed
 
 
-function assertHero(currentFile, params) {
+//NB infohash is lowercase in hero, not camelCase, because it's an html5 data obj
+function assertHero(currentFile) {
+    const $existing = $(`#hero option[value="${currentFile.infohash}"]`);
+
+    //called on webtorrent route load, either refresh or a.webtorrent route()
+    if ($existing.length !== 0){
+        assertSwitch(currentFile.infohash);
+        return;
+    }
+
     const $option = $("<option></option>");
-    $option.val(currentFile.infoHash);
+    $option.val(currentFile.infohash);
     $option.text(`${currentFile.apa} (${currentFile.format})`);
     
-    // Attach metadata for easy retrieval
-    $option.data({
-        infohash: params.infoHash,
-        apa: params.apa,
-        format: params.format
-    });
+    // Fix: ensure infohash is stored consistently
+    $option.data(currentFile);
 
     $("#hero").append($option);
 
+    // Trigger the download immediately when the file is first added
+    DL(currentFile.infohash);
+
     const $hero = $("#hero");
-    // Clear existing listeners to prevent leaks
-    $hero.off(".propagate_ui");
+    // Use 'change' for new selections and 'click' for re-clicking the same one
+    $hero.off("click").on("click", function(e) {
+        // If the dropdown is open, some browsers don't register 'click' on options.
+        // We check the value; if it's valid, we route.
+        const $selected = $(this).find("option:selected");
+        const val = $selected.val();
 
-    // 1. RE-CLICK HANDLER: Fires even if the value hasn't changed
-    $hero.on("click.propagate_ui", function() {
-        const val = $(this).val();
         if (!val || val === "null") return;
 
-        // If the URL doesn't match the current selection, force the route
-        const currentHash = window.location.hash;
-        if (!currentHash.includes(val)) {
-            $hero.trigger("change.user_action");
-        }
-    });
-
-    // 2. CHANGE HANDLER: Only routes when it's a genuine 'user_action'
-    $hero.on("change.user_action", function() {
-        const $opt = $(this).find('option:selected');
-        const val = $opt.val();
-        if (!val || val === "null") return;
-
-        // Navigate only if we aren't already there
-        TEMPLAR.route(`#webtorrent?format=${$opt.data("format")}&infoHash=${$opt.data("infohash")}&apa=${$opt.data("apa")}`);
+        // Force route even if it's the same selection
+        const routeURL = `#webtorrent?infoHash=${$selected.data("infohash")}&apa=${encodeURIComponent($selected.data("apa"))}&format=${$selected.data("format")}`;
+        
+        TEMPLAR.route(routeURL);
         
         $(".output").hide();
-        $("#output_" + $opt.data("infohash")).show();
+        $("#output_" + $selected.data("infohash")).show();
         assertPeersProgress();
     });
+
+    assertSwitch(currentFile.infohash)
 }
 
-function switchSelect(infoHash) {
+
+function assertSwitch(infoHash) {
     const $select = $("#hero");
     const $option = $select.find(`option[value="${infoHash}"]`);
 
     if ($option.length > 0) {
-        // Set the value SILENTLY (don't trigger .user_action)
+        // Set selected status without triggering '.user_action'
         $select.val(infoHash);
         $option.prop('selected', true);
         
-        // Update UI components manually to avoid routing flicker
+        // Sync the UI elements manually instead of triggering a change event
         $(".output").hide();
         $("#output_" + infoHash).show();
         assertPeersProgress();
     }
 }
-
 function assertProgress(){
     $progressBar = document.querySelector('#progressBar');
     $numPeers = document.querySelector('#numPeers');

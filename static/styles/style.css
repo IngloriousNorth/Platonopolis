@@ -70,9 +70,6 @@ q:before, q:after {
   height: 100%;
 }*/
 
-object{
-  margin-top:0px !important;
-}
 
 .output a{
   margin-bottom:0px !important;
@@ -165,7 +162,7 @@ body.is-seed .show-leech {
 }
 
 
-.output object{
+.output embed{
   position:fixed;
   top:88px;
   bottom:60px;
@@ -201,12 +198,12 @@ body.is-seed .show-leech {
 footer{
   height:60px;
   width:100%;
-  background: #333777 !important;
+  background: radial-gradient(#333777, mediumvioletred) !important;
 }
 
 
 #status {
-   color: #50C777;
+   color: cyan;
    font-size: 13px;
    margin-top: 5px;
    margin-left:5px;
@@ -224,7 +221,7 @@ footer{
 }
 
 #numPeers, #uploadSpeed, #downloadSpeed{
-  color:#50C777 !important;
+  color:cyan !important;
 }
 
 footer a:link, #hero a:visited {
@@ -1140,7 +1137,7 @@ input{
 body .ui-menu-item {
   /* font-family to all */
  /* box-shadow:4px 4px 5px #83DAC0;*/
-  background-color:palegoldenrod;
+  background-color:goldenrod;
   text-align:justify;
   font-size:16px;
   padding:7px 0px 7px 0px;
@@ -1148,7 +1145,7 @@ body .ui-menu-item {
 .ui-autocomplete{
   max-height:310px;
   width:270px;
-  color:#007BFF !important;
+  color:white !important;
   font-family: "Share Tech Mono", system-ui;
   position:relative;
   z-index:9999;
@@ -1582,8 +1579,8 @@ div.publishers h2 span a{
 
 h1, h1 a, h1 a:visited:not(.loading, .loading:visited){
   font-size:40px;
-   color:black;
-   text-shadow:3px 3px white;
+   color:white;
+   text-shadow:3px 3px black;
   position:fixed;
   text-decoration:none;
   top:0px;
@@ -1782,7 +1779,7 @@ h2 span a{
 }
 
 .ui-menu .ui-menu-item-wrapper.ui-state-active {
-    background: #50C777 !important;
+    background: #333777 !important;
     font-weight:bold !important;
     color:palegoldenrod !important; /* Adjust text color for readability */
 }
@@ -1955,7 +1952,7 @@ footer{
 }
 
 .magnetURI, .webtorrent{
-  color:darkgoldenrod !important;
+  color:mediumvioletred !important;
   display:block;
   font-family:"Share Tech Mono", sans-serif !important;
 }
@@ -2027,7 +2024,6 @@ footer{
   background-color:lightgoldenrodyellow !important;
   border-top-left-radius:8px;
   border-top-right-radius:8px;
-  border:3px solid gold;
 }
 
 .author span{
@@ -2089,12 +2085,12 @@ header{
   background: #50C777 !important;
 }
 
-#status{color: #FFF !important;}
+#status{color: #CDCDCD !important;}
 
 header{
-  box-shadow:2px 3px 3px darkgoldenrod !important;
-  background:lightskyblue !important;
-  border-bottom:3px solid #333777 !important;
+  box-shadow:3px 3px 4px #333777 !important;
+  background:linear-gradient(90deg, #333777, lightskyblue, goldenrod) !important;
+  border-bottom:3px solid #000 !important;
 }
 
 .dataTable thead th{
@@ -2135,7 +2131,7 @@ div.TEMPLAR{
 }
 
 .torrentsTable thead th{
-  background:#333777 !important;
+  background:silver !important;
   border-bottom:none !important;
   box-shadow:none !important;
   font-family:"Rye", "sans-serif" !important;
@@ -2163,10 +2159,11 @@ div.TEMPLAR{
 }
 
 .adv_search{
-  background:lightgoldenrodyellow !important;
-  border: 2px solid #007BFF !important;
+  background:linear-gradient(135deg, #007BFF, silver) !important;
   color:palegoldenrod !important;
   margin-bottom:30px;
+  box-shadow:3px 3px 4px #333777;
+  border:3px solid black !important;
   margin-top:30px;
 }
 
@@ -2198,7 +2195,6 @@ div.TEMPLAR{
 }
 
 .dt-container{
-  border:2px solid #333777 !important;
   margin-top:33px !important;
   border-bottom:none;
 }
@@ -2290,6 +2286,7 @@ canvas:-webkit-full-screen {
   box-shadow:3px 4px 3px #333777 !important;  
   font-weight:bold !important;
   border:2px solid goldenrod !important;
+  color:lightgoldenrodyellow !important;
 }
 
 #warp{
@@ -2310,7 +2307,10 @@ h2 span a{
 }
 
 footer{
-  border-top:3px solid darkgoldenrod !important;
+  border-top:2px solid palegoldenrod !important;
+  box-shadow: 0px -2px 3px #333777;
+  position:fixed;
+  z-index:9998;
 }
 
 #status{
@@ -2318,7 +2318,7 @@ footer{
 }
 
 .panel li a, .panel li a:visited, .mobile_panel li a, .mobile_panel li a:visited{
-  color:#888 !important;
+  color:#777 !important;
   font-family:"Share Tech Mono", sans-serif !important;
 }
 
@@ -2460,7 +2460,7 @@ div.upload{
     height:55px;
   }
 
-  .output object{
+  .output embed{
     top:55px;
     height:calc(100% - 115px);
   }
@@ -2490,14 +2490,14 @@ div.upload{
     font-size:40px;
     width:49px;
     height:49px;
-    color:#333777 !important;
+    color:palegoldenrod !important;
     top:9px;
     left:5px;
     z-index:9999;
   }
 
   #mobile_menu:hover{
-    color: palegoldenrod !important;
+    color: #007BFF !important;
   }
 
   .mobile_menu{
