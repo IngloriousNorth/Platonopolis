@@ -2,12 +2,12 @@
         @import url('https://fonts.googleapis.com/css2?family=Crimson+Pro:wght@400;700&family=Roboto:wght@400;700&display=swap');
 
         div.TEMPLAR.privacy {
-            background-color: #faf8f5;
+            background-color: #555;
             margin: 0;
             padding: 0;
             font-family: 'Roboto', sans-serif;
             color: #333;
-        }
+        }      
 
         /* Header Style from Screenshot */
        
@@ -37,14 +37,11 @@
         div.privacy .container {
             max-width: 95%;
             margin: 20px auto;
-            border: 4px solid #800080; /* Purple Border */
             padding: 5px;
-            background-color: #adff2f; /* Greenish/Yellow highlight border from UI */
         }
 
         .policy-section {
-            background-color: #0055ff; /* Blue background from the "Entries" in UI */
-            border: 2px solid #800080;
+            background-color: #555; /* Blue background from the "Entries" in UI */
             padding: 20px;
             color: white;
             margin-bottom: 5px;
@@ -84,7 +81,7 @@
         }
 
         h2 span a.TEMPLAR.privacy{
-            color:black !important;
+            color:goldenrod !important;
         }
     </style>
 </head>
@@ -94,12 +91,12 @@
     </div>
     <div class="container">
         <div class="policy-section">
-            <h2>Privacy Policy</h2>
+            <h3>1. Introduction</h3>
             <p>This platform is dedicated to providing public access to public domain works with a commitment to radical transparency and user privacy. Our philosophy is simple: Offer the people free information, without collecting your data.</p>
         </div>
 
         <div class="policy-section">
-            <h2>1. No Accounts, No Cookies</h2>
+            <h3>2. No Accounts, No Cookies</h3>
             <p>We do not use accounts, profiles, or registration systems. Your identity remains entirely anonymous to us.</p>
             <ul>
                 <li><strong>No Personal Information:</strong> We never ask for your name, email, or any other identifying information.</li>
@@ -108,7 +105,7 @@
         </div>
 
         <div class="policy-section">
-            <h2>2. "Revs" Statistics</h2>
+            <h3>3. "Revs" Statistics</h3>
             <p>To maintain our community <strong>Top 10</strong> rankings (calculated by Day, Week, Month, and Year), we record "Revs" (formerly "Snatches")!</p>
             <ul>
                 <li><strong>How it works:</strong> When a magnetURI is accessed, we increment a "rev" counter for that specific work.</li>
@@ -118,23 +115,19 @@
         </div>
 
         <div class="policy-section">
-            <h2>3. BitTorrent Infrastructure</h2>
+            <h3>4. BitTorrent Infrastructure</h3>
             <p><strong>WebTorrent:</strong> Once you join a WebTorrent swarm in the Browser (you do not connect to WebTorrent automatically; you only connect once you download or upload a file), your IP address will be visible to other peers in the swarm. This is a fundamental technological requirement of the BitTorrent protocol.</p>
-            <p><strong>Desktop Client</strong> Similarly, once you leave this site to join a peer-to-peer swarm on a Desktop Client, your IP address is visible to other peers.</p>           
+            <p><strong>Desktop ClientL</strong> Similarly, once you leave this site to join a peer-to-peer swarm on a Desktop Client, your IP address is visible to other peers.</p>           
         </div>
 
          <div class="policy-section">
-            <h2>4. Server Logs</h2>
+            <h3>5. Server Logs</h3>
              <p><strong>Infrastructure Logs:</strong> We do not maintain custom server logs. Our infrastructure runs on Amazon EC2, which maintains standard infrastructure logs required for basic network security. We do not analyze these logs for tracking or marketing purposes.</p>
              <p><strong>Programming Logs:</strong> There may be console.log(err) lines in the server code, which we reserve the right to analyze for basic debugging requirements.   
         </div>
 
          <div class="policy-section">
-            <h2>5. Future Roadmap</h2>
+            <h3>6. Future Roadmap</h3>
             <p>We are constantly evolving. Please note that if we integrate <span class="highlight-link">MetaMask</span>, this privacy policy will be updated to reflect how those technologies interact with your browser and the blockchain. Check back for updates in case New Features are rolled out.</p>
         </div>
-    </div>
-
-    <div class="footer-note">
-       WebTorrent Integration (Done) | MetaMask Integration (Pending)
     </div>

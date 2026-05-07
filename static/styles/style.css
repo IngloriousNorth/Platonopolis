@@ -413,7 +413,7 @@ h3{
   font-size:32px;
   text-decoration:underline;
   font-variant:small-caps;
-  font-family:  "Secular One", sans-"Special Elite";
+  font-family:  "Rye", serif;
   
 }
 
@@ -1150,7 +1150,7 @@ body .ui-menu-item {
   position:relative;
   z-index:9999;
   overflow-y:auto;
-  border: 2px solid #50C777 !important;
+  border: 4px solid palevioletred !important;
   border-radius:15px;
     
   /* A soft, deep shadow to give the menu elevation */
@@ -1749,10 +1749,6 @@ h2 span a{
   color: white !important;
 }
 
- #top10Title span a:not(.loading){
-  color:black !important;
- }
-
 .dtr-control{
   text-align:justify;
 }
@@ -1951,8 +1947,8 @@ footer{
   display:none;
 }
 
-.magnetURI, .webtorrent{
-  color:mediumvioletred !important;
+.magnetURI, a.webtorrent{
+  color:mediumvioletred;
   display:block;
   font-family:"Share Tech Mono", sans-serif !important;
 }
@@ -1964,6 +1960,33 @@ footer{
 .upload h3{
   text-align:left;
   padding-left:5px;
+}
+
+.page-jump-container{
+  width:150px;
+  margin-top:6px;
+  text-align:right;
+  float:right;
+}
+
+.page-jump-container #page, .page-jump-container span, .page-jump-container input{
+
+}
+
+.page{
+  margin-left:6px;
+  background-color:#333777 !important;
+  width:55px !important; 
+  height:33px !important;
+  color:lightgoldenrodyellow !important;
+  border:1px solid #007BFF;
+  float:right;
+
+}
+
+.page:hover{
+  border:2px solid gold;
+  font-weight:bold;
 }
 
 
@@ -2031,7 +2054,7 @@ footer{
 }
 
 h3{
-  margin-top:60px;
+  margin-top:20px;
   margin-bottom:21px;
 }
 
@@ -2127,7 +2150,7 @@ table.dataTable tr.dtrg-group th{
 }
 
 div.TEMPLAR{
-  background-color:silver !important;
+  background-color:#555 !important;
 }
 
 .torrentsTable thead th{
@@ -2161,10 +2184,9 @@ div.TEMPLAR{
 .adv_search{
   background:linear-gradient(135deg, #007BFF, silver) !important;
   color:palegoldenrod !important;
-  margin-bottom:30px;
+  margin-bottom:35px;
   box-shadow:3px 3px 4px #333777;
   border:3px solid black !important;
-  margin-top:30px;
 }
 
 .adv_search label{
@@ -2195,7 +2217,6 @@ div.TEMPLAR{
 }
 
 .dt-container{
-  margin-top:33px !important;
   border-bottom:none;
 }
 
@@ -2327,7 +2348,6 @@ footer{
 }
 
 .graph_search{
-  border:3px solid silver;
   background-color:black;
 }
 

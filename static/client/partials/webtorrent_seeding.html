@@ -1,12 +1,14 @@
     <style>
         div.webtorrent_seeding {
-            background-color: #0a0a0b;
-            color: #00ff41;
+            color: white;
             font-family: 'Share Tech Mono', monospace;
-            padding: 20px;
             line-height: 1.6;
-            max-width: 900px;
-            margin: auto;
+            padding-left:5px;
+            padding-right:5px;
+        }
+
+        a.webtorrent_seeding{
+            color:goldenrod;
         }
 
         .highlight {
@@ -15,17 +17,17 @@
             padding: 0 5px;
         }
 
-        .container {
-            border: 1px solid #333;
-            padding: 20px;
+        .seed_container {
+            margin:0;
+            margin: 0 auto;
             margin-bottom: 30px;
-            background: rgba(0, 255, 65, 0.05);
+            background: #555;
         }
 
         .image-placeholder {
             width: 100%;
             height: auto;
-            border: 1px dashed #00ff41;
+            border: 1px dashed cyan;
             text-align: center;
             padding: 40px 0;
             margin: 20px 0;
@@ -47,31 +49,27 @@
             color: #ff00ff; /* Cyberpunk pink accent */
         }
 
-        .webtorrent_seeding a {
-            color: #00ff41;
+        .webtorrent_seeding a:not(a.webtorrent_seeding) {
+            color: white;
             text-decoration: none;
             border-bottom: 1px solid #00ff41;
         }
 
-        .webtorrent_seeding a:hover {
-            background-color: #00ff41;
-            color: #000;
-        }
-
         .innovation-text {
             font-style: italic;
-            border-top: 1px solid #333;
             padding-top: 20px;
+            padding-bottom: 20px;
             margin-top: 40px;
         }
     </style>
 </head>
 <body>
 
-    <div class="container">
+    <div class="seed_container">
         <div class="titleBreak">
-            <h2><span><a style="color:goldenrod;" href="#webtorrent_seeding" class="TEMPLAR webtorrent_seeding">The WebTorrent Revolution</a></span></h2>
+            <h2><span><a style="color:goldenrod;" href="#webtorrent_seeding" class="TEMPLAR webtorrent_seeding">Welcome to WebTorrent</a></span></h2>
         </div>
+        <h3>The WebTorrent Revolution</h3>
         <p>
             WebTorrent is a revolutionary technology that brings the power of BitTorrent to the browser.
             Unlike traditional torrenting, which relies on TCP/UDP protocols, WebTorrent uses <span class="highlight">WebRTC</span>
@@ -84,28 +82,27 @@
             <img src="https://camo.githubusercontent.com/c4f15b945bfb4f451cc843624cf62291b2f2c51dc660afa7dd37c2c10b95fadf/68747470733a2f2f776562746f7272656e742e696f2f696d672f6e6574776f726b2e706e67" alt="WebTorrent Network Graph" style="max-width: 100%; height: auto;">
             <p>[Image: The WebTorrent Network Graph - Bridging Desktop and Web Peers]</p>
         </div>
-
+        <h3>WebRTC Peers</h3>
         <p>
             However, there is a catch: <strong>Web browsers cannot talk to traditional BitTorrent clients directly</strong>
             unless those clients specifically support WebRTC. To ensure that users on the website can access this data,
             we need dedicated "bridging" seeds.
         </p>
-
+        <h3>How to Help</h3>
         <p>
-            By using a <strong>WebTorrent-enabled desktop client</strong> (like the one provided below), you act as a
-            high-performance node that bridges the gap. You connect to both the traditional swarm and the browser swarm,
+            By using a <strong>WebTorrent-enabled desktop client</strong> (like the one provided below, BiglyBT with WebTorrent plugin, or WebTorrent Desktop), you act as a high-performance node that bridges the gap. You connect to both the traditional swarm and the browser swarm,
             making you the backbone of the archive's accessibility.
         </p>
     </div>
 
-    <div class="container">
-        <h2>The Seed Kit</h2>
+    <div class="seed_container">
+        <h3>The Seed Kit</h3>
         <p>We kindly ask for your help in preserving this knowledge. By running the portable client, you provide the bandwidth necessary for students and researchers across the globe to learn directly in their browsers.</p>
 
         <div class="magnet-box">
-            <span class="magnet-label">1) Portable qBittorrent (WebTorrent Enabled) .zip</span>
-            <p>A pre-configured, self-contained version of qBittorrent. No installation required—just run it and start bridging. This build includes the necessary WebRTC signaling to talk to browser peers.</p>
-            <a style="color:cyan;"href="magnet:?xt=urn:btih:e20aeac26da8570b0bc33dea8255591e37f9f979&dn=qbittorrent-webtorrent+%5Bpropagate.info%5D.zip&tr=wss%3A%2F%2Ftracker.btorrent.xyz&tr=wss%3A%2F%2Ftracker.openwebtorrent.com&tr=udp%3A%2F%2Ftracker.leechers-paradise.org%3A6969&tr=udp%3A%2F%2Ftracker.coppersurfer.tk%3A6969&tr=udp%3A%2F%2Ftracker.opentrackr.org%3A1337&tr=udp%3A%2F%2Fexplodie.org%3A6969&tr=udp%3A%2F%2Ftracker.empire-js.us%3A1337">Download via Magnet Link</a>
+            <span class="magnet-label">1) Portable qBittorrent (WebTorrent Enabled)</span>
+            <p>A pre-configured, self-contained version of qBittorrent. No installation required—just run it and start bridging. This build includes the necessary WebRTC signaling to talk to browser peers. Ensure you have the torrent-rasterbar.dll and an empty "profile" folder in the same directory as qbittorrent.exe.</p>
+            <a style="color:cyan;"href="magnet:?xt=urn:btih:f40ea12f8f86f1662599c46dca5d82ab027714f7&dn=qbittorrent.exe&tr=wss%3A%2F%2Ftracker.btorrent.xyz&tr=wss%3A%2F%2Ftracker.openwebtorrent.com&tr=udp%3A%2F%2Ftracker.leechers-paradise.org%3A6969&tr=udp%3A%2F%2Ftracker.coppersurfer.tk%3A6969&tr=udp%3A%2F%2Ftracker.opentrackr.org%3A1337&tr=udp%3A%2F%2Fexplodie.org%3A6969&tr=udp%3A%2F%2Ftracker.empire-js.us%3A1337">Download via Magnet Link</a>
         </div>
 
         <div class="magnet-box">
@@ -115,7 +112,8 @@
         </div>
     </div>
 
-    <div class="innovation-text">
+    <div class="seed_container">
+        <h3>Welcome to Innovation!</h3>
         <p>
             It is truly <span class="highlight">innovative and revolutionary</span> that we can now distribute thousands of gigabytes of free educational information—books, audio, and video—directly through a web browser.
             By removing the barrier of software installation, we democratize access to the world's most important public domain educational media.

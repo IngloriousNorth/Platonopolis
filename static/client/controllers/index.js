@@ -1,8 +1,8 @@
 const config = {
-        defaultPage: "webtorrent_seeding",
+        defaultPage: "sources",
         dir: "client/partials",
         fade: false,
-        pages: ["webtorrent", "sources", "top10", "node", "set", "upload", "privacy", "mission", "webtorrent_seeding"],
+        pages: ["webtorrent", "sources", "top10", "node", "set", "upload", "privacy"],
         helm: [
             {
                 page: "sources",
@@ -77,23 +77,11 @@ const config = {
                     initializeUpload();
                     uploadAutocomplete();
                 }
-            },
-            {
-                page: "mission",
-                fn : function(){
-                    $(".TEMPLAR.mission").show();
-                }
-            },
+            },           
             {
                 page:  "privacy",
                 fn : function(){
                     $(".TEMPLAR.privacy").show();
-                }
-            },
-            {
-                page: "webtorrent_seeding",
-                fn : function(){
-                    $(".TEMPLAR.webtorrent_seeding").show();
                 }
             }
         ]
@@ -119,7 +107,7 @@ function mount() {
     $(document).on("TEMPLAR", function(){           
         $("#warp").hide();
         $("#graph_search").hide();
-        $("h2 span a").hide();           
+        $("h2 span a").hide()
     })
 
     

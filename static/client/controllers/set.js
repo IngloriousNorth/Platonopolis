@@ -65,4 +65,17 @@ function crossWard() {
             assertSetTitleLoaded();
         }
     });
+    $('.page').on('click', function() {
+        // Get the value (DataTables uses 0-based indexing, so subtract 1)
+        const pageNum = parseInt($('#page-jump-input').val(), 10) - 1;
+        
+        // Get total number of pages
+        const info = setTable.page.info();
+
+        if (pageNum >= 0 && pageNum < info.pages) {
+            setTable.page(pageNum).draw('page');
+        } else {
+            alert("Please enter a valid page number between 1 and " + info.pages);
+        }
+    });
 }

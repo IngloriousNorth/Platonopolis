@@ -267,8 +267,41 @@ function initializeTorrents(table) {
         e.preventDefault();
         const d = this.dataset;
         // Fix: Using d.infoHash (case sensitive) and adding quotes to selector       
-        assertHero(d);
         
+        const $existing = $(`#hero option[value="${d.infohash}"]`);
+
+    //called on webtorrent route load, either refresh or a.webtorrent route()
+        if ($existing.length === 0){
+            $(this).text("Added!");
+            $(this).css('color', 'green');
+        }
+        else{
+            $(this).text("Already Added.");
+            $(this).css('color', '#007BFF');
+        }
+        var that = $(this);
+        setTimeout(function(){
+            that.text("[WebTorrent]");
+            that.css("color", "mediumvioletred");
+        },1337);
+        
+        assertHero(d);
+    });
+
+    $("a.webtorrent").text("[WebTorrent]");
+
+    $('.page').on('click', function() {
+        // Get the value (DataTables uses 0-based indexing, so subtract 1)
+        const pageNum = parseInt($('#page-jump-input').val(), 10) - 1;
+        
+        // Get total number of pages
+        const info = dataTable.page.info();
+
+        if (pageNum >= 0 && pageNum < info.pages) {
+            dataTable.page(pageNum).draw('page');
+        } else {
+            alert("Please enter a valid page number between 1 and " + info.pages);
+        }
     });
 }
 

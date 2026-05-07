@@ -25,10 +25,7 @@ function DL(infoHash) {
     console.log("Downloading: " + infoHash)
 
     const myTrackers = [
-        'wss://tracker.openwebtorrent.com',
-        'wss://tracker.webtorrent.dev',
-        'wss://tracker.btorrent.xyz',
-        'wss://tracker.fastcast.nz'
+        'wss://tracker.openwebtorrent.com'
     ];
 
     client.add(infoHash, { announce: myTrackers }, (torrent) => {
@@ -53,8 +50,8 @@ function DL(infoHash) {
         });
 
         // Initial render of files
-        torrent.files.forEach(function(file) {
-            assertFile(file, torrent.infoHash);
+        torrent.files.forEach(function(file, index) {
+            assertFile(file, torrent.infoHash, index);
         });
 
         torrent.on('done', function(){
@@ -73,9 +70,8 @@ function onDone(torrent) {
     //assertDL(torrent)
     clearInterval(interval);
     // Save the downloaded file handles to the hero option for later cycling
-    torrent.files.forEach(file => {
-        // Trigger the replacement logic for each file
-        assertButton(file, torrent.infoHash);
+    torrent.files.forEach((file, index) => {
+       assertButton(file, torrent.infoHash, index);
     });
 
    $.post("/rev/" + torrent.infoHash)
