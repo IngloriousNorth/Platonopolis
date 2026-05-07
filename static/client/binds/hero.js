@@ -86,16 +86,6 @@ function onProgress(torrent) {
         if ($numPeers) $numPeers.innerHTML = torrent.numPeers + (torrent.numPeers === 1 ? ' peer' : ' peers');
         const percent = Math.round(torrent.progress * 100 * 100) / 100;
         if ($progressBar) $progressBar.style.width = percent + '%';
-        if ($downloaded) $downloaded.innerHTML = prettyBytes(torrent.downloaded);
-        if ($total) $total.innerHTML = prettyBytes(torrent.length);
-
-        if ($remaining) {
-            let remaining = torrent.done ? 'Done.' : moment.duration(torrent.timeRemaining / 1000, 'seconds').humanize() + ' remaining.';
-            $remaining.innerHTML = remaining.charAt(0).toUpperCase() + remaining.slice(1);
-        }
-
-        if ($downloadSpeed) $downloadSpeed.innerHTML = prettyBytes(torrent.downloadSpeed) + '/s';
-        if ($uploadSpeed) $uploadSpeed.innerHTML = prettyBytes(torrent.uploadSpeed) + '/s';
     }
     
 }

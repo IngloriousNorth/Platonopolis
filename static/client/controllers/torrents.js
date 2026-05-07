@@ -117,7 +117,7 @@ function initializeTorrents(table) {
                     var authorField = "";
                     record._fields[1].forEach(function(field, i) {
                         if(i===0)
-                            authorField += " by "
+                            authorField += "<span class='silver'> by </span>"
                         if (record._fields[1].length === 1){                            
                             authorField += "<a class='TEMPLAR node author' href='#node?label=author&uuid=" +
                             field.properties.uuid + "'>" + decodeEntities(field.properties.name);
@@ -126,7 +126,7 @@ function initializeTorrents(table) {
                             authorField += "<a class='TEMPLAR node author' href='#node?label=author&uuid=" +
                             field.properties.uuid + "'>" + decodeEntities(field.properties.name);
                             if(i < record._fields[1].length - 1){
-                                authorField += "<span>, </span>"
+                                authorField += "<span class='silver'>, </span>"
                             }                            
                         }
                         authorField += "</a>"
@@ -136,7 +136,7 @@ function initializeTorrents(table) {
 
                     var dateField = "";
                     if (record._fields[0] && record._fields[0].properties.date) {
-                        dateField += "<b>[" + decodeEntities(record._fields[0].properties.date) + "]</b>";
+                        dateField += "<b class='silver'>[" + decodeEntities(record._fields[0].properties.date) + "]</b>";
                     }
 
                     var classesField = " ";
@@ -146,7 +146,7 @@ function initializeTorrents(table) {
                                 field.properties.uuid + "'>" + decodeEntities(field.properties.name);
                         }
                         if(record._fields[3].length > 1 && i < record._fields[3].length - 1){
-                            classesField += "<span class='classComma'>,</span></a>"
+                            classesField += "<span class='classComma silver'>,</span></a>"
                         }
                         else{
                             classesField += "</a>"
@@ -290,19 +290,7 @@ function initializeTorrents(table) {
 
     $("a.webtorrent").text("[WebTorrent]");
 
-    $('.page').on('click', function() {
-        // Get the value (DataTables uses 0-based indexing, so subtract 1)
-        const pageNum = parseInt($('#page-jump-input').val(), 10) - 1;
-        
-        // Get total number of pages
-        const info = dataTable.page.info();
-
-        if (pageNum >= 0 && pageNum < info.pages) {
-            dataTable.page(pageNum).draw('page');
-        } else {
-            alert("Please enter a valid page number between 1 and " + info.pages);
-        }
-    });
+  
 }
 
 

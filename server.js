@@ -586,7 +586,7 @@ query += "WITH s, e, t, count " +
     "collect(DISTINCT c) as classes " 
     var column = 0;
     if(req.body.order){
-        column = req.body.order[0];
+        column = req.body.order[0].column;
     }
   switch(column){
     case '0':
@@ -1072,7 +1072,7 @@ app.post("/torrents", [check("start").trim().escape(), check("length").trim().es
 query += torrentQuery;
 var column = 0;
 if(req.body.order){
-    column = req.body.order[0];
+    column = req.body.order[0].column;
 }
   switch(column){
     case '0':
