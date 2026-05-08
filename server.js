@@ -845,22 +845,22 @@ query += `
     MATCH (s)-[:PUB_AS]->(:Edition)-[:DIST_AS]->(torrent:Torrent) WHERE torrent.deleted = false
     WITH DISTINCT s AS s_seed
     WHERE s_seed IS NOT NULL
-    WITH s_seed ORDER BY rand() LIMIT 55
+    WITH s_seed ORDER BY rand() LIMIT 178
 
     // Find related sources through different paths (OR logic)
     CALL {
       WITH s_seed
       // Path A: Same Author
       MATCH (s_seed)<-[:AUTHOR]-(a:Author)-[:AUTHOR]->(s2:Source)
-      RETURN s2 LIMIT 25
+      RETURN s2 LIMIT 1337
       UNION
       // Path B: Same Class/Tag
       MATCH (s_seed)<-[:TAGS]-(c:Class)-[:TAGS]->(s2:Source)
-      RETURN s2 LIMIT 40
+      RETURN s2 LIMIT 1337
       UNION
       // Path C: Same Publisher
       MATCH (s_seed)-[:PUB_AS]->(:Edition)-[:PUBLISHED_BY]->(p:Publisher)<-[:PUBLISHED_BY]-(:Edition)<-[:PUB_AS]-(s2:Source) WHERE p.name <> ''
-      RETURN s2 LIMIT 17
+      RETURN s2 LIMIT 1337
     }
 
     // Ensure s2 is not the original seed and has a valid torrent
@@ -878,7 +878,7 @@ query += `
     OPTIONAL MATCH (s_seed)-[:PUB_AS]->(e:Edition)-[:PUBLISHED_BY]->(p:Publisher) WHERE p.name <> ''
 
 
-    RETURN s_seed AS s, a, c, p, s2, a2, c2, p2
+    RETURN DISTINCT s_seed AS s, a, c, p, s2, a2, c2, p2
     ORDER BY rand()
     LIMIT 555
 `;
