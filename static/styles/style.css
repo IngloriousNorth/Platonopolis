@@ -1526,7 +1526,7 @@ canvas:-webkit-full-screen {
 #graph_search, #adv_submit, .upload button{
   border:2px solid #007BFF;
   background:goldenrod;
-  color:#333777;
+  color:darkviolet;
   font-family:"Share Tech Mono", system-ui;
   font-size:18px;
   width:90px;
