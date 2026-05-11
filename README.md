@@ -8,6 +8,8 @@ Classes (tags), Authors, and Publishers all have their own page, what is a corre
 
 My site is propagate.info, meant for public domain, educational Ebooks, Audiobooks, Classical Music, Documentaries, and Renaissance Art. Starting with an educational use-case, I have decided to Open-Source this Software, because the way that Gazelle structures Libraries could be very innovative for research, ethics, and scholarship. This work was conceived in December 2013, and WebTorrent came out in 2016. 
 
+Seeding in BiglyBT with the WebTorrent plugin works with many torrents if you set the Tracker Concurrency to 8 and the Minimum Announce time to 51. Otherwise tracker.webtorrent.com ratelimits you.
+
 Fully built in and plug-in play is a Quantum Random Neo4J Recommendation Engine, which also works on mobile, making this the first quantum mobile app. There is also graph visualization (with VR-toggle), which coheres with an Advanced Search feature, so that users can search by title, author, class, publisher, source type, media, format, and resolution. If you search, say, Russell, Hume in the authors input, you will see them connected in a graph by "All is Quiet on the Western Front," almost like magic.  
 
 **GETTING STARTED**
