@@ -214,9 +214,9 @@ function graphRenderVR(selector) {
 
       return group;
     })
-// --- Link Styling ---
-.linkColor(d => d.isGold ? "cyan" : '#555') // Static value is faster than a function check
-
+    // --- Link Styling ---
+    .linkColor(d => d.isGold ? "cyan" : '#555') // Static value is faster than a function check
+    .linkWidth(1.7)
     .nodeLabel(node => node.name)
     .onNodeClick((node) => {
         const group = node.group.toLowerCase();
