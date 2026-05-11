@@ -1426,7 +1426,7 @@ div.TEMPLAR{
 }
 
 .adv_search label{
-  color:#50C777 !important;
+  color:cyan !important;
   letter-spacing:1px;
   font-size:16px;
   font-family:"Share Tech Mono", "serif" !important;
@@ -1517,6 +1517,7 @@ canvas:-webkit-full-screen {
   border:1px solid #50C777 !important;
   box-shadow:2px 3px 2px gold !important;
   width:99px;
+  height:90px;
   background-color:palegoldenrod !important;
   color:cyan !important;
   font-family:"Share Tech Mono", system-ui;
@@ -1528,11 +1529,11 @@ canvas:-webkit-full-screen {
   color:#333777;
   font-family:"Share Tech Mono", system-ui;
   font-size:18px;
-  width:77px;
+  width:90px;
   margin-bottom:16px;
   font-variant:small-caps;
   margin:0 auto;
-  height:33px;
+  height:40px;
   border-radius:13px;
   display:block;
   text-align:center;
@@ -1555,8 +1556,8 @@ canvas:-webkit-full-screen {
   color:white;
   font-variant:small-caps;
   text-align:center;
-  width: 77px;
-  height:33px;
+  width: 90px;
+  height:40px;
   border-radius:13px;
 }
 
