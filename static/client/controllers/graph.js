@@ -228,6 +228,7 @@ function graphRenderVR(selector) {
   Graph.d3Force('link').distance(d => d.isGold ? 110 : 35)
   Graph.d3Force('center').strength(0.07);
     // ... (Arrows prevention and VR/Mobile logic
+  setupMobileFullscreen(Graph);
 }
 function handleNormalClick(clickedNode){
     if (clickedNode) {
@@ -237,49 +238,41 @@ function handleNormalClick(clickedNode){
         TEMPLAR.route(`#node?label=${label}&uuid=${d.id}`);        
     }
 }
-
-function setupMobileFullscreen() {
+function setupMobileFullscreen(Graph) {
+    const container = document.querySelector(".graph_search");
     const isTouch = 'ontouchstart' in window || navigator.maxTouchPoints > 0;
     
-    // Only proceed if it's a touch device and VR isn't currently active
     if (isTouch && TEMPLAR.paramREC() && TEMPLAR.paramREC().search) {
         $("#mobile_fullscreen").show();
-        $("#mobile_fullscreen").on("click", () => {
-            // Get the actual canvas element from the force-graph
-            const canvas = document.querySelector('.graph_search'); 
+        $("#mobile_fullscreen").off("click").on("click", () => { // Use .off to prevent duplicate listeners
+            const canvasContainer = document.querySelector('.graph_search'); 
             
             if (!document.fullscreenElement) {
-                if (canvas.requestFullscreen) {
-                    canvas.requestFullscreen();
-                } else if (canvas.webkitRequestFullscreen) { // iOS/Safari
-                    canvas.webkitRequestFullscreen();
+                // Request fullscreen on the CONTAINER, not just the canvas
+                const requestMethod = canvasContainer.requestFullscreen || canvasContainer.webkitRequestFullscreen;
+                if (requestMethod) {
+                    requestMethod.call(canvasContainer);
                 }
             } else {
-                if (document.exitFullscreen) {
-                    document.exitFullscreen();
-                }
+                if (document.exitFullscreen) document.exitFullscreen();
             }
         });
-        window.addEventListener('fullscreenchange', () => {
-            // Tell the library to look at the new size of its container
-            // Most force-graph libs have a .width() and .height() or .onResize()
-            const newWidth = window.innerWidth;
-            const newHeight = window.innerHeight;
-            
-            Graph.width(newWidth);
-            Graph.height(newHeight);
-        });
 
-        // Hide button if VR mode starts
-        // Assuming your lib has an 'onNodeDrag' or similar event to hook into, 
-        // or just check for the VR session start
-        
-    }
-    else{
+        // This listener is key: it fires when entering OR exiting
+        window.addEventListener('fullscreenchange', () => {
+            if (document.fullscreenElement) {
+                // Set to current screen dimensions
+                Graph.width(window.innerWidth);
+                Graph.height(window.innerHeight);
+            } else {
+                // Reset to your original non-fullscreen size (e.g., 500px)
+                Graph.width(container.clientWidth);
+                Graph.height(500); 
+            }
+        });
+    } else {
         $("#mobile_fullscreen").hide();
     }
-
-    
 }
 
 // Update your initializeGraph to call the VR version

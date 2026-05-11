@@ -1173,17 +1173,17 @@ app.post("/rev/:infoHash", check("infoHash").trim().escape().not().isEmpty(), fu
     var query = "MATCH (t:Torrent{infoHash:$infoHash}) " + 
                 "SET t.snatches = toFloat(t.snatches + 1) " +
                 "WITH t " + 
-                "MATCH (p:Publisher)<-[:PUBLISHED_BY]-(e:Edition)-[:DIST_AS]->(t) " +
+                "OPTIONAL MATCH (p:Publisher)<-[:PUBLISHED_BY]-(e:Edition)-[:DIST_AS]->(t) " +
                 "SET e.snatches = toFloat(e.snatches + 1), p.snatches = toFloat(p.snatches + 1) " +
                 "WITH t, e " +
                 "MATCH (s:Source)-[:PUB_AS]->(e) " +
                 "SET s.snatches = toFloat(s.snatches + 1) " +
                 "SET s.lastSnatched = DATETIME() " +
                 "WITH s, t, e " +
-                "MATCH (c:Class)-[:TAGS]-(s) " +
+                "OPTIONAL MATCH (c:Class)-[:TAGS]-(s) " +
                 "SET c.snatches = toFloat(c.snatches + 1), c.updated = DATETIME() " +
                 "WITH s,t " +
-                "MATCH (a:Author)-[:AUTHOR]->(s) " +
+                "OPTIONAL MATCH (a:Author)-[:AUTHOR]->(s) " +
                 "SET a.snatches = toFloat(a.snatches +1) " +
                 "WITH t, s " +
                 "SET s.count = s.count + 1" 

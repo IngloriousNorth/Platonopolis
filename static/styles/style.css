@@ -152,6 +152,9 @@ body.is-seed .show-leech {
 }
 
 
+body.is-seed .show-seed { display: inline; } /* Shows "Seeding" and "to" */
+body.is-seed .show-leech { display: none; }  /* Hides "Downloading" and "from" */
+
 footer{
   height:80px;
   width:100%;
@@ -346,7 +349,6 @@ header{
   font-size:27px;  
   font-family:"Special Elite", "Times New Roman";
   font-variant:small-caps;
-  text-shadow:1px 0px lightgoldenrodyellow;
 }
 
 .tabs a.sources, .tabs a.sources:visited, .mobile_tabs a.sources, .mobile_tabs a.sources:visited{
@@ -820,7 +822,7 @@ a.adv_toggle{
 
 
 #adv_heading{
-  font-family: "Rye", "Times New Roman" !important;
+  font-family: "Share Tech Mono", "Times New Roman" !important;
   font-size:24px;
   text-align:center;
   float:left;
@@ -958,13 +960,14 @@ div.publishers h2 span a{
   }
 
 
-h1, h1 a, h1 a:visited:not(.loading, .loading:visited){
+h1, h1 a, h1 a:visited{
   font-size:36px;
    color:white;
    text-shadow:3px 3px black;
   position:fixed;
   text-decoration:none;
   top:0px;
+  letter-spacing:2px;
   left:5px;
   font-family:"Share Tech Mono", system-ui !important;
 
@@ -1334,7 +1337,7 @@ h3{
 #status{color: #CDCDCD !important;}
 
 header{
-  box-shadow:3px 3px 5px mediumvioletred;
+  box-shadow:3px 4px 6px darkviolet;
   background:linear-gradient(90deg, black, #007BFF, skyblue);
   border-bottom:2px solid #000;
 }
@@ -1419,7 +1422,7 @@ div.TEMPLAR{
   color:palegoldenrod !important;
   margin-bottom:35px;
   box-shadow:3px 3px 4px #000;
-  border:2px solid #007BFF !important;
+  border:2px solid #50C777 !important;
 }
 
 .adv_search label{
@@ -1445,7 +1448,7 @@ div.TEMPLAR{
 #adv_heading{
   color:darkgoldenrod;
   font-size:25px !important;
-  font-family:"Rye", sans-serif !important;
+  font-family:"Share Tech Mono", sans-serif !important;
   text-decoration:none;
   letter-spacing:0px;
 }
@@ -1582,8 +1585,8 @@ h2 span a{
 
 
 footer{
-  border-top:2px solid lightseagreen;
-  box-shadow: 0px -2px 4px silver;
+  border-top:2px solid mediumvioletred;
+  box-shadow: 0px -3px 6px silver;
   position:fixed;
   z-index:9998;
 }
@@ -1593,7 +1596,7 @@ footer{
 }
 
 .panel li a, .panel li a:visited, .mobile_panel li a, .mobile_panel li a:visited{
-  color:lightcyan;
+  color:cyan;
   font-family:"Share Tech Mono", sans-serif;
 }
 

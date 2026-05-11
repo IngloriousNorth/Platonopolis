@@ -1,3 +1,4 @@
+var $body
 var $progressBar
 var $numPeers
 var $downloaded
@@ -5,7 +6,6 @@ var $total
 var $remaining
 var $uploadSpeed
 var $downloadSpeed
-
 
 //NB infohash is lowercase in hero, not camelCase, because it's an html5 data obj
 function assertHero(currentFile) {
@@ -46,7 +46,7 @@ function assertHero(currentFile) {
         
         $(".output").hide();
         $("#output_" + $selected.data("infohash")).show();
-        assertPeersProgress();
+        assertProgress();
     });
 
     assertSwitch(currentFile.infohash)
@@ -65,10 +65,12 @@ function assertSwitch(infoHash) {
         // Sync the UI elements manually instead of triggering a change event
         $(".output").hide();
         $("#output_" + infoHash).show();
-        assertProgress();
+        assertProgress(infoHash);
     }
 }
-function assertProgress(){
+
+function assertProgress(infoHash){
+    $body = document.querySelector("body");
     $progressBar = document.querySelector('#progressBar');
     $numPeers = document.querySelector('#numPeers');
     $downloaded = document.querySelector('#downloaded')
@@ -77,13 +79,38 @@ function assertProgress(){
     $uploadSpeed = document.querySelector('#uploadSpeed')
     $downloadSpeed = document.querySelector('#downloadSpeed')
 
-    if ($numPeers) $numPeers.innerHTML = 0 + ' peers';
-    if ($progressBar) $progressBar.style.width = 0 + '%';
-    $downloaded.innerHTML = ""
-    $total.innerHTML = ""
-    $remaining.innerHTML = ""
-    $uploadSpeed.innerHTML = "0 b/s"
-    $downloadSpeed.innerHTML = "0 b/s"
+    const torrent = client.get(infoHash);
+
+    // 3. Conditional: If torrent exists and is finished downloading
+    if (torrent && torrent.done) {
+        // Apply the Seeding UI state
+        $body.classList.add('is-seed');
+
+        // Fill elements with the completed data
+        $numPeers.innerHTML = torrent.numPeers + (torrent.numPeers === 1 ? ' peer' : ' peers');        
+        $progressBar.style.width = '100%';
+
+        $downloaded.innerHTML = prettyBytes(torrent.downloaded);
+        $total.innerHTML = prettyBytes(torrent.length);
+        $remaining.innerHTML = 'Done.';
+        
+        // Show current speeds (Download will likely be 0, Upload might be active)
+        $downloadSpeed.innerHTML = prettyBytes(torrent.downloadSpeed) + '/s';
+        $uploadSpeed.innerHTML = prettyBytes(torrent.uploadSpeed) + '/s';
+
+    } else {
+        // Fallback/Reset state if torrent isn't found or isn't done
+        $body.classList.remove('is-seed');
+        
+        $numPeers.innerHTML = '0 peers';
+        $progressBar.style.width = '0%';
+        
+        $downloaded.innerHTML = "";
+        $total.innerHTML = "";
+        $remaining.innerHTML = "";
+        $uploadSpeed.innerHTML = "0 B/s";
+        $downloadSpeed.innerHTML = "0 B/s";
+    }
 }
 
 function onProgress(torrent) {
@@ -99,9 +126,11 @@ function onProgress(torrent) {
         let remaining
         if (torrent.done) {
           remaining = 'Done.'
+          $body.className += ' is-seed'
         } else {
           remaining = moment.duration(torrent.timeRemaining / 1000, 'seconds').humanize()
           remaining = remaining[0].toUpperCase() + remaining.substring(1) + ' remaining.'
+          $body.className = $body.className.replace('is-seed', '');
         }
         $remaining.innerHTML = remaining
 

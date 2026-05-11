@@ -68,6 +68,7 @@ function DL(infoHash) {
 function onDone(torrent) {  
     console.log("TORRENT COMPLETE")       
     onProgress(torrent);
+    
     //assertDL(torrent)
     clearInterval(interval);
     // Save the downloaded file handles to the hero option for later cycling
