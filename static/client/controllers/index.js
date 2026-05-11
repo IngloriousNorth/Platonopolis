@@ -63,6 +63,9 @@ const config = {
                         TEMPLAR.route("#");
                         return;
                     }
+                    if(!client){
+                        alert("NO CLIENT!");
+                    }
                     const currentFile = {
                         infohash : TEMPLAR.paramREC().infoHash,
                         apa : TEMPLAR.paramREC().apa,
@@ -98,8 +101,7 @@ function mount() {
         $.get("../client/partials/hero.html", function(data){
             $("footer").html(data);
             //helm race condition
-               //initializeWebtorrent();   
-            insertClient();          
+            //initializeWebtorrent();   
             TEMPLAR.initialize(config)
         })
     })

@@ -65,19 +65,25 @@ function assertSwitch(infoHash) {
         // Sync the UI elements manually instead of triggering a change event
         $(".output").hide();
         $("#output_" + infoHash).show();
-        assertPeersProgress();
+        assertProgress();
     }
 }
 function assertProgress(){
     $progressBar = document.querySelector('#progressBar');
     $numPeers = document.querySelector('#numPeers');
-    $downloaded = document.querySelector('#downloaded');
-    $total = document.querySelector('#total');
-    $remaining = document.querySelector('#remaining');
-    $uploadSpeed = document.querySelector('#uploadSpeed');
-    $downloadSpeed = document.querySelector('#downloadSpeed');
+    $downloaded = document.querySelector('#downloaded')
+    $total = document.querySelector('#total')
+    $remaining = document.querySelector('#remaining')
+    $uploadSpeed = document.querySelector('#uploadSpeed')
+    $downloadSpeed = document.querySelector('#downloadSpeed')
+
     if ($numPeers) $numPeers.innerHTML = 0 + ' peers';
     if ($progressBar) $progressBar.style.width = 0 + '%';
+    $downloaded.innerHTML = ""
+    $total.innerHTML = ""
+    $remaining.innerHTML = ""
+    $uploadSpeed.innerHTML = "0 b/s"
+    $downloadSpeed.innerHTML = "0 b/s"
 }
 
 function onProgress(torrent) {
@@ -86,19 +92,22 @@ function onProgress(torrent) {
         if ($numPeers) $numPeers.innerHTML = torrent.numPeers + (torrent.numPeers === 1 ? ' peer' : ' peers');
         const percent = Math.round(torrent.progress * 100 * 100) / 100;
         if ($progressBar) $progressBar.style.width = percent + '%';
+        $downloaded.innerHTML = prettyBytes(torrent.downloaded)
+        $total.innerHTML = prettyBytes(torrent.length)
+
+        // Remaining time
+        let remaining
+        if (torrent.done) {
+          remaining = 'Done.'
+        } else {
+          remaining = moment.duration(torrent.timeRemaining / 1000, 'seconds').humanize()
+          remaining = remaining[0].toUpperCase() + remaining.substring(1) + ' remaining.'
+        }
+        $remaining.innerHTML = remaining
+
+        // Speed rates
+        $downloadSpeed.innerHTML = prettyBytes(torrent.downloadSpeed) + '/s'
+        $uploadSpeed.innerHTML = prettyBytes(torrent.uploadSpeed) + '/s'      
     }
     
-}
-
-function assertPeersProgress(){
-    const $hero = $("#hero").find("option:selected");
-    const torrent = $hero.data("torrent");
-    if(!torrent){
-        if ($numPeers) $numPeers.innerHTML = 0 + ' peers';
-        if ($progressBar) $progressBar.style.width = 0 + "%";
-        return;
-    }
-    if ($numPeers) $numPeers.innerHTML = (torrent.numPeers ? torrent.numPeers : 0) + (torrent.numPeers === 1 ? ' peer' : ' peers');
-    const percent = Math.round(torrent.progress * 100 * 100) / 100;
-    if ($progressBar) $progressBar.style.width = (percent ? percent : 0) + "%";
 }

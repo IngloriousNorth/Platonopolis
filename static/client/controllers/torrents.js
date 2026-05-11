@@ -272,7 +272,7 @@ function initializeTorrents(table) {
 
     //called on webtorrent route load, either refresh or a.webtorrent route()
         if ($existing.length === 0){
-            $(this).text("Added!");
+            $(this).text("[Added!]");
             $(this).css('color', 'green');
         }
         else{
@@ -283,7 +283,7 @@ function initializeTorrents(table) {
         setTimeout(function(){
             that.text("[WebTorrent]");
             that.css("color", "mediumvioletred");
-        },1337);
+        },2360);
         
         assertHero(d);
     });

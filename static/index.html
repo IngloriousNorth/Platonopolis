@@ -18,7 +18,11 @@
 		<script src="//momentjs.com/downloads/moment.min.js"></script>
 		<script type='module'>
  			import WebTorrent from 'https://esm.sh/webtorrent/dist/webtorrent.min.js'
- 			window.WebTorrent = WebTorrent;
+ 			const client = new WebTorrent();
+		    const controller = await navigator.serviceWorker.register('/sw.min.js', { scope: './' })
+		    await navigator.serviceWorker.ready
+		    client.createServer({ controller })
+			window.client = client;		    
 		</script>
  		<!--<script type="text/javascript" src="https://cdn.datatables.net/v/dt/dt-1.12.1/r-2.3.0/rg-1.2.0/sc-2.0.7/datatables.min.js"></script>!-->
  		<link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.6.0/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous">
@@ -39,7 +43,6 @@
 	    	<!--<script src="client/models/worldSpiritmodels.js"></script>
 		<script src="client/controllers/worldSpirit.js"></script>!-->
 		<!--<script src="https://d3js.org/d3.v7.min.js"></script>!-->
-
 		<script src="client/models/upload.js"></script>
 		<script src="client/models/set.js"></script>
 		<script src="client/models/webtorrent.js"></script>
@@ -71,7 +74,8 @@
 		<link rel="stylesheet" type="text/css" href="styles/style.css"/>
 		<link rel="preconnect" href="https://fonts.googleapis.com">
 		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-		<link href="https://fonts.googleapis.com/css2?family=Pirata+One&family=Rye&family=Share+Tech+Mono&family=Special+Elite&display=swap" rel="stylesheet">
+		<link href="https://fonts.googleapis.com/css2?family=Rye&family=Share+Tech+Mono&family=Special+Elite&family=Tangerine&display=swap" rel="stylesheet">
+
 	</head>		
 	<body>
 		

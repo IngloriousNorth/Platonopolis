@@ -153,7 +153,7 @@ body.is-seed .show-leech {
 
 
 footer{
-  height:60px;
+  height:80px;
   width:100%;
   background-color:black !important;
 }
@@ -274,11 +274,11 @@ div.TEMPLAR{
     overflow-y: auto;
     color:black;
     width: 100%;
-    height: calc(100% - 148px);
+    height: calc(100% - 169px);
     position: absolute;
     box-sizing: border-box;
     top: 92px;
-    bottom: 30px;
+    bottom: 80px;
     background: linear-gradient(342deg, rgba(205,205,205,1) 16%, rgba(120,113,126,1) 39%, rgba(171,171,171,1) 87%);
 
   /*padding: 12px 8px 6px 8px;*/
@@ -346,16 +346,17 @@ header{
   font-size:27px;  
   font-family:"Special Elite", "Times New Roman";
   font-variant:small-caps;
-  
+  text-shadow:1px 0px lightgoldenrodyellow;
 }
 
 .tabs a.sources, .tabs a.sources:visited, .mobile_tabs a.sources, .mobile_tabs a.sources:visited{
   color:white !important;
 
+
 }
 
 .tabs a.top10, .tabs a.top10:visited, .mobile_tabs a.top10, .mobile_tabs a.top10:visited{
-  color:#007BFF !important;
+  color:white !important;
 }
 
 
@@ -896,7 +897,7 @@ a.publisher{
 
   body, div.TEMPLAR{
 
-    background: silver; 
+    background: #EFEFEF; 
     
 
   }
@@ -958,14 +959,14 @@ div.publishers h2 span a{
 
 
 h1, h1 a, h1 a:visited:not(.loading, .loading:visited){
-  font-size:40px;
+  font-size:36px;
    color:white;
    text-shadow:3px 3px black;
   position:fixed;
   text-decoration:none;
   top:0px;
   left:5px;
-  font-family:"Pirata One", system-ui !important;
+  font-family:"Share Tech Mono", system-ui !important;
 
 }
 
@@ -996,12 +997,8 @@ label.adv_all, input.adv_all{
 }
 
 #top10Title span a{
-  color: #007BFF;
-  text-shadow: 
-  -1px -1px 0 #000,  
-   1px -1px 0 #000,
-  -1px  1px 0 #000,
-   1px  1px 0 #000;
+  color: white;
+  
 }
 
 
@@ -1086,9 +1083,9 @@ h2 span a{
 
 .sourceType{
   color:black !important;
-    text-shadow:1px 1px white;
-  font-size:21px !important;
-  font-family:"Pirata One", "Times New Roman" !important;
+  text-shadow:1px 3px gold;
+  font-size:18px !important;
+  font-family:"Share Tech Mono", "Times New Roman" !important;
   text-align:center !important;
   font-variant:small-caps;
   width:98px;
@@ -1106,7 +1103,7 @@ h2 span a{
 }
 
 .ui-menu .ui-menu-item-wrapper.ui-state-active {
-    background: #333777 !important;
+    background: #50C777 !important;
     font-weight:bold !important;
     color:palegoldenrod !important; /* Adjust text color for readability */
 }
@@ -1307,10 +1304,10 @@ h3{
 
 .set a.author{
   text-shadow: 
-  -1px -1px 0 #000,  
-   1px -1px 0 #000,
-  -1px  1px 0 #000,
-   1px  1px 0 #000;
+  -1px -1px 0 #007BFF,  
+   1px -1px 0 #007BFF,
+  -1px  1px 0 #007BFF,
+   1px  1px 0 #007BFF;
 }
 .set table thead th:nth-last-child(2){
   border-radius:0;
@@ -1346,13 +1343,13 @@ header{
   box-shadow:none;
   border-bottom:3px solid darkviolet;
   /* 1. Define your gradient */
-  background-color:darkgoldenrod;
+  background-color:goldenrod;
   color:black;
   text-shadow:1px 2px white;
-  font-size:27px;
+  font-size:24px;
   padding-top:13px;
   padding-bottom:13px;
-  font-family:"Pirata One", system-ui;
+  font-family:"Rye", system-ui;
 
 }
 
@@ -1372,7 +1369,7 @@ table.dataTable tr.dtrg-group th{
 
 
 .tableHeading, .tableHeading a{
-  font-family: "Special Elite", "Times New Roman" !important;
+  font-family: "Times New Roman" !important;
   font-size:16px !important;
 }
 
@@ -1385,7 +1382,7 @@ table.dataTable tr.dtrg-group th{
 }
 
 div.TEMPLAR{
-  background-color:silver;
+  background-color:#EFEFEF;
 }
 
 .torrentsTable thead th{
@@ -1579,13 +1576,13 @@ canvas:-webkit-full-screen {
 h2 span a{
   font-size:32px;
   font-family:"Special Elite", "Times New Roman";
-  text-shadow:1px 2px black;
   padding-left:5px;
+  text-shadow: 1px 2px #007;
 }
 
 
 footer{
-  border-top:2px solid mediumvioletred;
+  border-top:2px solid lightseagreen;
   box-shadow: 0px -2px 4px silver;
   position:fixed;
   z-index:9998;
@@ -1596,12 +1593,12 @@ footer{
 }
 
 .panel li a, .panel li a:visited, .mobile_panel li a, .mobile_panel li a:visited{
-  color:silver;
+  color:lightcyan;
   font-family:"Share Tech Mono", sans-serif;
 }
 
 .dataTable td{
-  background-color:white;
+  background-color:lightcyan;
 }
 
 .graph_search{
@@ -1661,7 +1658,7 @@ div.upload{
 
   h1, h1 a, h1 a :visited{
     position:relative;
-    top:2px;
+    top:4px;
     text-align:center;
   }
 
@@ -1738,8 +1735,8 @@ div.upload{
  
  div.TEMPLAR{
     top:60px;
-    height:calc(100% - 120px) !important;
-    bottom:60px;
+    height:calc(100% - 141px) !important;
+    bottom:80px;
  }
 
   .desktop_1{
@@ -1771,7 +1768,7 @@ div.upload{
     top:63px;
     z-index:9998;
     bottom:88px;
-    background-color:coral !important;
+    background-color:#007BFF !important;
   }
   
 

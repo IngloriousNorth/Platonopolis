@@ -25,7 +25,8 @@ function DL(infoHash) {
     console.log("Downloading: " + infoHash)
 
     const myTrackers = [
-        'wss://tracker.openwebtorrent.com'
+        'wss://tracker.openwebtorrent.com',
+        'wss://tracker.webtorrent.dev'
     ];
 
     client.add(infoHash, { announce: myTrackers }, (torrent) => {

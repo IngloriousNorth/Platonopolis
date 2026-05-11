@@ -1282,7 +1282,7 @@ app.post("/create_author", check("name").trim().escape().not().isEmpty().isLengt
 app.post("/add_author", check("name").trim().escape().not().isEmpty().isLength({max : 256}).withMessage("Author must be <= 256 characters"), function(req,res){
   const errors = validationResult(req);
     if (!errors.isEmpty()) {
-        consloe.log(errors.array())
+        console.log(errors.array())
       return res.json({ errors: errors.array() });
     }
     const session = driver.session()
