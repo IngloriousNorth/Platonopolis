@@ -1,6 +1,6 @@
 **WELCOME**
 
-Gazelle-WebTorrent is an Open Source Web2.0 (possibly soon to be 3.0) BitTorrent indexer for WebTorrent inspired by the innovative Information Architecture of Project Gazelle.
+Gazelle-WebTorrent is an Open Source BitTorrent Indexer for WebTorrent inspired by the innovative Information Architecture of Project Gazelle.
 
 Please note that the organizer of this code has no association with any members of Project Gazelle. It is simply an Open Source JQuery/WebTorrent Library generated based on their very innovative and secretive architecture. Here's the genius of Gazelle for library organization: PDFs and mp3s of the same Edition/Translation are listed under the same DataTable heading, and my style was to list two Editions of the same Source Title under the same dataTable dtrg-group heading. 
 
