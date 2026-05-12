@@ -1306,10 +1306,10 @@ h3{
 
 .set a.author{
   text-shadow: 
-  -1px -1px 0 #007BFF,  
-   1px -1px 0 #007BFF,
-  -1px  1px 0 #007BFF,
-   1px  1px 0 #007BFF;
+  -1px -1px 0 #333777,  
+   1px -1px 0 #333777,
+  -1px  1px 0 #333777,
+   1px  1px 0 #333777;
 }
 .set table thead th:nth-last-child(2){
   border-radius:0;
@@ -1425,7 +1425,7 @@ div.TEMPLAR{
 }
 
 .adv_search label{
-  color:#333777;
+  color:cyan;
   letter-spacing:1px;
   font-size:16px;
   font-family:"Share Tech Mono", "serif";
@@ -1525,7 +1525,7 @@ canvas:-webkit-full-screen {
 #graph_search, #adv_submit, .upload button, #mobile_fullscreen{
   border:2px solid #007BFF;
   background:goldenrod;
-  color:#333777;
+  color:palevioletred;
   font-family:"Aldrich", system-ui;
   font-size:16px;
   width:99px;
