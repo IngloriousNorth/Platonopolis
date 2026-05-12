@@ -26,9 +26,14 @@ To get started, you will need to:
 
 *Edit config.js and enter your Neo4j credentials.*
 
-*Edit the Torrents model under static/client/models* Insert Source types (such as Documentary, or Renaissance Art), edition_torrent media (such as Ebook or Concert), and edition_torrent format (such as PDF or mp3), and resolutions (such as v0, 720p or 1080x720) For perspective, an Ebook vs Audiobook would be [media] and a PDF vs djvu would be [format]. If you want x264, I recommend setting mkv (x264) as a [format], and then using the Resolutions array to add SD, 720p, 4k, etc. 
+*Edit the Torrents model under static/client/models* Insert Source types (such as Documentary, or Renaissance Art), edition_torrent media (such as Ebook or Concert), and edition_torrent format (such as PDF or mp3), and resolutions (such as v0, 720p or 1080x720) For perspective, an Ebook vs Audiobook would be [media] and a PDF vs djvu would be [format]. 
+
+*Edit the torrents.js bind map function and relate Image thumbnails to Source types*, also put your image thumbnails in the static/img folder
 
 *Host server.js, config.js, static/, and js/ on a node.js platform; you might have to work out the express port on certain platforms*
+
+OPTIONAL:
+*For codecs* There is no codec <select> model. mp3 bitrates are resolutions but mkvs have codecs in addition to resolution, so the current code uses a "format (codec)" paradigm, so mkv and mkv(x264) are different "formats" (the codec is baked into the format). If you want to code codecs you can just follow the resolutions paradigm and insert a codec model in torrents.js and add it to the upload.js controller (for file upload metadata) and torrent.js bind functions (for adv_search), insert it into the (:Torrent) DB query in post/upload on server.js, and add a <br> edition_torrent.torrent.properties.codec in the last function of torrents.js bind.
 
 **ABOUT THE ARCHITECTURE**
 
@@ -36,15 +41,13 @@ This BitTorrent Indexer uses the very innovative and profound Gazelle Methodolog
 
 I have also added Graph Visualization based on Gazelle's "Similar Artists" web, using the powerful Neo4j Java database and ForceGraphVR.
 
-To seed to browsers, please use WebTorrent Desktop for few files, or BiglyBT for many files (I can seed 3000 to browsers instantly using BiglyBT). qBitTorrent is slated to add WebTorrent support soon; Ferross' technology is a cutting-edge game-changer!
+To seed to browsers, please use WebTorrent Desktop for few files. qBitTorrent is slated to add WebTorrent support "soon," but if you check my repos I have a working qBitTorrent libtorrent 2.1 -webtorrent enabled .exe.
 
 Gazelle-Webtorrent is also a Single-Page Application (SPA) with a functional use-case, as torrents stay seeding and downloading as you TEMPLAR.route partials. If you play an HTML audio element on the .webtorrent route, it will continue playing as you go back/forward.
 
-The TEMPLAR router is black-boxed as a lib module, but if you want to add pages or manipulate function calls, you'll have to learn to initialize the helm() function. Check the docs of TEMPLAR.js
+The TEMPLAR router is black-boxed as a lib module, but if you want to add pages or manipulate function calls, you'll have to learn to initialize the helm() function. Check the docs of TEMPLAR.js repo.
 
 **AMAZON-APACHE-TEMPLAR**
 
-As an example of robust System Operations, I use **Apache** as a reverse proxy and **TEMPLAR** as an MVC-compatible client-side router. The Apache reverse-proxy and express app are hosted on an **Amazon** EC2 micro-instance.
-
-This setup costs less than 10$ a month to seed 100GB of stored data (18000 nodes).
+As an example of robust System Operations, I use **Apache** as a reverse proxy and **TEMPLAR** as an MVC-compatible client-side router. The Apache reverse-proxy and express app are hosted on an **Amazon** EC2 micro-instance, which is very cheap to run.
 
