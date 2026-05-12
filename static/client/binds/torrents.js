@@ -281,15 +281,14 @@ function assertAdvSearchUI(){
         $(option2).text(decodeEntities(decodeEntities(val)));
         $("#adv_res").append(option2);
       })
-  //});
-    var option = document.createElement("option");
-    $(option).val("Digital");
-    $(option).text("Digital");
-    $("#adv_res").append(option);
-    var option2 = document.createElement("option");
-    $(option2).val("Scan");
-    $(option2).text("Scan");
-    $("#adv_res").append(option2);
+
+    pdf_resolutions.forEach(function(val){
+      var option3 = document.createElement("option");
+      $(option3).val(val);
+      $(option3).text(decodeEntities(decodeEntities(val)));
+      $("#adv_res").append(option3);
+    })
+
     if (TEMPLAR.paramREC() && TEMPLAR.paramREC().res) {
         $("#adv_res").val(TEMPLAR.paramREC().res);
     }
