@@ -158,22 +158,6 @@ function initializeTorrents(table) {
                     var numPeers = 0;
                     record._fields[2].forEach(function(edition_torrent) {
                         /* This is where the torrent table (with WebTorrent Download) <th> header is set. */
-                        /*
-
-                        if (edition_torrent.torrent) {
-                            // Image selection logic based on type
-                            
-                            if (edition_torrent.edition) {                    
-                                const currentApa = assertAPACitation(record, edition_torrent);
-                                torrentsTable += assertTr(record, edition_torrent, currentApa);
-
-                                if (editionsAdded.indexOf(edition_torrent.edition.properties.uuid) === -1) {
-                                    assertFirstEditionRow(record, edition_torrent, editionsAdded, assertAPACitation(record, edition_torrent), sourceIMG, dateField, authorField, classesField, torrentsTable);
-                                } else {
-                                    assertExistingEditionRow(record, edition_torrent, editionsAdded, torrentsTable)
-                                }
-                            }
-                        }*/
                         // Inside record._fields[2].forEach:
                         var torrentsTableRows = ""; // Store only <tr> elements here
                         var currentApa = assertAPACitation(record, edition_torrent);

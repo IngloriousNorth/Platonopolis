@@ -29,7 +29,7 @@ const config = {
                     initializeTorrents("week");
                     initializeTorrents("month");
                     initializeTorrents("year");
-                    //initializeTorrents("alltime");
+                    initializeTorrents("alltime");
                 }
             },
             {
