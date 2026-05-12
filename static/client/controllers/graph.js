@@ -200,12 +200,14 @@ function graphRenderVR(selector) {
 }
 function handleNormalClick(clickedNode){
     if (clickedNode) {
+        document.exitFullscreen();
         const d = clickedNode;
         const routeMap = { "Source": "source", "Author": "author", "Class": "class", "Publisher": "publisher", "Find Source" : "source", "Find Author" : "author", "Find Class" : "class", "Find Publisher" : "publisher" };
         const label = routeMap[d.group] || d.group.toLowerCase();
         TEMPLAR.route(`#node?label=${label}&uuid=${d.id}`);        
     }
 }
+
 function setupMobileFullscreen(Graph) {
     const container = document.querySelector(".graph_search");
     const isTouch = 'ontouchstart' in window || navigator.maxTouchPoints > 0;

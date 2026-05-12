@@ -1,3 +1,30 @@
+function assertWebTorrent(){
+  $(document).off("click", "a.webtorrent").on("click", "a.webtorrent", function(e) {
+        e.preventDefault();
+        const d = this.dataset;
+        // Fix: Using d.infoHash (case sensitive) and adding quotes to selector       
+        
+        const $existing = $(`#hero option[value="${d.infohash}"]`);
+
+    //called on webtorrent route load, either refresh or a.webtorrent route()
+        if ($existing.length === 0){
+            $(this).text("[Added!]");
+            $(this).css('color', 'green');
+        }
+        else{
+            $(this).text("Already Added.");
+            $(this).css('color', '#007BFF');
+        }
+        var that = $(this);
+        setTimeout(function(){
+            that.text("[WebTorrent]");
+            that.css("color", "#333777");
+        },2360);
+        
+        assertHero(d);
+    });
+}
+
 function assertGraphParamsPendingReset(){
   $("a TEMPLAR.torrents").on("click", function(){
     resetGraphParams();

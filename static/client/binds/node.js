@@ -109,11 +109,11 @@ function assertButtonTab(){
     switch(TEMPLAR.paramREC().label){
         case "source":
             $("#warp").show();
-            $("#graph_search").show();
+            $("#graph_search").show().focus();
             break;
         default:
             $("#warp").hide()
-            $("#graph_search").show();
+            $("#graph_search").show().focus();
             break;
     }
 }
