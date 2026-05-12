@@ -181,7 +181,7 @@ footer{
 }
 
 #numPeers, #uploadSpeed, #downloadSpeed{
-  color:#333777;
+  color:cyan;
 }
 
 footer a:link, #hero a:visited {
