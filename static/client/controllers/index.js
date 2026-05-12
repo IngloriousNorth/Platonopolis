@@ -7,7 +7,8 @@ const config = {
             {
                 page: "sources",
                 fn: function() {
-                    // Priority 1: Get the list visible                    
+                    // Priority 1: Get the list visible    
+                    assertGraphFullscreenButton();                
                     initializeTorrents("torrents");
                                         
                     if(TEMPLAR.paramREC() && TEMPLAR.paramREC().search === "true"){

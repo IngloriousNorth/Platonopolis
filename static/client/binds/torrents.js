@@ -4,6 +4,11 @@ function assertGraphParamsPendingReset(){
   })
 }
 
+//hides mobile_fullscreen on route, show is in the graph controller for touch only
+function assertGraphFullscreenButton(){
+  $("#mobile_fullscreen").hide();
+}
+
 function assertTitleLoaded(){
   switch (TEMPLAR.pageREC()) {
     case "torrents":
@@ -219,7 +224,6 @@ function assertGraphSearch(){
 }
 
 function assertAdvSearchUI(){
- // $.get("/advanced_search_ui", function (data) {
     $("#adv_type").empty();
     $("#adv_type").append("<option value='all'>All Genuses</option>");
     $("#adv_media").empty();
@@ -237,6 +241,7 @@ function assertAdvSearchUI(){
       $("adv_any").prop("checked", true);
       $("#adv_all").prop("checked", false);
     }
+
     types.forEach(function (val) {
       var option = document.createElement("option");
       $(option).val(val);
@@ -297,19 +302,6 @@ function assertAdvSearchUI(){
 function assertAdvButton(){
   $("#adv_submit").unbind("click");
   $("#adv_submit").click(function () {
-    //pass false for no route
-    /*if($("#adv_title").val() !== ""){
-      walkGraph("source", $("#adv_title").val(), false);
-    }
-    if($("#adv_author").val() !== ""){
-      walkGraph("author", $("#adv_author").val(), false);
-    }
-    if($("#adv_classes").val() !== ""){
-      walkGraph("class", $("#adv_classes").val(), false);
-    }
-    if($("#adv_publisher").val() !== ""){
-      walkGraph("publisher", $("#adv_publisher").val(), false);
-    }*/
     
     TEMPLAR.route(
       "#sources?search=true&title=" +
@@ -333,7 +325,6 @@ function assertAdvButton(){
         "&res=" +
         $("#adv_res").val()
     );
-    //initializeTorrents("torrents");
   });
 }
 
@@ -342,11 +333,6 @@ function assertTr(record, edition_torrent, apaHtml){
     const cleanApa = apaHtml.replace(/<[^>]*>?/gm, '');
      var tr = "<tr>";
       tr += "<td>" + edition_torrent.torrent.properties.format + "<br>" + edition_torrent.torrent.properties.media + "<br>" + ( edition_torrent.torrent.properties.res !== "N/A" ? edition_torrent.torrent.properties.res : "" )+ "</td>";          
-      
-     /*   tr +=
-        "<td class='here'>" +
-        timeSince(edition_torrent.torrent.properties.created_at) +
-        " ago</td>";*/
       tr +=
         "<td>" +
           "<a" +

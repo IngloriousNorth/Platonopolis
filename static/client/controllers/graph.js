@@ -66,38 +66,6 @@ function graph(data) {
         });
     });
 
-    /*// --- PASS 2: LINKS ---
-    data.gData.forEach(function(record) {
-        var source = record._fields[0];
-        var author = record._fields[1];
-        var classs = record._fields[2];
-        var publisher = record._fields[3];
-
-        
-        const isGoldLink = (n1, n2) => {
-            const findLabels = ["Find Source", "Find Author", "Find Class", "Find Publisher"];
-            const node1 = Obelisk.nodes.find(n => n.id === n1.properties.uuid);
-            const node2 = Obelisk.nodes.find(n => n.id === n2.properties.uuid);
-            return (node1 && findLabels.includes(node1.group)) || (node2 && findLabels.includes(node2.group));
-        };
-
-        if (source && author) {
-            if (!Obelisk.links.some(l => l.source === author.properties.uuid && l.target === source.properties.uuid)) {
-                Obelisk.links.push({ source: author.properties.uuid, target: source.properties.uuid, isGold: isGoldLink(source, author) });
-            }
-        }
-        if (source && classs) {
-            if (!Obelisk.links.some(l => l.source === source.properties.uuid && l.target === classs.properties.uuid)) {
-                Obelisk.links.push({ source: source.properties.uuid, target: classs.properties.uuid, isGold: isGoldLink(source, classs) });
-            }
-        }
-        if (source && publisher && publisher.properties.name) {
-            if (!Obelisk.links.some(l => l.source === source.properties.uuid && l.target === publisher.properties.uuid)) {
-                Obelisk.links.push({ source: source.properties.uuid, target: publisher.properties.uuid, isGold: isGoldLink(source, publisher) });
-            }
-        }
-    });
-*/
 data.gData.forEach(function(record) {
 
     // Record structure based on your current backend RETURN:
