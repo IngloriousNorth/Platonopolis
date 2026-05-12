@@ -163,7 +163,7 @@ footer{
 
 
 #status {
-   color: darkcyan;
+   color: silver;
    font-size: 13px;
    margin-top: 5px;
    margin-left:5px;
@@ -181,7 +181,7 @@ footer{
 }
 
 #numPeers, #uploadSpeed, #downloadSpeed{
-  color:darkcyan;
+  color:#333777;
 }
 
 footer a:link, #hero a:visited {
@@ -320,19 +320,10 @@ header{
  
 }
 
-
-
-
-
-
-
-
-
 .tabs{
   width:1080px;
   left: 0;
   right: 0;
-  top:1px;
   margin-left: auto;
   margin-right: auto;
   position:relative;
