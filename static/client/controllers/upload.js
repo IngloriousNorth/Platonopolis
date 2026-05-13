@@ -397,7 +397,7 @@ function htmlUpload(){
 		     	 	$("#edition_date").val() + "). " : "). ") : ""
 
 		      }
-		      editionField += uploadModel.title + '. '
+		      editionField += uploadModel.title.replace(/[\\/:"*?<>|]/g, "-") + '. '
 		      editionField = editionField.replaceAll(':', " - ");
 		      editionField = editionField.replaceAll("/", "_");
 		      editionField = editionField.replaceAll("\\", "_")
