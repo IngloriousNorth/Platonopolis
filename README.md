@@ -32,7 +32,7 @@ To get started, you will need to:
 *Host server.js, config.js, static/, and js/ on a node.js platform; you might have to work out the express port on certain platforms*
 
 OPTIONAL:
-*For codecs* There is no codec <select> model. mp3 bitrates are resolutions but mkvs have codecs in addition to resolution, so the current code uses a "format (codec)" paradigm, so mkv and mkv(x264) are different "formats" (the codec is baked into the format), but you could use resolutions as in 1080p / x264 vs. 1080p. 
+*For codecs* There is no codec <select> model. mp3 bitrates are resolutions but mkvs have codecs in addition to resolution, so the current code uses a "format (codec)" paradigm, so mkv and mkv(x264) are different "formats" (the codec is baked into the format), but you could use resolutions as in 1080p / x264 vs. 1080p.
 
 **ABOUT THE ARCHITECTURE**
 
