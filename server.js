@@ -271,10 +271,9 @@ app.post("/node/:label", [
         });
 
         const total = result.records[0]._fields[4]
-         
-        result.records.forEach(function(record){
-            console.log(record._fields[2].edition)
-        })
+
+      //deleted console.log
+ 
         res.json({
             draw: parseInt(req.body.draw) || 0,
             recordsTotal: total,
