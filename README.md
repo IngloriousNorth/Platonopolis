@@ -1,5 +1,3 @@
-License: MIT
-
 # WELCOME
 
 Gazelle-WebTorrent is an Open Source BitTorrent Indexer for WebTorrent inspired by the innovative Information Architecture of Project Gazelle. It was originally made with the intention of a public domain educational use-case and has been open-sourced with an MIT License. 
@@ -33,18 +31,4 @@ To get started, you will need to:
 
 OPTIONAL:
 *For codecs* There is no codec <select> model. mp3 bitrates are resolutions but mkvs have codecs in addition to resolution, so the current code uses a "format (codec)" paradigm, so mkv and mkv(x264) are different "formats" (the codec is baked into the format), but you could use resolutions as in 1080p / x264 vs. 1080p. 
-
-# ABOUT THE ARCHITECTURE
-
-This BitTorrent Indexer uses the mysterious Gazelle Methodology for Organization, with graph info architecture, (Source)-[]->(Edition)->[]->(Torrent). I have taken the liberty of using the Neo4J Graph Database to organize Libraries, primarily for the Graph Search VR feature. Two editions, with different translators, are listed under the same Datatable dtrg-group, called a Source (as in, "Primary Source"). If there exists both an audiobook (mp3) and an Ebook (PDF) for a particular translator (Edition), the two torrents are listed under that edition in a 'torrentsTable'. This way torrents for the same sources or ebooks and audiobooks of the same edition aren't scattered around the UI. 
-
-I have also added Graph Visualization using the powerful Neo4j Java database and ForceGraphVR.
-
-Gazelle-WebTorrent-Neo4J is also a Single-Page Application (SPA) with a functional use-case, as torrents stay seeding and downloading as you TEMPLAR.route partials. If you play an HTML audio element on the .webtorrent route, it will continue playing as you go back/forward.
-
-The TEMPLAR router is black-boxed as a lib module, but if you want to add pages or manipulate function calls, you'll have to learn to initialize the helm() function. Check the docs of TEMPLAR.js repo.
-
-# AMAZON-APACHE-TEMPLAR
-
-As an example of robust System Operations, I use **Apache** as a reverse proxy and **TEMPLAR** as an MVC-compatible client-side router. The Apache reverse-proxy and express app are hosted on an **Amazon** EC2 micro-instance, which is very cheap to run.
 
