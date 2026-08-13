@@ -4,8 +4,7 @@ Gazelle-WebTorrent is an Open Source BitTorrent Indexer for WebTorrent inspired 
 
 Please note that the organizer of this code has no association with any members of Project Gazelle. It is simply an Open Source JQuery/WebTorrent Library generated based on their very innovative and secretive architecture. 
 
-My site was propagate.info, meant for public domain, educational Ebooks, Audiobooks, Classical Music, Documentaries, and Renaissance Art. Starting with an educational use-case, I have decided to Open-Source this Software, because the way that Gazelle structures Libraries could be very innovative for research, ethics, and scholarship. This work was conceived in December 2013, and WebTorrent came out in 2016. After struggling with WebTorrent seeding for 4 years and failing to receive my SSI in time to renew my AWS subscription, I gave up on my goal of building a public library. 2 days later my SSD failed so I can't seed. 
-
+My site is propagate.info, meant for public domain, educational Ebooks, Audiobooks, Classical Music, Documentaries, and Renaissance Art. Starting with an educational use-case, I have decided to Open-Source this Software, because the way that Gazelle structures Libraries could be very innovative for research, ethics, and scholarship. This work was conceived in December 2013, and WebTorrent came out in 2016. qBitTorrent is to add webtorrent support in v5.3. The site is back as of 8/3/26.
 
 Fully built in and plug-in play is a Quantum Random Neo4J Recommendation Engine, which also works on mobile, making this the first quantum mobile app. There is also graph visualization (with VR-toggle), which coheres with an Advanced Search feature, so that users can search by title, author, class, publisher, source type, media, format, and resolution.
 
@@ -15,13 +14,15 @@ The server is express/node.js, and the Database is Neo4j; downloads are to work 
 
 The whole thing follows MVC architecture based on AngularJS, where a "bind" is a DOM manipulator. 
 
-This should be literally plug-and-play, all you have to do to get a fully working WebTorrent Indexer is 1) Set up a Neo4J Database, 2) Input your Neo4J credentials into config.js, and 3) Edit the torrents.js model to suit the types, media, formats, and resolutions of your public domain media. 
+This should be literally plug-and-play (the only manual work is adding Neo4J Lucene Search indexes, you will get an error for each missing index, there should be 4), all you have to do to get a fully working WebTorrent Indexer is 1) Set up a Neo4J Database, 2) Input your Neo4J credentials into config.js, and 3) Edit the torrents.js model to suit the types, media, formats, and resolutions of your public domain media. 
 
 To get started, you will need to:
 
 *Start a Neo4j Aura Database, or host your own* (they have a free Community Edition up to 200,000 or so nodes)!
 
 *Edit config.js and enter your Neo4j credentials.*
+
+*Add Lucene Search Indexes (can't be bothered to find them rn, just click Graph Search and successively add the 4 indexes as outlined in the server logs)*
 
 *Edit the Torrents model under static/client/models* Insert Source types (such as Documentary, or Renaissance Art), edition_torrent media (such as Ebook or Concert), and edition_torrent format (such as PDF or mp3), and resolutions (such as v0, 720p or 1080x720) For perspective, an Ebook vs Audiobook would be [media] and a PDF vs djvu would be [format]. 
 
