@@ -271,9 +271,10 @@ app.post("/node/:label", [
         });
 
         const total = result.records[0]._fields[4]
-
-      //deleted console.log
- 
+         
+        result.records.forEach(function(record){
+            console.log(record._fields[2].edition)
+        })
         res.json({
             draw: parseInt(req.body.draw) || 0,
             recordsTotal: total,
@@ -1177,6 +1178,7 @@ app.post("/rev/:infoHash", check("infoHash").trim().escape().not().isEmpty(), fu
                 "WITH t, e " +
                 "MATCH (s:Source)-[:PUB_AS]->(e) " +
                 "SET s.snatches = toFloat(s.snatches + 1) " +
+                "SET s.lastSnatched = DATETIME() " +
                 "WITH s, t, e " +
                 "OPTIONAL MATCH (c:Class)-[:TAGS]-(s) " +
                 "SET c.snatches = toFloat(c.snatches + 1), c.updated = DATETIME() " +
@@ -1227,19 +1229,20 @@ app.post("/top10/:time", check("time").trim().escape(), async function(req,res){
       case "year":
         params.time = "P365D";
         break;
-      case "alltime":
-        params.time = "P3000Y";
-        break;      
+      /*case "alltime":
+        params.time = "P99Y";
+        break;
+      */
     }
 
     var query = "WITH DATETIME() - duration($time) AS threshold " +
                 "MATCH (t:Torrent {deleted : false})<-[]-(e:Edition)<-[]-(s:Source) " + 
-                "WHERE s.top10 > threshold " +
+                "WHERE s.lastSnatched > threshold " +
                 "WITH s LIMIT 250 " +
                 "WITH count(DISTINCT s) AS count " +
                 "WITH DATETIME() - duration($time) AS threshold, count " +
                 "MATCH (t:Torrent {deleted : false})<-[]-(e:Edition)<-[]-(s:Source) " + 
-                "WHERE s.top10 >threshold "
+                "WHERE s.lastSnatched >threshold "
 
     query += top10Query;
     query += "WITH s, a, edition_torrents, c, count " 
