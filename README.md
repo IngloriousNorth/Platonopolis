@@ -30,14 +30,14 @@ To get started, you will need to:
 Paste into browser.neo4j.io:
 `CREATE FULLTEXT INDEX source_name IF NOT EXISTS
 FOR (n:Source) 
-ON EACH [n.name]
-CREATE FULLTEXT INDEX authorSearch IF NOT EXISTS
+ON EACH [n.name]`
+`CREATE FULLTEXT INDEX authorSearch IF NOT EXISTS
 FOR (n:Author) 
-ON EACH [n.name]
-CREATE FULLTEXT INDEX classes IF NOT EXISTS
+ON EACH [n.name]`
+`CREATE FULLTEXT INDEX classes IF NOT EXISTS
 FOR (n:Class) 
-ON EACH [n.name]
-CREATE FULLTEXT INDEX publisherName IF NOT EXISTS
+ON EACH [n.name]`
+`CREATE FULLTEXT INDEX publisherName IF NOT EXISTS
 FOR (n:Publisher) 
 ON EACH [n.name]`
 
