@@ -57,15 +57,16 @@ function graph(data) {
                     Obelisk.nodes.push({ id: field.properties.uuid, group: isMatch ? "Find Author" : "Author", name: decodeEntities(decodeEntities(field.properties.name)), count: 1, color: "gold" });
                 } else if (field.labels[0] === "Class") {
                     let isMatch = classes2.includes(field.properties.name.toLowerCase().replace(/\s/g, ''));
-                    Obelisk.nodes.push({ id: field.properties.uuid, group: isMatch ? "Find Class" : "Class", name: decodeEntities(field.properties.name), count: 1, color: "#50C777" });
+                    Obelisk.nodes.push({ id: field.properties.uuid, group: isMatch ? "Find Class" : "Class", name: decodeEntities(field.properties.name), count: 1, color: "red" });
                 } else if (field.labels[0] === "Publisher") {
                     let isMatch = publishers.some(t => field.properties.name.includes(t));
-                    Obelisk.nodes.push({ id: field.properties.uuid, group: isMatch ? "Find Publisher" : "Publisher", name: toTitleCase(decodeEntities(decodeEntities(field.properties.name))), count: 1, color: "darkviolet" });
+                    Obelisk.nodes.push({ id: field.properties.uuid, group: isMatch ? "Find Publisher" : "Publisher", name: toTitleCase(decodeEntities(decodeEntities(field.properties.name))), count: 1, color: "#007BFF" });
                 }
             }
         });
     });
 
+ 
 data.gData.forEach(function(record) {
 
     // Record structure based on your current backend RETURN:
@@ -200,14 +201,12 @@ function graphRenderVR(selector) {
 }
 function handleNormalClick(clickedNode){
     if (clickedNode) {
-        document.exitFullscreen();
         const d = clickedNode;
         const routeMap = { "Source": "source", "Author": "author", "Class": "class", "Publisher": "publisher", "Find Source" : "source", "Find Author" : "author", "Find Class" : "class", "Find Publisher" : "publisher" };
         const label = routeMap[d.group] || d.group.toLowerCase();
         TEMPLAR.route(`#node?label=${label}&uuid=${d.id}`);        
     }
 }
-
 function setupMobileFullscreen(Graph) {
     const container = document.querySelector(".graph_search");
     const isTouch = 'ontouchstart' in window || navigator.maxTouchPoints > 0;

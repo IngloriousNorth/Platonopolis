@@ -9,7 +9,7 @@ function initializeTorrents(table) {
 
     //shiv for sources and top10
     if(TEMPLAR.pageREC() === "sources" || TEMPLAR.pageREC() === "top10"){
-        $("h2 span a").fadeIn(1812);
+        $("h2 span a").show();
     }
     
     if ($.fn.DataTable.isDataTable("#" + table)) {
@@ -158,6 +158,22 @@ function initializeTorrents(table) {
                     var numPeers = 0;
                     record._fields[2].forEach(function(edition_torrent) {
                         /* This is where the torrent table (with WebTorrent Download) <th> header is set. */
+                        /*
+
+                        if (edition_torrent.torrent) {
+                            // Image selection logic based on type
+                            
+                            if (edition_torrent.edition) {                    
+                                const currentApa = assertAPACitation(record, edition_torrent);
+                                torrentsTable += assertTr(record, edition_torrent, currentApa);
+
+                                if (editionsAdded.indexOf(edition_torrent.edition.properties.uuid) === -1) {
+                                    assertFirstEditionRow(record, edition_torrent, editionsAdded, assertAPACitation(record, edition_torrent), sourceIMG, dateField, authorField, classesField, torrentsTable);
+                                } else {
+                                    assertExistingEditionRow(record, edition_torrent, editionsAdded, torrentsTable)
+                                }
+                            }
+                        }*/
                         // Inside record._fields[2].forEach:
                         var torrentsTableRows = ""; // Store only <tr> elements here
                         var currentApa = assertAPACitation(record, edition_torrent);
@@ -179,7 +195,16 @@ function initializeTorrents(table) {
             },
         },
         drawCallback: function(settings) {
-                       assertTitleLoaded()
+            /*if (!this.api().table().node()) return;
+
+            this.api().rows().every(function() {
+                syncTorrentButtonState(this.node()); // Check main row
+                if (this.child.isShown()) {
+                    syncTorrentButtonState(this.child()); // Check expanded child row
+                }
+            });
+            */
+            assertTitleLoaded()
             //this sets graphParams in the graphModel so the graph can accumulate where the user left off.
             if(firstLoad){
               if($("#adv_title").val() !== ""){
@@ -198,6 +223,17 @@ function initializeTorrents(table) {
   
             }
             
+            // Handle Copy Event
+            /*$("table tbody").off('contextmenu', ".magnetURI").on('contextmenu', ".magnetURI", function() {
+                const infoHash = $(this).data("infohash");
+                $.post("/rev/" + infoHash);
+            });*/
+            /*$("a.webtorrent").off("click").on("click" function(){
+                const infoHash = $(this).data("infohash");
+                const APA = $(this).data("apa");                            
+                TEMPLAR.route("file?infoHash=" + infoHash + "&APA=" + encodeURIComponent(APA));                
+            })*/
+
             $("table tbody").off("click", ".magnetURI").on("click", ".magnetURI", function(){
                 const infoHash = $(this).data("infohash");
                 $.post("/rev/" + infoHash)
@@ -227,8 +263,32 @@ function initializeTorrents(table) {
 
     if (TEMPLAR.pageREC() === "top10") $('th').unbind('click.DT')
    
-    assertWebTorrent();
+    $(document).off("click", "a.webtorrent").on("click", "a.webtorrent", function(e) {
+        e.preventDefault();
+        const d = this.dataset;
+        // Fix: Using d.infoHash (case sensitive) and adding quotes to selector       
+        
+        const $existing = $(`#hero option[value="${d.infohash}"]`);
 
+    //called on webtorrent route load, either refresh or a.webtorrent route()
+        if ($existing.length === 0){
+            $(this).text("[Added!]");
+            $(this).css('color', 'green');
+        }
+        else{
+            $(this).text("Already Added.");
+            $(this).css('color', '#007BFF');
+        }
+        var that = $(this);
+        setTimeout(function(){
+            that.text("[WebTorrent]");
+            that.css("color", "mediumvioletred");
+        },2360);
+        
+        assertHero(d);
+    });
+
+    $("a.webtorrent").text("[WebTorrent]");
 
   
 }
