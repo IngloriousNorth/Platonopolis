@@ -26,7 +26,21 @@ To get started, you will need to:
 
 *Edit config.js and enter your Neo4j credentials.*
 
-*Add Lucene Search Indexes (can't be bothered to find them rn, just click Graph Search and successively add the 4 indexes as outlined in the server logs)*
+*Add Lucene Search Indexes*
+Paste into browser.neo4j.io:
+`CREATE FULLTEXT INDEX source_name IF NOT EXISTS
+FOR (n:Source) 
+ON EACH [n.name]
+`REATE FULLTEXT INDEX authorSearch IF NOT EXISTS
+FOR (n:Author) 
+ON EACH [n.name]
+CREATE FULLTEXT INDEX classes IF NOT EXISTS
+FOR (n:Class) 
+ON EACH [n.name]
+CREATE FULLTEXT INDEX publisherName IF NOT EXISTS
+FOR (n:Publisher) 
+ON EACH [n.name]`
+
 
 *Edit the Torrents model under static/client/models* Insert Source types (such as Documentary, or Renaissance Art), edition_torrent media (such as Ebook or Concert), and edition_torrent format (such as PDF or mp3), and resolutions (such as v0, 720p or 1080x720) For perspective, an Ebook vs Audiobook would be [media] and a PDF vs djvu would be [format]. 
 
