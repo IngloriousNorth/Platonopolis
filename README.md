@@ -1,6 +1,6 @@
 # WELCOME
 
-Gazelle-WebTorrent is an Open Source BitTorrent Indexer for WebTorrent inspired by the innovative Information Architecture of Project Gazelle. It was originally made with the intention of a public domain educational use-case and has been open-sourced with an MIT License. 
+Platonopolis (formerly Gazelle-WebTorrent-Neo4J) is an Open Source BitTorrent Indexer for WebTorrent inspired by the innovative Information Architecture of Project Gazelle. It was originally made with the intention of a public domain educational use-case and has been open-sourced with an MIT License. 
 
 Please note that the organizer of this code has no association with any members of Project Gazelle. It is simply an Open Source JQuery/WebTorrent Library generated based on their very innovative and secretive architecture. 
 
