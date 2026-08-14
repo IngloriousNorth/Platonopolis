@@ -31,7 +31,7 @@ Paste into browser.neo4j.io:
 `CREATE FULLTEXT INDEX source_name IF NOT EXISTS
 FOR (n:Source) 
 ON EACH [n.name]
-`REATE FULLTEXT INDEX authorSearch IF NOT EXISTS
+CREATE FULLTEXT INDEX authorSearch IF NOT EXISTS
 FOR (n:Author) 
 ON EACH [n.name]
 CREATE FULLTEXT INDEX classes IF NOT EXISTS
