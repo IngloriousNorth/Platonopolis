@@ -63,8 +63,8 @@ function updateTitleUI(name, label) {
     const colors = {
         source: "white",
         author: "gold",
-        class: "#50C777",
-        publisher: "darkviolet"
+        class: "red",
+        publisher: "#007BFF"
     };
 
     switch(label){
@@ -83,7 +83,7 @@ function updateTitleUI(name, label) {
     $("#nodeTitle span a").text(name)
        .attr("class", "TEMPLAR node")
        .attr("href", "#node?label=" + label + "&uuid=" + (TEMPLAR.paramREC() ? TEMPLAR.paramREC().uuid : "undefined"))
-       .css("color", colors[label] || "white").fadeIn(1812); 
+       .css("color", colors[label] || "white").show(); 
 
     TEMPLAR.DOM();
 
@@ -109,11 +109,11 @@ function assertButtonTab(){
     switch(TEMPLAR.paramREC().label){
         case "source":
             $("#warp").show();
-            $("#graph_search").show().focus();
+            $("#graph_search").show();
             break;
         default:
             $("#warp").hide()
-            $("#graph_search").show().focus();
+            $("#graph_search").show();
             break;
     }
 }
