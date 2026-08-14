@@ -8,6 +8,10 @@ My site is now platonopolis.us, meant for public domain, educational Ebooks, Aud
 
 Fully built in and plug-in play is a Quantum Random Neo4J Recommendation Engine, which also works on mobile, making this the first quantum mobile app. There is also graph visualization (with VR-toggle), which coheres with an Advanced Search feature, so that users can search by title, author, class, publisher, source type, media, format, and resolution.
 
+In the future we will allow some or all torrents to be minted with a Crypto Address, using the Pay-What-You-Want Structure coined by by Radiohead. 
+
+Once Metamask is added to the information architecture, this will be a plug and play Quantum Web 3.0 WebTorrent Indexer. Oracles TBD.
+
 # GETTING STARTED
 
 The server is express/node.js, and the Database is Neo4j; downloads are to work using WebTorrent in the Browser. The Library renders a paginated JQuery DataTable and a ForceGraphVR to the client (under the advanced search-condition). I have developed an in-house client-side SPA-router called TEMPLAR, which routes using #anchors and uriParams, as a lightweight alternative to AngularJS. You will find the TEMPLAR router on my GitHub page.
