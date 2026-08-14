@@ -12,7 +12,7 @@ $(document).on("TEMPLAR", function() {
 
 var TEMPLAR = { 
     _dir: "client/partials",
-    _fade: true,
+    _fade: false,
     _helm: [],
     _page : "home",
     _pages : [],
