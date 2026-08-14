@@ -68,6 +68,13 @@ q:before, q:after {
   height: 100%;
 }*/
 
+#phil{
+  height:92px;
+  position:fixed;
+  left:0px;
+  top:0px;
+
+}
 
 .output a{
   margin-bottom:0px !important;
@@ -76,7 +83,7 @@ q:before, q:after {
 
 .upload_inst{
   font-size:16px;
-  font-family:"Arial", sans-"Special Elite";
+  font-family:"Arial", sans-"Pirata One";
   color:black;
   display:block;
   text-align:justify !important;
@@ -158,12 +165,12 @@ body.is-seed .show-leech { display: none; }  /* Hides "Downloading" and "from" *
 footer{
   height:80px;
   width:100%;
-  background-color:black !important;
+  background-color:red !important;
 }
 
 
 #status {
-   color: silver;
+   color: blue;
    font-size: 13px;
    margin-top: 5px;
    margin-left:5px;
@@ -181,7 +188,7 @@ footer{
 }
 
 #numPeers, #uploadSpeed, #downloadSpeed{
-  color:cyan;
+  color:white !important;
 }
 
 footer a:link, #hero a:visited {
@@ -247,19 +254,19 @@ label{
 /*
 
 ::-webkit-input-placeholder {
-  font-family: 'Imperial Script', Arial, Helvetica, sans-"Special Elite";
+  font-family: 'Imperial Script', Arial, Helvetica, sans-"Pirata One";
 }
 
 :-ms-input-placeholder {
-  font-family: 'Imperial Script', Arial, Helvetica, sans-"Special Elite";
+  font-family: 'Imperial Script', Arial, Helvetica, sans-"Pirata One";
 }
 
 :-moz-placeholder {
-  font-family: 'Imperial Script', Arial, Helvetica, sans-"Special Elite";
+  font-family: 'Imperial Script', Arial, Helvetica, sans-"Pirata One";
 }
 
 ::-moz-placeholder {
-  font-family: 'Imperial Script', Arial, Helvetica, sans-"Special Elite";
+  font-family: 'Imperial Script', Arial, Helvetica, sans-"Pirata One";
 }*/
 
 .dataTables_length{
@@ -320,6 +327,14 @@ header{
  
 }
 
+
+
+
+
+
+
+
+
 .tabs{
   width:1080px;
   left: 0;
@@ -336,10 +351,10 @@ header{
 
 .tabs a, .tabs a:visited, .mobile_tabs a, .mobile_tabs a:visited{
   
-  /*font-family:"Atkinson Hyperlegible Mono", "Special Elite";*/
+  /*font-family:"Atkinson Hyperlegible Mono", "Pirata One";*/
   text-decoration:underline;
-  font-size:27px;  
-  font-family:"Aldrich", "Times New Roman";
+  font-size:23px;  
+  font-family:"Share Tech Mono", "Times New Roman";
   font-variant:small-caps;
 }
 
@@ -443,13 +458,13 @@ thead tr{
 
 
 .child{
-  border-bottom:5px solid mediumvioletred;
+  border-bottom:3px solid darkgoldenrod;
 }
 
 
 table.dataTable tr.dtrg-group th{
   
-  height:142px;
+  height:160px;
 
 }
 
@@ -497,7 +512,6 @@ table.dataTable thead tr:first-child th:last-child {
 
 
 .tableHeading{
-  top:7px;
   position: relative;
   float: left;
   padding: 0px 8px 0px 8px !important;
@@ -564,7 +578,7 @@ input{
 }
 
 .search input::placeholder, .adv_show input::placeholder{
-  color:#50C777;
+  color:red;
   font-family:"Share Tech Mono", system-ui;
 }
 
@@ -599,7 +613,7 @@ body .ui-autocomplete {
 }
 
 .search{
-  margin-top:-3px;
+  margin-top:0px;
 }
 
 .panel ul, .tabs ul, #search_ul{
@@ -699,7 +713,7 @@ a.link a.visited{
 .torrentsTable{
 
 
-  font-family:"Lato", sans-"Special Elite";
+  font-family:"Lato", sans-"Pirata One";
 }
 
 
@@ -743,7 +757,7 @@ a.adv_toggle{
  
 .active .page-link{
   background-color:goldenrod !important;
-  color:#007BFF !important;
+  color:blue !important;
 }
 
 
@@ -758,13 +772,13 @@ a.adv_toggle{
   margin:0 auto;
   --angle: 0deg;
   /*border: 3px solid;
-  border-image: conic-gradient(from var(--angle), red, palegoldenrod, lime, aqua, #007BFF, magenta, red) 1;
+  border-image: conic-gradient(from var(--angle), red, palegoldenrod, lime, aqua, blue, magenta, red) 1;
   
   animation: 10s rotate linear infinite;
   box-shadow:4px 3px 5px black;*/
   border-radius:14px !important;
  
-  background: linear-gradient(120deg, #007BFF, silver, #333777);
+  background: linear-gradient(120deg, blue, silver, #333777);
   border:3px solid mediumvioletred;
 
   
@@ -773,7 +787,7 @@ a.adv_toggle{
 .adv_search input:not(.adv_all){
   font-size:16px;
   height:27px;
-  font-family:"Lato", sans-"Special Elite";
+  font-family:"Share Tech Mono", sans-serif;
   margin-top:22px !important;
 
 }
@@ -840,11 +854,11 @@ a.authors{
 }
 
 a.classes{
-  color:#50C777 !important;
+  color:red !important;
 }
 
 a.publishers{
-  color:darkviolet !important;
+  color:blue !important;
 }
 
 
@@ -870,7 +884,7 @@ a.publishers{
 
 .removeAuthor{
   color:#83DAC0;
-  font-family:"Pirata One",sans-"Special Elite";
+  font-family:"Pirata One",sans-"Pirata One";
 }
 
 .sourceTab{
@@ -910,7 +924,7 @@ a.source, .source span{
 
 
 #authorTitle span{
-  color:#007BFF;
+  color:blue;
 }
 
 #classTitle span{
@@ -922,7 +936,7 @@ a.source, .source span{
 }
 
 div.authors h2 span a{
-  color:#007BFF !important;
+  color:blue !important;
 }
 
 div.classes h2 span a{
@@ -936,7 +950,7 @@ div.publishers h2 span a{
   .upload p{
     font-size:16px;
     padding-left:5px;
-    color:#007BFF;
+    color:blue;
   }
 
   #legal{
@@ -954,15 +968,15 @@ div.publishers h2 span a{
 
 
 h1, h1 a, h1 a:visited{
-  font-size:32px;
-   color:#F8F8F8;
-   text-shadow:4px 5px #333777;
+  font-size:36px;
+   color:black;
+   text-shadow:4px 5px white;
   position:fixed;
-  text-decoration:none;
+  text-decoration:underline;
   top:0px;
   letter-spacing:2px;
-  left:5px;
-  font-family:"Share Tech Mono", system-ui !important;
+  left:77px;
+  font-family:"Pirata One", system-ui !important;
 
 }
 
@@ -980,11 +994,11 @@ a.author, span.author{
 }
 
 a.class, span.class{
-  color:#50C777;
+  color:red;
 }
 
 a.publisher, span.publisher{
-  color:darkviolet !important;
+  color:blue !important;
 }
 
 /* 12;22 */
@@ -1062,7 +1076,7 @@ a.source, a.author{
 
 
 .torrentsTable td{
-  font-family:""Special Elite"", "Special Elite";
+  font-family:""Pirata One"", "Pirata One";
 
 }
 
@@ -1080,8 +1094,8 @@ h2 span a{
 .sourceType{
   color:black !important;
   text-shadow:1px 3px gold;
-  font-size:13px !important;
-  font-family:"Aldrich", "Times New Roman" !important;
+  font-size:18px !important;
+  font-family:"Share Tech Mono", "Times New Roman" !important;
   text-align:center !important;
   font-variant:small-caps;
   width:98px;
@@ -1099,16 +1113,16 @@ h2 span a{
 }
 
 .ui-menu .ui-menu-item-wrapper.ui-state-active {
-    background: #50C777 !important;
+    background: red !important;
     font-weight:bold !important;
-    color:palegoldenrod !important; /* Adjust text color for readability */
+    color:blue !important; /* Adjust text color for readability */
 }
 
 
 
 h3{
   font-size:21px;
-  font-family:"Lato", sans-"Special Elite";
+  font-family:"Pirata One", "Share Tech Mono", serif;
   text-align:center;
   width:100%;
 }
@@ -1197,13 +1211,7 @@ footer{
 
 
 .torrentClasses a {
-    padding:9px;
-
-}
-
-.torrentClasses{
-  position:relative;
-  top:7px;
+    padding-top:8px;
 }
 
 
@@ -1220,14 +1228,14 @@ footer{
 
 
 
-.magnetURI, a.webtorrent, .magnetURI:visited, a.webtorrent:visited{
-  color:#333777;
+.magnetURI, a.webtorrent{
+  color:darkgoldenrod;
   display:block;
   font-family:"Share Tech Mono", sans-serif !important;
 }
 
 .webtorrent{
-  padding-bottom:12px;
+  padding-bottom:9px;
 }
 
 .upload h3{
@@ -1297,7 +1305,7 @@ h3{
 }
 
 .search input{
-  font-family:"Share Tech Mono", "Special Elite";
+  font-family:"Share Tech Mono", "Pirata One";
 }
 
 .set a.publisher, .set a.class, .set a.author{
@@ -1306,10 +1314,10 @@ h3{
 
 .set a.author{
   text-shadow: 
-  -1px -1px 0 #333777,  
-   1px -1px 0 #333777,
-  -1px  1px 0 #333777,
-   1px  1px 0 #333777;
+  -1px -1px 0 blue,  
+   1px -1px 0 blue,
+  -1px  1px 0 blue,
+   1px  1px 0 blue;
 }
 .set table thead th:nth-last-child(2){
   border-radius:0;
@@ -1333,17 +1341,20 @@ h3{
 }
 
 
-#status{color: #CDCDCD !important;}
+#status{
+  color: white !important;
+}
 
 header{
-  box-shadow:3px 4px 6px darkviolet;
-  background:linear-gradient(90deg, black, #007BFF, skyblue);
-  border-bottom:3px solid #333777;
+  box-shadow:3px 4px 6px gold;
+  background:goldenrod;
+  border-bottom:4px dotted white;
 }
 
 .dataTable thead th{
   box-shadow:none;
-  border-bottom:3px solid darkviolet;
+  box-shadow:2px 2px 2px goldenrod;
+  border-bottom:3px dotted white;
   /* 1. Define your gradient */
   background-color:goldenrod;
   color:black;
@@ -1351,7 +1362,7 @@ header{
   font-size:24px;
   padding-top:13px;
   padding-bottom:13px;
-  font-family:"Aldrich", system-ui;
+  font-family:"Pirata One", system-ui;
 
 }
 
@@ -1360,7 +1371,7 @@ header{
 }
 
 table.dataTable tr.dtrg-group th{
-  background:#007BFF;
+  background:blue;
   box-shadow:2px 2px 4px silver;
   padding-top:6px;
   padding-left:5px;
@@ -1371,31 +1382,31 @@ table.dataTable tr.dtrg-group th{
 
 
 .tableHeading, .tableHeading a{
-  font-family: "Aldrich", serif;
-  font-size:16px;
+  font-family: "Times New Roman" !important;
+  font-size:16px !important;
 }
 
 
 
 .dataTable td{
-  font-family:"Share Tech Mono", system-ui;
-  font-size:16px;
+  font-family:"Share Tech Mono", system-ui !important;
+  font-size:16px !important;
   text-align:justify;
 }
 
 div.TEMPLAR{
-  background-color:#EFEFEF;
+  background-color:white;
 }
 
 .torrentsTable thead th{
-  background:silver;
-  border-bottom:none;
-  box-shadow:none;
-  font-family:"Share Tech Mono", "sans-serif";
-  font-size:16px;
-  text-shadow:none;
-  color:darkgoldenrod;
-  text-align:left;
+  background:silver !important;
+  border-bottom:none !important;
+  box-shadow:none !important;
+  font-family:"Rye", "sans-serif" !important;
+  font-size:16px !important;
+  text-shadow:none !important;
+  color:white !important;
+  text-align:left !important;
 }
 
 .torrentsTable td{
@@ -1417,44 +1428,45 @@ div.TEMPLAR{
 }
 
 .adv_search{
-  background:linear-gradient(135deg, lightgoldenrodyellow, silver);
-  color:palegoldenrod;
+  background:blue;
+  color:palegoldenrod !important;
   margin-bottom:35px;
-  box-shadow:3px 3px 4px palevioletred;
-  border:3px solid #333777;
+  box-shadow:7px 7px 7px gold;
+  border:5px dotted white !important;
 }
 
 .adv_search label{
-  color:cyan;
+  color:#CDCDCD !important;
   letter-spacing:1px;
   font-size:16px;
-  font-family:"Share Tech Mono", "serif";
+  font-family:"Pirata One", "serif" !important;
 }
 
 .adv_search select, .adv_search select option{
-  font-family:"Aldrich", "serif";
+  font-family:"Share Tech Mono", "serif" !important;
 }
 
 .adv_search input::placeholder{
-  font-family: "Share Tech Mono", "serif";
+  font-family: "Share Tech Mono", "serif" !important;
 }
 
 .adv_search input{
-  font-family:"Share Tech Mono", "serif";
+  font-family:"Share Tech Mono", "serif" !important;
 }
 
 
 #adv_heading{
-  color:darkgoldenrod;
+  color:white;
   font-size:25px !important;
-  font-family:"Share Tech Mono", sans-serif !important;
+  font-family:"Pirata One", sans-serif !important;
   text-decoration:none;
+  text-shadow:2px 3px black;
   letter-spacing:0px;
 }
 
 .torrentsTable a{
 
-  font-family:"Aldrich", system-ui !important;
+  font-family:"Share Tech Mono", system-ui !important;
 }
 
 .authors_area div a{
@@ -1467,7 +1479,7 @@ div.TEMPLAR{
 }
 
 .upload label{
-  font-family:"Special Elite", sans-serif;
+  font-family:"Pirata One", sans-serif;
 }
 
 .inst{
@@ -1513,22 +1525,22 @@ canvas:-webkit-full-screen {
   position:relative;
   left:10px;
   top:-49px;
-  border:1px solid #50C777;
-  box-shadow:2px 3px 2px gold;
+  border:1px solid #50C777 !important;
+  box-shadow:2px 3px 2px gold !important;
   width:99px;
   height:40px;
-  background-color:palegoldenrod;
-  color:darkcyan;
-  font-family:"Aldrich", system-ui;
+  background-color:palegoldenrod !important;
+  color:cyan !important;
+  font-family:"Share Tech Mono", system-ui;
 }
 
-#graph_search, #adv_submit, .upload button, #mobile_fullscreen{
-  border:2px solid #007BFF;
+#graph_search, #adv_submit, .upload button{
+  border:3px solid blue;
   background:goldenrod;
-  color:palevioletred;
-  font-family:"Aldrich", system-ui;
-  font-size:16px;
-  width:99px;
+  color:white;
+  font-family:"Share Tech Mono", system-ui;
+  font-size:18px;
+  width:101px;
   margin-bottom:16px;
   font-variant:small-caps;
   margin:0 auto;
@@ -1547,15 +1559,15 @@ canvas:-webkit-full-screen {
 }
 
 #warp{
-  font-family:"Aldrich", system-ui;
+  font-family:"Share Tech Mono", system-ui;
   display:block;
-  font-size:16px;
+  font-size:18px;
   margin:0 auto;
   background-color:black;
   color:white;
   font-variant:small-caps;
   text-align:center;
-  width: 99px;
+  width: 90px;
   height:40px;
   border-radius:13px;
 }
@@ -1578,17 +1590,17 @@ canvas:-webkit-full-screen {
 
 h2 span a{
   font-size:32px;
-  font-family:"Aldrich", "Times New Roman";
+  font-family:"Share Tech Mono", "Times New Roman";
   padding-left:5px;
-  text-shadow: 2px 3px #333777;
+  text-shadow: 1px 2px #007;
 }
 
 
 footer{
-  border-top:3px solid #333777;
-  box-shadow: 0px -3px 7px mediumvioletred;
+  border-top:2px dotted white;
   position:fixed;
   z-index:9998;
+  box-shadow:2px -3px 2px gold;
 }
 
 #status{
@@ -1596,8 +1608,8 @@ footer{
 }
 
 .panel li a, .panel li a:visited, .mobile_panel li a, .mobile_panel li a:visited{
-  color:#333777;
-  font-family:"Share Tech Mono", sans-serif;
+  color:white;
+  font-family:"Pirata One", sans-serif;
 }
 
 .dataTable td{
@@ -1661,10 +1673,15 @@ div.upload{
 
   h1, h1 a, h1 a :visited{
     position:relative;
-    top:5px;
+    top:4px;
+    left:0px;
     text-align:center;
   }
 
+  #phil{
+    height:55px;
+    left:32px;
+  }
   
   table{
     font-size:16px;
@@ -1752,14 +1769,14 @@ div.upload{
     font-size:40px;
     width:49px;
     height:49px;
-    color:darkcyan !important;
+    color:red !important;
     top:9px;
     left:5px;
     z-index:9999;
   }
 
   #mobile_menu:hover{
-    color: lightgoldenrodyellow !important;
+    color: #EFEFEF !important;
   }
 
   .mobile_menu{
@@ -1771,7 +1788,7 @@ div.upload{
     top:63px;
     z-index:9998;
     bottom:88px;
-    background-color:skyblue !important;
+    background-color:blue !important;
   }
   
 
@@ -2006,7 +2023,7 @@ div.TEMPLAR.webtorrent{
 }
 
 h3{
-  color:silver;
+  color:#DEDEDE;
 }
 
 /* 4. Final Polish for the .torrentsTable to bridge the gap */
