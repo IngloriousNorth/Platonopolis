@@ -150,7 +150,7 @@ body.is-seed .show-leech {
 }
 
 .is-seed #hero {
-   background-color: darkcyan;
+   background-color: navy;
    transition: .5s .5s background-color ease-in-out;
 }
 
@@ -165,12 +165,12 @@ body.is-seed .show-leech { display: none; }  /* Hides "Downloading" and "from" *
 footer{
   height:80px;
   width:100%;
-  background-color:red !important;
+  background-color:darkblue !important;
 }
 
 
 #status {
-   color: blue;
+   color:white;
    font-size: 13px;
    margin-top: 5px;
    margin-left:5px;
@@ -188,7 +188,7 @@ footer{
 }
 
 #numPeers, #uploadSpeed, #downloadSpeed{
-  color:white !important;
+  color:skyblue !important;
 }
 
 footer a:link, #hero a:visited {
@@ -778,7 +778,7 @@ a.adv_toggle{
   box-shadow:4px 3px 5px black;*/
   border-radius:14px !important;
  
-  background: linear-gradient(120deg, blue, silver, #333777);
+  background: silver;
   border:3px solid mediumvioletred;
 
   
@@ -854,11 +854,11 @@ a.authors{
 }
 
 a.classes{
-  color:red !important;
+  color:#50C777 !important;
 }
 
 a.publishers{
-  color:blue !important;
+  color:mediumvioletred !important;
 }
 
 
@@ -969,13 +969,13 @@ div.publishers h2 span a{
 
 h1, h1 a, h1 a:visited{
   font-size:36px;
-   color:black;
-   text-shadow:4px 5px white;
+   color:white;
+   text-shadow:2px 3px black;
   position:fixed;
   text-decoration:underline;
   top:0px;
   letter-spacing:2px;
-  left:77px;
+  left:5px;
   font-family:"Pirata One", system-ui !important;
 
 }
@@ -994,11 +994,11 @@ a.author, span.author{
 }
 
 a.class, span.class{
-  color:red;
+  color:#50C777;
 }
 
 a.publisher, span.publisher{
-  color:blue !important;
+  color:mediumvioletred !important;
 }
 
 /* 12;22 */
@@ -1113,9 +1113,9 @@ h2 span a{
 }
 
 .ui-menu .ui-menu-item-wrapper.ui-state-active {
-    background: red !important;
+    background: darkblue !important;
     font-weight:bold !important;
-    color:blue !important; /* Adjust text color for readability */
+    color:palegoldenrod !important; /* Adjust text color for readability */
 }
 
 
@@ -1346,15 +1346,15 @@ h3{
 }
 
 header{
-  box-shadow:3px 4px 6px gold;
-  background:goldenrod;
-  border-bottom:4px dotted white;
+  box-shadow:3px 4px 7px lightskyblue;
+  background:darkblue;
+  border-bottom:2px solid darkgoldenrod;
 }
 
 .dataTable thead th{
   box-shadow:none;
   box-shadow:2px 2px 2px goldenrod;
-  border-bottom:3px dotted white;
+  border-bottom:2px solid black;
   /* 1. Define your gradient */
   background-color:goldenrod;
   color:black;
@@ -1371,7 +1371,7 @@ header{
 }
 
 table.dataTable tr.dtrg-group th{
-  background:blue;
+  background:#007BFF;
   box-shadow:2px 2px 4px silver;
   padding-top:6px;
   padding-left:5px;
@@ -1395,11 +1395,11 @@ table.dataTable tr.dtrg-group th{
 }
 
 div.TEMPLAR{
-  background-color:white;
+  background-color:slategray;
 }
 
 .torrentsTable thead th{
-  background:silver !important;
+  background:slategray !important;
   border-bottom:none !important;
   box-shadow:none !important;
   font-family:"Rye", "sans-serif" !important;
@@ -1428,18 +1428,18 @@ div.TEMPLAR{
 }
 
 .adv_search{
-  background:blue;
+  background:silver;
   color:palegoldenrod !important;
   margin-bottom:35px;
-  box-shadow:7px 7px 7px gold;
-  border:5px dotted white !important;
+  box-shadow:3px 3px 4px skyblue;
+  border:2px solid darkgoldenrod !important;
 }
 
 .adv_search label{
-  color:#CDCDCD !important;
+  color:goldenrod !important;
   letter-spacing:1px;
   font-size:16px;
-  font-family:"Pirata One", "serif" !important;
+  font-family:"Share Tech Mono", "serif" !important;
 }
 
 .adv_search select, .adv_search select option{
@@ -1535,9 +1535,10 @@ canvas:-webkit-full-screen {
 }
 
 #graph_search, #adv_submit, .upload button{
-  border:3px solid blue;
+  border:2px solid black;
   background:goldenrod;
-  color:white;
+  box-shadow:2px 2px 3px darkblue !important;
+  color:skyblue;
   font-family:"Share Tech Mono", system-ui;
   font-size:18px;
   width:101px;
@@ -1552,9 +1553,9 @@ canvas:-webkit-full-screen {
 }
 
 #graph_search:hover, #adv_submit:hover, .upload button:hover{
-  box-shadow:3px 4px 3px #333777;  
+  box-shadow:3px 4px 3px skyblue;  
   font-weight:bold;
-  border:2px solid goldenrod;
+  border:2px solid white;
   color:lightgoldenrodyellow;
 }
 
@@ -1597,10 +1598,11 @@ h2 span a{
 
 
 footer{
-  border-top:2px dotted white;
+  border-top:2px solid darkgoldenrod;
+  box-shadow:2px -3px 3px skyblue;
   position:fixed;
   z-index:9998;
-  box-shadow:2px -3px 2px gold;
+  background-color:slategray !important;
 }
 
 #status{
@@ -1608,8 +1610,8 @@ footer{
 }
 
 .panel li a, .panel li a:visited, .mobile_panel li a, .mobile_panel li a:visited{
-  color:white;
-  font-family:"Pirata One", sans-serif;
+  color:lightgoldenrodyellow;
+  font-family:"Share Tech Mono", sans-serif;
 }
 
 .dataTable td{
@@ -1769,7 +1771,7 @@ div.upload{
     font-size:40px;
     width:49px;
     height:49px;
-    color:red !important;
+    color:skyblue !important;
     top:9px;
     left:5px;
     z-index:9999;
