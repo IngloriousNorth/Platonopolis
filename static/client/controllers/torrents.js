@@ -262,7 +262,33 @@ function initializeTorrents(table) {
     })
 
     if (TEMPLAR.pageREC() === "top10") $('th').unbind('click.DT')
-   
+    
+    $(document).off("click", "#torrent_infoHash").on("click", "#torrent_infoHash", function(e){
+      e.preventDefault();
+      
+      // Retrieve the infohash from the data-infohash attribute
+      const infoHash = $(this).data('infohash');
+      
+      if (!infoHash) {
+        console.warn('No data-infohash attribute found on this element.');
+        return;
+      }
+
+      // Copy to clipboard using modern Navigator API
+      navigator.clipboard.writeText(infoHash)
+        .then(() => {
+          
+          // Optional: Give visual feedback to the user
+          const $el = $(this);
+          const originalText = $el.text();
+          $el.text('[Copied!]');
+          $el.css('color', '#50C777');
+          setTimeout(() => { $el.text(originalText); $el.css('color', 'darkgoldenrod'); }, 2000);
+        })
+        .catch(err => {
+          console.error('Failed to copy to clipboard:', err);
+        });
+    });
     $(document).off("click", "a.webtorrent").on("click", "a.webtorrent", function(e) {
         e.preventDefault();
         const d = this.dataset;
@@ -273,16 +299,16 @@ function initializeTorrents(table) {
     //called on webtorrent route load, either refresh or a.webtorrent route()
         if ($existing.length === 0){
             $(this).text("[Added!]");
-            $(this).css('color', 'green');
+            $(this).css('color', '#50C777');
         }
         else{
             $(this).text("Already Added.");
-            $(this).css('color', '#007BFF');
+            $(this).css('color', 'orange');
         }
         var that = $(this);
         setTimeout(function(){
             that.text("[WebTorrent]");
-            that.css("color", "mediumvioletred");
+            that.css("color", "darkgoldenrod");
         },2360);
         
         assertHero(d);

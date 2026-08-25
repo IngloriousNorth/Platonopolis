@@ -1,35 +1,10 @@
-/*   const params = TEMPLAR.paramREC();
-
-    const $option = $("#hero option[value='" + params.infoHash + "']");
-    const torrentCache = $option.data("torrent");
-
-    
-
-    if (torrentCache) {
-
-        assertPeersProgress();
-    } else {
-        if (client.get(params.infoHash)) {
-            return; 
-        }
-
-        
-        DL(params.infoHash);
-    }
-
-}*/
-
 function DL(infoHash) {    
     assertProgress();
     assertOutput(infoHash);
     console.log("Downloading: " + infoHash)
 
-    const myTrackers = [
-        'wss://tracker.openwebtorrent.com',
-        'wss://tracker.webtorrent.dev'
-    ];
 
-    client.add(infoHash, { announce: myTrackers }, (torrent) => {
+    client.add(getMagnetURI(infoHash), (torrent) => {
         insertTorrent(infoHash, torrent);
 
         const interval = setInterval(function(){
@@ -72,9 +47,10 @@ function onDone(torrent) {
     //assertDL(torrent)
     clearInterval(interval);
     // Save the downloaded file handles to the hero option for later cycling
+    apa = TEMPLAR.paramREC() ? TEMPLAR.paramREC().apa : ""
     torrent.files.forEach((file, index) => {
-       assertButton(file, torrent.infoHash, index);
+       assertButton(file, torrent.infoHash, index, apa);
     });
 
-   $.post("/rev/" + torrent.infoHash)
+   //$.post("/rev/" + torrent.infoHash)
 }
