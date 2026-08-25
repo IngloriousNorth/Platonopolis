@@ -65,21 +65,23 @@ function assertFile(file, infoHash, index) {
         }   
     }
 
-    const isMedia = file.name.match(/\.(mp3|mp4|webm|ogg|wav|mov|m4a)$/i);
-    if (isMedia && !document.getElementById(statusId)) {
+    
+    if (!document.getElementById(statusId)) {
         const statusLabel = document.createElement('div');
         statusLabel.id = statusId;
         statusLabel.innerText = "[ PROCESSING: " + file.name + " ]";
         statusLabel.style.cssText = "display:inline-block; padding:10px; margin-bottom:10px; font-family:'Share Tech Mono', monospace; color:skyblue; border:1px dashed #ffff00; font-size:13px; background:rgba(0,0,0,0.5);";
-        
+        $(statusLabel).css({
+          'position': 'relative',
+          'z-index': 1000
+        });
         if(heroInfoHash === infoHash){
-            $container.prepend(statusLabel);
-            $(statusLabel).after("<br>");
+            $container.prepend(statusLabel)
         }
     }
 }
 
-function assertButton(file, infoHash, index) {
+function assertButton(file, infoHash, index, apaName) {
     const statusId = `status-${infoHash}-${index}`;
     const $statusElement = $("#" + statusId);
     
@@ -89,18 +91,29 @@ function assertButton(file, infoHash, index) {
                 const blob = await file.blob();
                 const url = URL.createObjectURL(blob);
 
+                // 1. Get original file extension (.pdf, .mp4, etc.)
+                const ext = file.name.substring(file.name.lastIndexOf('.'));
+
+                // 2. Format custom APA filename (Sanitize illegal file characters)
+                let customFilename = file.name;
+                if (apaName) {
+                    // Remove characters invalid in Windows/Mac/Linux filenames: \ / : * ? " < > |
+                    const cleanApa = apaName.replace(/[\\/:*?"<>|]/g, '').trim();
+                    customFilename = `${cleanApa}${ext}`;
+                }
+
                 const btn = document.createElement('a');
                 btn.href = url;
-                btn.download = file.name;
-                btn.innerText = "DL: " + file.name;
+                
+                // 3. Set the clean APA filename on download attribute
+                btn.download = customFilename;
+                btn.innerText = "DL: " + customFilename;
                 btn.className = "download-button-main";
                 btn.style.cssText = "display:inline-block; padding:10px; margin-top:5px; margin-bottom:10px; background:#50C777; color:white; border:1px solid #00ccff; text-decoration:none; font-family:monospace; font-size:14px; border-radius:3px; cursor:pointer;";
 
                 btn.onclick = (e) => e.stopPropagation();
 
-                // Relaxed check: if the element exists in DOM, swap it
                 $statusElement.replaceWith(btn);
-                $(btn).after("<br>");
                 
             } catch (err) {
                 console.error("Button swap failed:", err);

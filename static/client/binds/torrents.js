@@ -1,55 +1,23 @@
-function assertWebTorrent(){
-  $(document).off("click", "a.webtorrent").on("click", "a.webtorrent", function(e) {
-        e.preventDefault();
-        const d = this.dataset;
-        // Fix: Using d.infoHash (case sensitive) and adding quotes to selector       
-        
-        const $existing = $(`#hero option[value="${d.infohash}"]`);
-
-    //called on webtorrent route load, either refresh or a.webtorrent route()
-        if ($existing.length === 0){
-            $(this).text("[Added!]");
-            $(this).css('color', 'green');
-        }
-        else{
-            $(this).text("Already Added.");
-            $(this).css('color', '#007BFF');
-        }
-        var that = $(this);
-        setTimeout(function(){
-            that.text("[WebTorrent]");
-            that.css("color", "#333777");
-        },2360);
-        
-        assertHero(d);
-    });
-}
-
 function assertGraphParamsPendingReset(){
   $("a TEMPLAR.torrents").on("click", function(){
     resetGraphParams();
   })
 }
 
-//hides mobile_fullscreen on route, show is in the graph controller for touch only
-function assertGraphFullscreenButton(){
-  $("#mobile_fullscreen").hide();
-}
-
 function assertTitleLoaded(){
   switch (TEMPLAR.pageREC()) {
     case "torrents":
       if(TEMPLAR.paramREC() && TEMPLAR.paramREC().search){
-        $("#torrentsTitle span a").text("Graph Search").attr("href", "#torrents?search=true&title=&author=&classes=&all=false&publisher=&type=all&media=all&format=all&res=all").fadeIn(1812);
+        $("#torrentsTitle span a").text("Graph Search").attr("href", "#torrents?search=true&title=&author=&classes=&all=false&publisher=&type=all&media=all&format=all&res=all").show();
 
       }
       else{
-        $("#torrentsTitle span a").text("Sources").attr("href", "#sources").fadeIn(1812);
+        $("#torrentsTitle span a").text("Sources").attr("href", "#sources").show();
 
       }
       break;
     case "top10":
-      $("#top10Title span a").text("Top 10").fadeIn(1812);
+      $("#top10Title span a").text("Top 10").show();
       break;
     case "node":
       //TODO: maybe multiple calls here
@@ -63,7 +31,7 @@ function assertTitleLoaded(){
       //});*/
       break;
     default:
-      $("#torrentsTitle span a").text("Sources").fadeIn(1812);
+      $("#torrentsTitle span a").text("Sources").show();
       break;
 
   }
@@ -251,6 +219,7 @@ function assertGraphSearch(){
 }
 
 function assertAdvSearchUI(){
+ // $.get("/advanced_search_ui", function (data) {
     $("#adv_type").empty();
     $("#adv_type").append("<option value='all'>All Genuses</option>");
     $("#adv_media").empty();
@@ -268,7 +237,6 @@ function assertAdvSearchUI(){
       $("adv_any").prop("checked", true);
       $("#adv_all").prop("checked", false);
     }
-
     types.forEach(function (val) {
       var option = document.createElement("option");
       $(option).val(val);
@@ -313,14 +281,15 @@ function assertAdvSearchUI(){
         $(option2).text(decodeEntities(decodeEntities(val)));
         $("#adv_res").append(option2);
       })
-
-    pdf_resolutions.forEach(function(val){
-      var option3 = document.createElement("option");
-      $(option3).val(val);
-      $(option3).text(decodeEntities(decodeEntities(val)));
-      $("#adv_res").append(option3);
-    })
-
+  //});
+    var option = document.createElement("option");
+    $(option).val("Digital");
+    $(option).text("Digital");
+    $("#adv_res").append(option);
+    var option2 = document.createElement("option");
+    $(option2).val("Scan");
+    $(option2).text("Scan");
+    $("#adv_res").append(option2);
     if (TEMPLAR.paramREC() && TEMPLAR.paramREC().res) {
         $("#adv_res").val(TEMPLAR.paramREC().res);
     }
@@ -329,6 +298,19 @@ function assertAdvSearchUI(){
 function assertAdvButton(){
   $("#adv_submit").unbind("click");
   $("#adv_submit").click(function () {
+    //pass false for no route
+    /*if($("#adv_title").val() !== ""){
+      walkGraph("source", $("#adv_title").val(), false);
+    }
+    if($("#adv_author").val() !== ""){
+      walkGraph("author", $("#adv_author").val(), false);
+    }
+    if($("#adv_classes").val() !== ""){
+      walkGraph("class", $("#adv_classes").val(), false);
+    }
+    if($("#adv_publisher").val() !== ""){
+      walkGraph("publisher", $("#adv_publisher").val(), false);
+    }*/
     
     TEMPLAR.route(
       "#sources?search=true&title=" +
@@ -352,6 +334,7 @@ function assertAdvButton(){
         "&res=" +
         $("#adv_res").val()
     );
+    //initializeTorrents("torrents");
   });
 }
 
@@ -360,6 +343,11 @@ function assertTr(record, edition_torrent, apaHtml){
     const cleanApa = apaHtml.replace(/<[^>]*>?/gm, '');
      var tr = "<tr>";
       tr += "<td>" + edition_torrent.torrent.properties.format + "<br>" + edition_torrent.torrent.properties.media + "<br>" + ( edition_torrent.torrent.properties.res !== "N/A" ? edition_torrent.torrent.properties.res : "" )+ "</td>";          
+      
+     /*   tr +=
+        "<td class='here'>" +
+        timeSince(edition_torrent.torrent.properties.created_at) +
+        " ago</td>";*/
       tr +=
         "<td>" +
           "<a" +
@@ -370,7 +358,8 @@ function assertTr(record, edition_torrent, apaHtml){
            " data-format='" + edition_torrent.torrent.properties.format + "'" +
            " data-infohash = '" + edition_torrent.torrent.properties.infoHash + "'" +
            " class='webtorrent' href='webtorrent'>[WebTorrent]</a>" +
-           "<a href='" + getMagnetURI(edition_torrent.torrent.properties.infoHash) + "' class='magnetURI' data-infohash='" + edition_torrent.torrent.properties.infoHash + "'>[magnetURI]</a><br>"
+           "<a href='" + getMagnetURI(edition_torrent.torrent.properties.infoHash) + "' class='magnetURI' data-infohash='" + edition_torrent.torrent.properties.infoHash + "'>[magnetURI]</a>" + 
+           "<a href='#' id='torrent_infoHash' data-infohash='" + edition_torrent.torrent.properties.infoHash + "'>[infoHash]</a>"
       tr += "<td>" +
         edition_torrent.torrent.properties.snatches
         "</td>"

@@ -58,14 +58,29 @@ function assertSwitch(infoHash) {
     const $option = $select.find(`option[value="${infoHash}"]`);
 
     if ($option.length > 0) {
-        // Set selected status without triggering '.user_action'
+        // 1. Sync dropdown selection
         $select.val(infoHash);
         $option.prop('selected', true);
         
-        // Sync the UI elements manually instead of triggering a change event
+        // 2. Toggle visible output container
         $(".output").hide();
         $("#output_" + infoHash).show();
+        
+        // 3. Sync bottom progress bar
         assertProgress(infoHash);
+
+        // 4. FIX: If torrent exists in WebTorrent memory and is already done,
+        // force swap of status elements to Download Buttons!
+        const torrent = client.get(infoHash);
+        if (torrent && torrent.done) {
+            apa = TEMPLAR.paramREC() ? TEMPLAR.paramREC().apa : ""
+            torrent.files.forEach((file, index) => {
+               assertButton(file, torrent.infoHash, index, apa);
+            });
+        } else if (!torrent) {
+            // If it wasn't added yet, run full DL
+            DL(infoHash);
+        }
     }
 }
 
