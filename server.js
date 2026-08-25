@@ -1457,9 +1457,9 @@ app.post("/upload/:uuid", check("APA").trim().escape(), check("type").trim().esc
             'MERGE (e:Edition {title : $editionTitle, snatches: toFloat(0), publisher: $editionPublisher, uuid : randomUUID()})<-[:PUB_AS]-(s) ' +
             'SET e.pages = $editionPages, e.no = $editionNo, e.date = $editionDate, e.img = $editionIMG, e.created_at = toFloat(TIMESTAMP()) '     
             if(params.editionPublisher){
-                    query += 'MERGE (p:Publisher {name : $editionPublisher}) ' +
+                 query += 'MERGE (p:Publisher {name : $editionPublisher}) ' +
                 'ON CREATE SET p.uuid = randomUUID(), p.snatches = TOFLOAT(0) ' +
-                'MERGE (p)<-[:PUBLISHED_BY]-(e)'
+                'MERGE (p)<-[:PUBLISHED_BY]-(e) '
             }
             
             query += 'CREATE (t:Torrent {size : $size, res: $res, infoHash: $infoHash, media : $media, format: $format})<-[:DIST_AS]-(e) ' +
@@ -1557,7 +1557,7 @@ app.post("/upload/:uuid", check("APA").trim().escape(), check("type").trim().esc
             if(params.editionPublisher){
                 query += 'MERGE (p:Publisher {name : $editionPublisher}) ' +
                 'ON CREATE SET p.uuid = randomUUID(), p.snatches = TOFLOAT(0) ' +
-                'MERGE (p)<-[:PUBLISHED_BY]-(e)'
+                'MERGE (p)<-[:PUBLISHED_BY]-(e) '
             }
             query += "WITH s, e MERGE (t:Torrent {snatches: toFloat(0), created_at: toFloat(TIMESTAMP()), "+
             "deleted : false, uuid: randomUUID(), media : $torrentMedia, format: $torrentFormat, "+
