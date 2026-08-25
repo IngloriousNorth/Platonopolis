@@ -138,10 +138,10 @@ body.is-seed .show-leech {
 
 
 .output embed{
-  position:fixed;
-  top:88px;
-  bottom:60px;
-  height: calc(100% - 148px);
+  position:relative;
+  top:0px;
+  bottom:0px;
+  height: 100%;
   z-index:900;
   width:100%;
   margin:0 auto;
@@ -458,7 +458,7 @@ thead tr{
 
 
 .child{
-  border-bottom:3px solid darkgoldenrod;
+  border-bottom:5px solid white;
 }
 
 
@@ -567,7 +567,7 @@ table.dataTable thead tr:first-child th:last-child {
 .search input{
   border-radius: 5px 5px 6px;
   margin: 0px 16px 0px 0px;
-  background-color:lightcyan !important;
+  background-color:lightgoldenrodyellow; !important;
   width:180px;
   color:black;
   height:17px !important;
@@ -587,7 +587,7 @@ input{
 body .ui-menu-item {
   /* font-family to all */
  /* box-shadow:4px 4px 5px #83DAC0;*/
-  background-color:goldenrod;
+  background-color:slategray;
   text-align:justify;
   font-size:16px;
   padding:7px 0px 7px 0px;
@@ -779,7 +779,7 @@ a.adv_toggle{
   border-radius:14px !important;
  
   background: silver;
-  border:3px solid mediumvioletred;
+  border:3px solid skyblue;
 
   
 }
@@ -999,6 +999,10 @@ a.class, span.class{
 
 a.publisher, span.publisher{
   color:mediumvioletred !important;
+  user-select: text !important;
+  -webkit-user-select: text !important;
+  -moz-user-select: text !important;
+  cursor: text
 }
 
 /* 12;22 */
@@ -1063,6 +1067,10 @@ label.adv_all, input.adv_all{
 
 a.source, a.author{
   text-decoration: none;
+  user-select: text !important;
+  -webkit-user-select: text !important;
+  -moz-user-select: text !important;
+  cursor: text;
 }
 
 
@@ -1082,7 +1090,10 @@ a.source, a.author{
 
 
 h2 span a{
-  
+  user-select: text !important;
+  -webkit-user-select: text !important;
+  -moz-user-select: text !important;
+  cursor: text;
   font-size:24px;
 }
 
@@ -1113,9 +1124,9 @@ h2 span a{
 }
 
 .ui-menu .ui-menu-item-wrapper.ui-state-active {
-    background: darkblue !important;
+    background: goldenrod !important;
     font-weight:bold !important;
-    color:palegoldenrod !important; /* Adjust text color for readability */
+    color:deepskyblue !important; /* Adjust text color for readability */
 }
 
 
@@ -1193,7 +1204,7 @@ footer{
 }
 
 #hero option{
-  background:lightcyan;
+  background:skyblue;
 }
 
 .adv_show select{
@@ -1228,10 +1239,15 @@ footer{
 
 
 
-.magnetURI, a.webtorrent{
+.magnetURI, a.webtorrent, #torrent_infoHash{
   color:darkgoldenrod;
   display:block;
+  padding:6px;
   font-family:"Share Tech Mono", sans-serif !important;
+}
+
+.magnetURI:hover, a.webtorrent:hover, #torrent_infoHash:hover{
+  color:#007BFF;
 }
 
 .webtorrent{
@@ -1346,14 +1362,14 @@ h3{
 }
 
 header{
-  box-shadow:3px 4px 7px lightskyblue;
-  background:darkblue;
-  border-bottom:2px solid darkgoldenrod;
+  box-shadow:4px 4px 5px white;
+  background:#007BFF;
+  border-bottom:2px solid black;
 }
 
 .dataTable thead th{
   box-shadow:none;
-  box-shadow:2px 2px 2px goldenrod;
+  box-shadow:2px 2px 2px white;
   border-bottom:2px solid black;
   /* 1. Define your gradient */
   background-color:goldenrod;
@@ -1361,6 +1377,8 @@ header{
   text-shadow:1px 2px white;
   font-size:24px;
   padding-top:13px;
+  position:relative;
+  z-index:2;
   padding-bottom:13px;
   font-family:"Pirata One", system-ui;
 
@@ -1431,8 +1449,8 @@ div.TEMPLAR{
   background:silver;
   color:palegoldenrod !important;
   margin-bottom:35px;
-  box-shadow:3px 3px 4px skyblue;
-  border:2px solid darkgoldenrod !important;
+  box-shadow:2px 3px 3px white;
+  border:2px solid black !important;
 }
 
 .adv_search label{
@@ -1530,15 +1548,15 @@ canvas:-webkit-full-screen {
   width:99px;
   height:40px;
   background-color:palegoldenrod !important;
-  color:cyan !important;
+  color:skyblue !important;
   font-family:"Share Tech Mono", system-ui;
 }
 
 #graph_search, #adv_submit, .upload button{
-  border:2px solid black;
-  background:goldenrod;
-  box-shadow:2px 2px 3px darkblue !important;
-  color:skyblue;
+  border:3px solid #007BFF;
+  background:deepskyblue;
+  box-shadow:2px 2px 3px white !important;
+  color:palegoldenrod;
   font-family:"Share Tech Mono", system-ui;
   font-size:18px;
   width:101px;
@@ -1555,7 +1573,7 @@ canvas:-webkit-full-screen {
 #graph_search:hover, #adv_submit:hover, .upload button:hover{
   box-shadow:3px 4px 3px skyblue;  
   font-weight:bold;
-  border:2px solid white;
+  border:4px solid white;
   color:lightgoldenrodyellow;
 }
 
@@ -1598,11 +1616,11 @@ h2 span a{
 
 
 footer{
-  border-top:2px solid darkgoldenrod;
-  box-shadow:2px -3px 3px skyblue;
+  border-top:2px solid black;
+  box-shadow:2px -2px 2px white;
   position:fixed;
   z-index:9998;
-  background-color:slategray !important;
+  background-color:darkgoldenrod !important;
 }
 
 #status{
@@ -1610,7 +1628,7 @@ footer{
 }
 
 .panel li a, .panel li a:visited, .mobile_panel li a, .mobile_panel li a:visited{
-  color:lightgoldenrodyellow;
+  color:skyblue;
   font-family:"Share Tech Mono", sans-serif;
 }
 
@@ -1790,7 +1808,7 @@ div.upload{
     top:63px;
     z-index:9998;
     bottom:88px;
-    background-color:blue !important;
+    background-color:slategray !important;
   }
   
 
@@ -2039,6 +2057,7 @@ h3{
 /* Ensure the text stays readable in the new dark context */
 .torrentsTable td {
     padding: 10px;
+    border-bottom:1px solid silver;
 }
 
 /* The APA container */
