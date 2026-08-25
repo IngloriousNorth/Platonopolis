@@ -2,8 +2,6 @@ import express from 'express';
 
 const app = express();
 
-const port = 8080;
-
 import util from 'util';
 
 import { fileURLToPath } from 'url';
@@ -1237,10 +1235,10 @@ app.post("/top10/:time", check("time").trim().escape(), async function(req,res){
 
     var query = "WITH DATETIME() - duration($time) AS threshold " +
                 "MATCH (t:Torrent {deleted : false})<-[]-(e:Edition)<-[]-(s:Source) " + 
-                "WHERE s.lastSnatched > threshold " +
+                "WHERE s.lastSnatched > threshold " + // set to s.top10 > threshold for top10 based on upload date
                 "WITH s LIMIT 250 " +
                 "WITH count(DISTINCT s) AS count " +
-                "WITH DATETIME() - duration($time) AS threshold, count " +
+                "WITH DATETIME() - duration($time) AS threshold, count " + // set to s.top10 > threshold for top10 based on upload date
                 "MATCH (t:Torrent {deleted : false})<-[]-(e:Edition)<-[]-(s:Source) " + 
                 "WHERE s.lastSnatched >threshold "
 
@@ -1317,7 +1315,8 @@ app.get("/upload/:uuid", check("uuid").trim().escape().isLength({max:256}), func
   "OPTIONAL MATCH (c:Class)-[]->(s) " +
   "WITH s, a, c " +
   "MATCH (e:Edition)<-[:PUB_AS]-(s) " +
-  "WITH s,a,e,c, {title : e.title, date: e.date, pages : e.pages, img: e.img, uuid: e.uuid, publisher: e.publisher} AS edition " +
+  "OPTIONAL MATCH (p:Publisher)<-[:PUBLISHED_BY]-(e) " +
+  "WITH s,p,a,e,c, {title : e.title, date: e.date, pages : e.pages, img: e.img, uuid: e.uuid, publisher: p.name} AS edition " +
   "OPTIONAL MATCH (t:Torrent)<-[:DIST_AS]-(e) " +
   "RETURN s.name AS title, COLLECT(DISTINCT {uuid: a.uuid, name : a.name}) AS author, COLLECT(DISTINCT c.name) AS classes, s.date AS date, " +
   "collect(DISTINCT edition) AS editions, COLLECT(DISTINCT t) AS torrents, s.type AS type"
@@ -1456,11 +1455,14 @@ app.post("/upload/:uuid", check("APA").trim().escape(), check("type").trim().esc
             ') ' +
 
             'MERGE (e:Edition {title : $editionTitle, snatches: toFloat(0), publisher: $editionPublisher, uuid : randomUUID()})<-[:PUB_AS]-(s) ' +
-            'SET e.pages = $editionPages, e.no = $editionNo, e.date = $editionDate, e.img = $editionIMG, e.created_at = toFloat(TIMESTAMP()) ' +     
-            'MERGE (p:Publisher {name : $editionPublisher}) ' +
-            'ON CREATE SET p.uuid = randomUUID(), p.snatches = TOFLOAT(0) ' +
-            'MERGE (p)<-[:PUBLISHED_BY]-(e)' +
-            'CREATE (t:Torrent {size : $size, res: $res, infoHash: $infoHash, media : $media, format: $format})<-[:DIST_AS]-(e) ' +
+            'SET e.pages = $editionPages, e.no = $editionNo, e.date = $editionDate, e.img = $editionIMG, e.created_at = toFloat(TIMESTAMP()) '     
+            if(params.editionPublisher){
+                    query += 'MERGE (p:Publisher {name : $editionPublisher}) ' +
+                'ON CREATE SET p.uuid = randomUUID(), p.snatches = TOFLOAT(0) ' +
+                'MERGE (p)<-[:PUBLISHED_BY]-(e)'
+            }
+            
+            query += 'CREATE (t:Torrent {size : $size, res: $res, infoHash: $infoHash, media : $media, format: $format})<-[:DIST_AS]-(e) ' +
             'SET t.snatches = toFloat(0), t.uuid = randomUUID(), t.created_at = toFloat(TIMESTAMP()), t.deleted = false, t.created_at = toFloat(TIMESTAMP()) '
 
           params["sourceTitle"] = he.encode(req.body.title);
@@ -1552,9 +1554,11 @@ app.post("/upload/:uuid", check("APA").trim().escape(), check("type").trim().esc
 
             query += 'WITH s, e ';
             query += 'MERGE (s)-[pu:PUB_AS]->(e) ';
-            query += 'MERGE (p:Publisher {name : $editionPublisher}) ' +
-            'ON CREATE SET p.uuid = randomUUID(), p.snatches = TOFLOAT(0) ' +
-            'MERGE (p)<-[:PUBLISHED_BY]-(e)'
+            if(params.editionPublisher){
+                query += 'MERGE (p:Publisher {name : $editionPublisher}) ' +
+                'ON CREATE SET p.uuid = randomUUID(), p.snatches = TOFLOAT(0) ' +
+                'MERGE (p)<-[:PUBLISHED_BY]-(e)'
+            }
             query += "WITH s, e MERGE (t:Torrent {snatches: toFloat(0), created_at: toFloat(TIMESTAMP()), "+
             "deleted : false, uuid: randomUUID(), media : $torrentMedia, format: $torrentFormat, "+
             "res : $torrentRes, size: $torrentSize, infoHash: $torrentInfoHash" +
