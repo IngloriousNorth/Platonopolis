@@ -63,8 +63,8 @@ function updateTitleUI(name, label) {
     const colors = {
         source: "white",
         author: "gold",
-        class: "red",
-        publisher: "#007BFF"
+        class: "#50C777",
+        publisher: "mediumvioletred"
     };
 
     switch(label){
