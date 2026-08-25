@@ -605,7 +605,7 @@ function htmlUpload(){
 	$("#classes_input").change(function(){
 		uploadModel.classes = $("#classes_input").val().split(",");		
 	})
-
+    $("#up_submit").off("click");
 	$("#up_submit").click(function(e){
 		e.preventDefault();
     /*if($("#link_address").val() === ""){
