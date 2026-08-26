@@ -1456,7 +1456,8 @@ app.post("/upload/:uuid", check("APA").trim().escape(), check("type").trim().esc
 
             'MERGE (e:Edition {title : $editionTitle, snatches: toFloat(0), publisher: $editionPublisher, uuid : randomUUID()})<-[:PUB_AS]-(s) ' +
             'SET e.pages = $editionPages, e.no = $editionNo, e.date = $editionDate, e.img = $editionIMG, e.created_at = toFloat(TIMESTAMP()) '     
-            if(params.editionPublisher){
+            if(req.body.edition_publisher){
+                console.log(params.editionPublisher)
                  query += 'MERGE (p:Publisher {name : $editionPublisher}) ' +
                 'ON CREATE SET p.uuid = randomUUID(), p.snatches = TOFLOAT(0) ' +
                 'MERGE (p)<-[:PUBLISHED_BY]-(e) '
@@ -1554,7 +1555,7 @@ app.post("/upload/:uuid", check("APA").trim().escape(), check("type").trim().esc
 
             query += 'WITH s, e ';
             query += 'MERGE (s)-[pu:PUB_AS]->(e) ';
-            if(params.editionPublisher){
+            if(req.body.edition_publisher){
                 query += 'MERGE (p:Publisher {name : $editionPublisher}) ' +
                 'ON CREATE SET p.uuid = randomUUID(), p.snatches = TOFLOAT(0) ' +
                 'MERGE (p)<-[:PUBLISHED_BY]-(e) '
