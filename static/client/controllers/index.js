@@ -7,8 +7,7 @@ const config = {
             {
                 page: "sources",
                 fn: function() {
-                    // Priority 1: Get the list visible    
-                    assertGraphFullscreenButton();                
+                    // Priority 1: Get the list visible                    
                     initializeTorrents("torrents");
                                         
                     if(TEMPLAR.paramREC() && TEMPLAR.paramREC().search === "true"){
@@ -29,7 +28,7 @@ const config = {
                     initializeTorrents("week");
                     initializeTorrents("month");
                     initializeTorrents("year");
-                    initializeTorrents("alltime");
+                    //initializeTorrents("alltime");
                 }
             },
             {

@@ -2,7 +2,7 @@ var upload;
 var initialized;
 
 function initializeUpload(){
-
+    console.log("HERE")
 	htmlUpload();
 	$("#errorsDiv").empty();
 	var uuid;
@@ -95,7 +95,7 @@ function initializeUpload(){
 
 
 				      if(edition.publisher){
-				        publisherHtml += edition.publisher ? decodeEntities(decodeEntities(edition.publisher)) + ". " : " "
+				        publisherHtml += edition.publisher  ? decodeEntities(decodeEntities(edition.publisher)) : "";
 				      }
 				     
 				      if(edition.title){
@@ -397,7 +397,7 @@ function htmlUpload(){
 		     	 	$("#edition_date").val() + "). " : "). ") : ""
 
 		      }
-		      editionField += uploadModel.title.replace(/[\\/:"*?<>|]/g, "-") + '. '
+		      editionField += uploadModel.title + '. '
 		      editionField = editionField.replaceAll(':', " - ");
 		      editionField = editionField.replaceAll("/", "_");
 		      editionField = editionField.replaceAll("\\", "_")
@@ -488,10 +488,16 @@ function htmlUpload(){
 
   		client.seed(files, function(torrent){
   			console.log(torrent);
-			$("#MG").empty();
 			uploadModel.torrent.infoHash = torrent.infoHash;
-			$("#MG").append('<br><a href="' + torrent.torrentFileBlobURL + '" target="_blank" download="' + torrent.name + '.torrent">[Torrent]</a>')
+			// 1. Create a Blob from the raw torrent file buffer
+			const torrentBlob = new Blob([torrent.torrentFile], { type: 'application/x-bittorrent' });
+			const torrentBlobURL = URL.createObjectURL(torrentBlob);
 
+			// 2. Format custom download filename (fallback to infoHash if name missing)
+			const fileName = (torrent.name || torrent.infoHash) + '.torrent';
+
+			// 3. Append the download link using the valid Blob URL
+			$("#MG").append('<br><a href="' + torrentBlobURL + '" download="' + fileName + '">[Torrent]</a>');
             $("#MG").append("&nbsp;<a href='magnet:?xt=urn:btih:" + torrent.infoHash + "&tr=wss%3A%2F%2Ftracker.btorrent.xyz&tr=wss%3A%2F%2Ftracker.openwebtorrent.com&tr=udp%3A%2F%2Ftracker.leechers-paradise.org%3A6969&tr=udp%3A%2F%2Ftracker.coppersurfer.tk%3A6969&tr=udp%3A%2F%2Ftracker.opentrackr.org%3A1337&tr=udp%3A%2F%2Fexplodie.org%3A6969&tr=udp%3A%2F%2Ftracker.empire-js.us%3A1337'>[magnetURI]</a>");     		
 		});
   	})
@@ -558,6 +564,7 @@ function htmlUpload(){
 
 	$("#edition_title").change(function(){
 		uploadModel.edition.edition_title = $("#edition_title").val();
+
 	})
 
 	$("#edition_date").change(function(){
@@ -589,6 +596,7 @@ function htmlUpload(){
 	})
 
 
+	$("#create_author").off("click");
 	$("#create_author").click(function(e){
 		e.preventDefault();
        $("body").css("cursor", "progress");
@@ -605,7 +613,8 @@ function htmlUpload(){
 	$("#classes_input").change(function(){
 		uploadModel.classes = $("#classes_input").val().split(",");		
 	})
-    $("#up_submit").off("click");
+
+	$("#up_submit").off("click");
 	$("#up_submit").click(function(e){
 		e.preventDefault();
     /*if($("#link_address").val() === ""){
@@ -674,6 +683,8 @@ function resetUpload(){
 	$("#merge_source_input").val("");
 	$("#uploadHeading a").text("Upload")
 
+	$("#MG").empty();
+
 	$(".torrent_a").remove();
 
 	$("#title").val("");
@@ -716,6 +727,8 @@ function resetUpload(){
 	$("#type").empty();
 	$("#media").empty();
 	$("#format").empty();
+	$("#resolutions").empty();
+	$("#pdf_resolutions").empty();
 	$("#up_submit").prop("disabled", false)
 
 	//$("#errorsDiv").empty();

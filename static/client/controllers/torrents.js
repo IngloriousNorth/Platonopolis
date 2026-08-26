@@ -289,6 +289,23 @@ function initializeTorrents(table) {
           console.error('Failed to copy to clipboard:', err);
         });
     });
+
+    $(document).off("click", ".copy-citation-btn").on("click", ".copy-citation-btn", function(e) {
+      e.stopPropagation();
+      const uuid = $(this).data("uuid");
+      const $btn = $(this);
+      
+      // Extract clean text content from the citation element
+      const textToCopy = $("#edition_" + uuid + "_field").text().trim();
+
+      navigator.clipboard.writeText(textToCopy).then(() => {
+        // Visual indicator feedback (turns green briefy)
+        $btn.css("color", "#50C777");
+        setTimeout(() => $btn.css("color", "#a0a0a0"), 1200);
+      }).catch(err => {
+        console.error("Failed to copy citation: ", err);
+      });
+    });
     $(document).off("click", "a.webtorrent").on("click", "a.webtorrent", function(e) {
         e.preventDefault();
         const d = this.dataset;
@@ -298,11 +315,11 @@ function initializeTorrents(table) {
 
     //called on webtorrent route load, either refresh or a.webtorrent route()
         if ($existing.length === 0){
-            $(this).text("[Added!]");
+            $(this).text("[Loading..!]");
             $(this).css('color', '#50C777');
         }
         else{
-            $(this).text("Already Added.");
+            $(this).text("Already Loaded.");
             $(this).css('color', 'orange');
         }
         var that = $(this);
