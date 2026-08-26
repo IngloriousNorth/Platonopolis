@@ -76,30 +76,43 @@ function assertExistingEditionRow(edition_torrent, editionsAdded, newRows) {
     dtRecs[index][5] = existingHtml.replace("</tbody></table>", newRows + "</tbody></table>");
 }
 
-function assertFirstEditionRow(record, edition_torrent, editionsAdded, citationHtml, sourceIMG, dateField, authorField, classesField, torrentsTable){ //records is DataTable records, not neo4j records.
+function assertFirstEditionRow(record, edition_torrent, editionsAdded, citationHtml, sourceIMG, dateField, authorField, classesField, torrentsTable) { // records is DataTable records, not neo4j records.
   editionsAdded.push(edition_torrent.edition.properties.uuid);
-      dtRecs[editionsAdded.indexOf(edition_torrent.edition.properties.uuid)] = [
-          "<img class='tableImg' id='source_" + record._fields[0].properties.uuid + "' src='" + sourceIMG + "'>" +
-          "<span class='sourceType'>" + decodeEntities(decodeEntities(record._fields[0].properties.type)) + "</span>" +
-          "<div class='torrentSource'>" +
-          "<div class='tableHeading'><a id='sourceTab' class='TEMPLAR node source' href='#node?label=source&uuid=" + record._fields[0].properties.uuid + "'>" +
-          //(record._fields[0].properties.name.length > 45 ? decodeEntities(record._fields[0].properties.name.substring(0, 45)) + "..." : decodeEntities(record._fields[0].properties.name)) +
-          decodeEntities(decodeEntities(record._fields[0].properties.name)) +
-          "</a>" + dateField + authorField + "</div><br><div class='torrentClasses'>" + classesField + "</div></div>",
 
-          "<span class='apa-trigger'>" + // Removed title='Click to copy citation'
-              "<span class='apa-text bold' id='edition_" + edition_torrent.edition.properties.uuid + "_field'>" +
-                citationHtml +
-              "</span>" +              
-          "</span>",
+  const editionUuid = edition_torrent.edition.properties.uuid;
 
-          edition_torrent.edition.properties.snatches,
-          "<span id='edition_date'>" +
-          (edition_torrent.edition.properties.date && edition_torrent.edition.properties.date !== "undefined" && edition_torrent.edition.properties.date !== record._fields[0].properties.date ? record._fields[0].properties.date + "/" + edition_torrent.edition.properties.date : record._fields[0].properties.date) +
-          "</span>",
-          timeSince(edition_torrent.edition.properties.created_at) + " ago",
-          torrentsTable + "</table>"
-      ];
+  // Clipboard SVG Icon + Copy Trigger with flex inline-block lock
+  const copyBtnHtml = 
+    "<button class='copy-citation-btn' data-uuid='" + editionUuid + "' title='Copy APA Citation' style='background:transparent; border:none; cursor:pointer; padding:0 0 0 6px; color:#a0a0a0; display:inline-flex; align-items:center; vertical-align:middle; line-height:1;'>" +
+      "<svg width='15' height='15' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'>" +
+        "<rect x='9' y='9' width='13' height='13' rx='2' ry='2'></rect>" +
+        "<path d='M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1'></path>" +
+      "</svg>" +
+    "</button>";
+
+  dtRecs[editionsAdded.indexOf(editionUuid)] = [
+    "<img class='tableImg' id='source_" + record._fields[0].properties.uuid + "' src='" + sourceIMG + "'>" +
+    "<span class='sourceType'>" + decodeEntities(decodeEntities(record._fields[0].properties.type)) + "</span>" +
+    "<div class='torrentSource'>" +
+    "<div class='tableHeading'><a id='sourceTab' class='TEMPLAR node source' href='#node?label=source&uuid=" + record._fields[0].properties.uuid + "'>" +
+    decodeEntities(decodeEntities(record._fields[0].properties.name)) +
+    "</a>" + dateField + authorField + "</div><br><div class='torrentClasses'>" + classesField + "</div></div>",
+
+    // Flex container preventing line breaks and ensuring inline layout
+    "<div class='apa-container' style='display:inline-flex; align-items:baseline; max-width:100%;'>" +
+      "<span class='apa-text bold' id='edition_" + editionUuid + "_field'>" +
+        citationHtml +
+      "</span>" +
+      copyBtnHtml +
+    "</div>",
+
+    edition_torrent.edition.properties.snatches,
+    "<span id='edition_date'>" +
+    (edition_torrent.edition.properties.date && edition_torrent.edition.properties.date !== "undefined" && edition_torrent.edition.properties.date !== record._fields[0].properties.date ? record._fields[0].properties.date + "/" + edition_torrent.edition.properties.date : record._fields[0].properties.date) +
+    "</span>",
+    timeSince(edition_torrent.edition.properties.created_at) + " ago",
+    torrentsTable + "</table>"
+  ];
 }
 
 
