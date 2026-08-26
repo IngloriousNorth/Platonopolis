@@ -974,6 +974,14 @@ h2 a:hover{
   cursor:pointer;
 }
 
+#info{
+  font-family:"Share Tech Mono", sans-serif;
+  font-size:16px;
+  color:white;
+  text-align:justify;
+  padding:32px 5px 32px 5px;
+}
+
 h1, h1 a, h1 a:visited{
   font-size:31px;
    color:skyblue;
@@ -1215,7 +1223,7 @@ footer{
 }
 
 #hero option{
-  background:skyblue;
+  background:lightgoldenrodyellow;
 }
 
 .adv_show select{
