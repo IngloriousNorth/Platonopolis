@@ -729,6 +729,8 @@ function resetUpload(){
 	$("#format").empty();
 	$("#resolutions").empty();
 	$("#pdf_resolutions").empty();
+	$("#music_resolutions").empty();
+	$("#video_resolutions").empty();
 	$("#up_submit").prop("disabled", false)
 
 	//$("#errorsDiv").empty();
