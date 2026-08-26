@@ -495,6 +495,7 @@ function htmlUpload(){
 
 			// 2. Format custom download filename (fallback to infoHash if name missing)
 			const fileName = (torrent.name || torrent.infoHash) + '.torrent';
+			$("#MG").empty();
 
 			// 3. Append the download link using the valid Blob URL
 			$("#MG").append('<br><a href="' + torrentBlobURL + '" download="' + fileName + '">[Torrent]</a>');

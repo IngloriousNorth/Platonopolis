@@ -5,7 +5,7 @@ function initializeTorrents(table) {
     // This is more robust than checking the local variable 'dataTable'
     // 1. HARD RESET: Kill the old instance and its DOM leftovers
     assertTitleHidden();
-
+    $("#mobile_fullscreen").hide();
 
     //shiv for sources and top10
     if(TEMPLAR.pageREC() === "sources" || TEMPLAR.pageREC() === "top10"){
