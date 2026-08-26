@@ -1196,14 +1196,16 @@ app.post("/rev/:infoHash", check("infoHash").trim().escape().not().isEmpty(), fu
 })
 
 var top10Query = "WITH s, count ORDER BY s.snatches DESC LIMIT 250 " +
-    "OPTIONAL MATCH (a:Author)-[]->(s) " + 
+    "OPTIONAL MATCH (a:Author)-[]->(s)-[]-(e:Edition)-[]-(t:Torrent) WHERE t.deleted = false " + 
     "WITH s, a, count " +  
     "OPTIONAL MATCH (p:Publisher)<-[:PUBLISHED_BY]-(e:Edition)<-[:PUB_AS]-(s) " +
-    "WITH s,a,e,p, count " +
-    "OPTIONAL MATCH (t:Torrent)<-[:DIST_AS]-(e:Edition)-[:PUBLISHED_BY]->(p:Publisher) WHERE t.deleted = false " +
-    "WITH s,a,e,t,p, count " +  
+    "WITH s, a, count " +
+    "OPTIONAL MATCH (s)-[:PUB_AS]->(e:Edition)-[:DIST_AS]->(t:Torrent) WHERE t.deleted = false " +
+    "OPTIONAL MATCH (e)-[:PUBLISHED_BY]->(p:Publisher) " +
+    "WITH s, a, e, t, p, count " +  
     "OPTIONAL MATCH (c:Class)-[:TAGS]->(s) " +
-    "WITH s, a, collect(DISTINCT{publisher: p, edition : e, torrent: t} ) AS edition_torrents, c, count "
+    "WITH s, a, collect(DISTINCT CASE WHEN e IS NOT NULL AND t IS NOT NULL THEN {publisher: p, edition: e, torrent: t} END) AS raw_editions, c, count " +
+    "WITH s, a, [x IN raw_editions WHERE x IS NOT NULL] AS edition_torrents, c, count ";
 
 app.post("/top10/:time", check("time").trim().escape(), async function(req,res){
   const errors = validationResult(req);
@@ -1234,13 +1236,13 @@ app.post("/top10/:time", check("time").trim().escape(), async function(req,res){
     }
 
     var query = "WITH DATETIME() - duration($time) AS threshold " +
-                "MATCH (t:Torrent {deleted : false})<-[]-(e:Edition)<-[]-(s:Source) " + 
-                "WHERE s.lastSnatched > threshold " + // set to s.top10 > threshold for top10 based on upload date
+                "MATCH (t:Torrent)<-[]-(e:Edition)<-[]-(s:Source) WHERE t.deleted = false " + 
+                "AND s.lastSnatched > threshold " + // set to s.top10 > threshold for top10 based on upload date
                 "WITH s LIMIT 250 " +
                 "WITH count(DISTINCT s) AS count " +
                 "WITH DATETIME() - duration($time) AS threshold, count " + // set to s.top10 > threshold for top10 based on upload date
-                "MATCH (t:Torrent {deleted : false})<-[]-(e:Edition)<-[]-(s:Source) " + 
-                "WHERE s.lastSnatched >threshold "
+                "MATCH (t:Torrent)<-[]-(e:Edition)<-[]-(s:Source) WHERE t.deleted = false " + 
+                "AND s.lastSnatched >threshold "
 
     query += top10Query;
     query += "WITH s, a, edition_torrents, c, count " 
@@ -1457,7 +1459,6 @@ app.post("/upload/:uuid", check("APA").trim().escape(), check("type").trim().esc
             'MERGE (e:Edition {title : $editionTitle, snatches: toFloat(0), publisher: $editionPublisher, uuid : randomUUID()})<-[:PUB_AS]-(s) ' +
             'SET e.pages = $editionPages, e.no = $editionNo, e.date = $editionDate, e.img = $editionIMG, e.created_at = toFloat(TIMESTAMP()) '     
             if(req.body.edition_publisher){
-                console.log(params.editionPublisher)
                  query += 'MERGE (p:Publisher {name : $editionPublisher}) ' +
                 'ON CREATE SET p.uuid = randomUUID(), p.snatches = TOFLOAT(0) ' +
                 'MERGE (p)<-[:PUBLISHED_BY]-(e) '
