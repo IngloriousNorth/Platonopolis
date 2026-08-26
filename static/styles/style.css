@@ -954,7 +954,7 @@ div.publishers h2 span a{
   }
 
   #legal{
-    color:#50C777;
+    color:mediumvioletred;
     font-weight:bold;
   }
 
@@ -1145,7 +1145,7 @@ h2 span a{
 .ui-menu .ui-menu-item-wrapper.ui-state-active {
     background: goldenrod !important;
     font-weight:bold !important;
-    color:deepskyblue !important; /* Adjust text color for readability */
+    color:lightskyblue !important; /* Adjust text color for readability */
 }
 
 
