@@ -315,11 +315,11 @@ function initializeTorrents(table) {
 
     //called on webtorrent route load, either refresh or a.webtorrent route()
         if ($existing.length === 0){
-            $(this).text("[Loading..!]");
+            $(this).text("[Revving..!]");
             $(this).css('color', '#50C777');
         }
         else{
-            $(this).text("Already Loaded.");
+            $(this).text("Already Added.");
             $(this).css('color', 'orange');
         }
         var that = $(this);
