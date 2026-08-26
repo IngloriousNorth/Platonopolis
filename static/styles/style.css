@@ -883,8 +883,8 @@ a.publishers{
 
 
 .removeAuthor{
-  color:#83DAC0;
-  font-family:"Pirata One",sans-"Pirata One";
+  color:mediumvioletred;
+  font-family:"Share Tech Mono",serif;
 }
 
 .sourceTab{
@@ -985,7 +985,7 @@ h2 a:hover{
 h1, h1 a, h1 a:visited{
   font-size:31px;
    color:skyblue;
-   text-shadow:2px 2px white;
+   text-shadow:2px 3px mediumvioletred;
   position:fixed;
   text-decoration:none;
   top:0px;
@@ -1432,7 +1432,7 @@ table.dataTable tr.dtrg-group th{
 }
 
 div.TEMPLAR{
-  background-color:slategray;
+  background-color:dimgray;
 }
 
 .torrentsTable thead th{
@@ -1647,7 +1647,7 @@ footer{
 }
 
 .panel li a, .panel li a:visited, .mobile_panel li a, .mobile_panel li a:visited{
-  color:skyblue;
+  color:lightgoldenrodyellow;
   font-family:"Share Tech Mono", sans-serif;
 }
 
