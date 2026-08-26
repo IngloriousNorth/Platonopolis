@@ -985,7 +985,7 @@ h2 a:hover{
 h1, h1 a, h1 a:visited{
   font-size:31px;
    color:skyblue;
-   text-shadow:3px 4px darkgoldenrod;
+   text-shadow:2px 2px white;
   position:fixed;
   text-decoration:none;
   top:0px;
