@@ -966,17 +966,24 @@ div.publishers h2 span a{
     color:darkgoldenrod;
   }
 
+a.source:hover, a.author:hover{
+  cursor:pointer;
+}
+
+h2 a:hover{
+  cursor:pointer;
+}
 
 h1, h1 a, h1 a:visited{
-  font-size:36px;
-   color:white;
-   text-shadow:2px 3px black;
+  font-size:31px;
+   color:skyblue;
+   text-shadow:3px 4px darkgoldenrod;
   position:fixed;
-  text-decoration:underline;
+  text-decoration:none;
   top:0px;
   letter-spacing:2px;
   left:5px;
-  font-family:"Pirata One", system-ui !important;
+  font-family:"Share Tech Mono", system-ui !important;
 
 }
 
@@ -1003,6 +1010,10 @@ a.publisher, span.publisher{
   -webkit-user-select: text !important;
   -moz-user-select: text !important;
   cursor: text
+}
+
+a.publisher:hover{
+  cursor:pointer;
 }
 
 /* 12;22 */
