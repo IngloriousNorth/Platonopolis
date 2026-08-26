@@ -1778,10 +1778,7 @@ div.upload{
     height:55px;
   }
 
-  .output embed{
-    top:55px;
-    height:calc(100% - 115px);
-  }
+ 
 
   .ui-autocomplete{
     width:299px;
