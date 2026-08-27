@@ -141,7 +141,7 @@ function onProgress(torrent) {
         let remaining
         if (torrent.done) {
           remaining = 'Done.'
-          $body.className += ' is-seed'
+          $body.className = ' is-seed'
         } else {
           remaining = moment.duration(torrent.timeRemaining / 1000, 'seconds').humanize()
           remaining = remaining[0].toUpperCase() + remaining.substring(1) + ' remaining.'

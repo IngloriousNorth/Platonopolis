@@ -42,7 +42,6 @@ function assertFile(file, infoHash, index) {
                     if (fileName.endsWith('.pdf')) {
                         element = document.createElement('embed');
                         element.type = 'application/pdf';
-                        element.style.height = '80vh';
                     } else if (fileName.match(/\.(mp4|webm|ogg|mkv)$/)) {
                         element = document.createElement('video');
                         element.controls = true;
@@ -70,7 +69,7 @@ function assertFile(file, infoHash, index) {
         const statusLabel = document.createElement('div');
         statusLabel.id = statusId;
         statusLabel.innerText = "[ PROCESSING: " + file.name + " ]";
-        statusLabel.style.cssText = "display:inline-block; padding:10px; margin-bottom:10px; font-family:'Share Tech Mono', monospace; color:skyblue; border:1px dashed #ffff00; font-size:13px; background:rgba(0,0,0,0.5);";
+        statusLabel.style.cssText = "display:block; padding:10px; margin-bottom:10px; font-family:'Share Tech Mono', monospace; color:skyblue; border:1px dashed #ffff00; font-size:13px; background:rgba(0,0,0,0.5);";
         $(statusLabel).css({
           'position': 'relative',
           'z-index': 1000
@@ -109,7 +108,7 @@ function assertButton(file, infoHash, index, apaName) {
                 btn.download = customFilename;
                 btn.innerText = "DL: " + customFilename;
                 btn.className = "download-button-main";
-                btn.style.cssText = "display:inline-block; padding:10px; margin-top:5px; margin-bottom:10px; background:#50C777; color:white; border:1px solid #00ccff; text-decoration:none; font-family:monospace; font-size:14px; border-radius:3px; cursor:pointer;";
+                btn.style.cssText = "display:inline-block; padding:10px; margin-bottom:10px; background:#50C777; color:white; border:1px solid #00ccff; text-decoration:none; font-family:monospace; font-size:14px; border-radius:3px; cursor:pointer;";
 
                 btn.onclick = (e) => e.stopPropagation();
 
