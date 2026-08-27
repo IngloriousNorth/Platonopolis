@@ -136,17 +136,28 @@ body.is-seed .show-leech {
    display: none;
 }
 
-
-.output embed{
-  position:relative;
-  top:0px;
-  bottom:0px;
+/* Ensure the parent containers expand to full height */
+div.webtorrent,
+.output {
   height: 100%;
-  z-index:900;
-  width:100%;
-  margin:0 auto;
-  /*top: 0;
-  bottom: 0;*/
+  display: flex;
+  flex-direction: column;
+}
+
+/* Ensure the file entry wrapper stretches and stacks vertically */
+.file-entry {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 0 !important; /* Prevents overflow pushing elements down */
+}
+
+/* The button takes its natural height (~36px), embed fills all remaining space */
+.output embed {
+  width: 100%;
+  flex: 1; /* Takes 100% of remaining vertical height automatically */
+  border: none;
+  display: block;
 }
 
 .is-seed #hero {
@@ -279,6 +290,8 @@ label{
   top:40px;
   margin:0 auto;
 }
+
+
 
 div.TEMPLAR{
     overflow-y: auto;
@@ -984,8 +997,8 @@ h2 a:hover{
 
 h1, h1 a, h1 a:visited{
   font-size:31px;
-   color:skyblue;
-   text-shadow:2px 3px mediumvioletred;
+   color:cyan;
+   text-shadow:3px 3px black;
   position:fixed;
   text-decoration:none;
   top:0px;
@@ -1269,9 +1282,7 @@ footer{
   color:#007BFF;
 }
 
-.webtorrent{
-  padding-bottom:9px;
-}
+
 
 .upload h3{
   text-align:left;
@@ -1348,11 +1359,7 @@ h3{
 }
 
 .set a.author{
-  text-shadow: 
-  -1px -1px 0 blue,  
-   1px -1px 0 blue,
-  -1px  1px 0 blue,
-   1px  1px 0 blue;
+  text-shadow:1px 1px black;
 }
 .set table thead th:nth-last-child(2){
   border-radius:0;
